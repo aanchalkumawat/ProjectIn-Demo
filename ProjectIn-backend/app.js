@@ -1,22 +1,46 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const connectDB = require('./config/dbConfig');
-const authRoutes = require('./routes/authRoutes');
+require("dotenv").config(); // Load environment variables
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
+const authRoutes = require("./routes/authRoutes"); // Corrected path for Authentication routes
+const teamRoutes = require("./routes/teamRoutes"); // Team routes
 
 const app = express();
 
-// Connect to MongoDB Atlas
-connectDB();
-
 // Middleware
-app.use(cors());
-app.use(bodyParser.json());
+app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(bodyParser.json()); // Parse JSON request bodies
+
+// Connect to MongoDB Atlas
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB Atlas connected successfully"))
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB Atlas:", err);
+    process.exit(1); // Exit the app if the database connection fails
+  });
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use("/api/auth", authRoutes); // Authentication endpoints
+app.use("/api/team", teamRoutes); // Team-related endpoints
+
+// Default Route
+app.get("/", (req, res) => {
+  res.send("Welcome to the ProjectIn API!");
+});
+
+// Handle Undefined Routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 // Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
