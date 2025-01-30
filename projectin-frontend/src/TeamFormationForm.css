@@ -1,0 +1,86 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #0C67A0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.form-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 800px;
+  height: fit-content;
+}
+
+button {
+  width: 50%;
+  padding: 10px;
+  background-color: #033452;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.invitation-list {
+  margin-top: 20px;
+}
+
+.invitation-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.invitation-item select {
+  margin: 0 10px;
+}
+
+.status {
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.status.pending {
+  color: #ffc107; /* Yellow for pending */
+}
+
+.status.accepted {
+  color: #28a745; /* Green for accepted */
+}
+
+.status.rejected {
+  color: #dc3545; /* Red for rejected */
+}

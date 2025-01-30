@@ -7,13 +7,19 @@ const teamSchema = new mongoose.Schema({
   },
   leaderId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Referencing the User model
+    ref: "User",
     required: true,
   },
   members: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+  ],
+  pendingInvitations: [
+    {
+      email: { type: String, required: true },
+      status: { type: String, enum: ["pending", "accepted", "rejected"], default: "pending" },
     },
   ],
   projectTitle: {
@@ -23,3 +29,4 @@ const teamSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Team", teamSchema);
+

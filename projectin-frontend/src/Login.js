@@ -1,97 +1,106 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./LoginForm.css";
 
-const Login = () => {
-  const [isSignUp, setIsSignUp] = useState(false); // Toggle between Login and Sign-Up
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "student", // Default role for sign-up
-  });
+export default function LoginForm() {
+  const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
+  const [email, setEmail] = useState(""); // Email input
+  const [password, setPassword] = useState(""); // Password input
+  const [confirmPassword, setConfirmPassword] = useState(""); // Confirm Password for signup
+  const [error, setError] = useState(""); // Error message
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Clear previous errors
 
-    if (isSignUp) {
-      // Handle Sign-Up
-      try {
-        const res = await axios.post("http://localhost:5000/api/auth/register", formData);
-        alert(res.data.message);
-        setIsSignUp(false); // Switch back to login mode after successful sign-up
-      } catch (error) {
-        console.error("Error during sign-up:", error);
-        alert(error.response?.data?.message || "Sign-up failed");
-      }
-    } else {
-      // Handle Login
-      try {
-        const res = await axios.post("http://localhost:5000/api/auth/login", {
-          email: formData.email,
-          password: formData.password,
-        });
-        alert(res.data.message);
+    if (!email || !password) {
+      setError("All fields are required.");
+      return;
+    }
+
+    if (!isLogin && password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const endpoint = isLogin
+        ? "http://localhost:5000/api/auth/login"
+        : "http://localhost:5000/api/auth/register";
+
+      const data = { email, password };
+      const res = await axios.post(endpoint, data);
+
+      if (isLogin) {
+        // Save token in localStorage
         localStorage.setItem("token", res.data.token);
-        // Redirect to dashboard
-        window.location.href = "/dashboard";
-      } catch (error) {
-        console.error("Error during login:", error);
-        alert(error.response?.data?.message || "Login failed");
+        alert("Login successful!");
+        window.location.href = "/dashboard"; // Redirect to dashboard
+      } else {
+        alert("Signup successful! You can now log in.");
+        setIsLogin(true); // Switch to login form after successful signup
       }
+    } catch (error) {
+      console.error("Error:", error);
+      setError(error.response?.data?.message || "An error occurred. Please try again.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>{isSignUp ? "Sign Up" : "Login"}</h2>
-      
-      {isSignUp && (
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      )}
-      
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-      
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={formData.password}
-        onChange={handleChange}
-        required
-      />
-      
-      <button type="submit">{isSignUp ? "Sign Up" : "Login"}</button>
-      
-      <p>
-        {isSignUp ? "Already have an account?" : "New user?"}{" "}
-        <span
-          style={{ color: "blue", cursor: "pointer" }}
-          onClick={() => setIsSignUp(!isSignUp)}
-        >
-          {isSignUp ? "Login" : "Sign Up"}
-        </span>
-      </p>
-    </form>
+    <div className="container">
+      <div className="form-container">
+        <div className="form-toggle">
+          <button className={isLogin ? "active" : ""} onClick={() => setIsLogin(true)}>
+            Login
+          </button>
+          <button className={!isLogin ? "active" : ""} onClick={() => setIsLogin(false)}>
+            Signup
+          </button>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="form">
+            <h1>{isLogin ? "Login Form" : "Signup Form"}</h1>
+            <input
+              type="email"
+              placeholder="Enter Banasthali mail ID"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {!isLogin && (
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            )}
+            {isLogin && <a href="#">Forgot Password?</a>}
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit">{isLogin ? "Login" : "Signup"}</button>
+            {isLogin ? (
+              <p>
+                Not a Member? <a href="#" onClick={() => setIsLogin(false)}>Signup now</a>
+              </p>
+            ) : (
+              <p>
+                Already have an account? <a href="#" onClick={() => setIsLogin(true)}>Login</a>
+              </p>
+            )}
+          </div>
+        </form>
+      </div>
+    </div>
   );
-};
+}
 
-export default Login;
 
