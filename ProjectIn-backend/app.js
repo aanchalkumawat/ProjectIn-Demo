@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes"); // Corrected path for Authent
 const teamRoutes = require("./routes/teamRoutes"); // Team routes
 const notificationRoutes = require("./routes/notificationRoutes");
 const mentorRoutes = require("./routes/mentorRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 const app = express();
 
 // Middleware
@@ -33,6 +34,7 @@ app.use("/api/auth", authRoutes); // Authentication endpoints
 app.use("/api/team", teamRoutes); // Team-related endpoints
 app.use("/api/mentor", mentorRoutes);
 app.use("/api", notificationRoutes);
+app.use("/api/project", projectRoutes);
 
 console.log("Registered Routes:");
 app._router.stack.forEach((r) => {

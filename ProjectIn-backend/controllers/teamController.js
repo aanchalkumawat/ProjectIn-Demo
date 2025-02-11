@@ -2,51 +2,38 @@ const Team = require("../models/Team");
 const User = require("../models/User");
 const Notification = require("../models/Notification");
 
-// Create a new team
+// 📌 Create a Team
 const createTeam = async (req, res) => {
   try {
-    const { teamName, projectTitle } = req.body;
+    const { leaderName, leaderRollNo, course, leaderEmail } = req.body;
 
-    if (!teamName || !projectTitle) {
-      return res.status(400).json({ message: "Team name and project title are required" });
+    // Ensure leader does not have an existing team
+    const existingTeam = await Team.findOne({ leaderId: req.user.id });
+    if (existingTeam) {
+      return res.status(400).json({ message: "You already have a team." });
     }
 
-    // Create a new team with the leader as the creator
-    const team = new Team({
-      teamName,
-      leaderId: req.user.id, // The logged-in user becomes the leader
-      members: [req.user.id], // Add the leader to the members list
-      projectTitle,
+    // Create new team
+    const newTeam = new Team({
+      leaderId: req.user.id,
+      leaderEmail,
+      leaderName,
+      leaderRollNo,
+      course,
+      members: [req.user.id], // Leader is the first member
+      pendingInvitations: [],
     });
 
-    // Save the team in the database
-    await team.save();
-
-    res.status(201).json({ message: "Team created successfully", team });
+    await newTeam.save();
+    res.status(201).json({ message: "Team created successfully", team: newTeam });
   } catch (error) {
     console.error("Error creating team:", error);
-    res.status(500).json({ error: "Error creating team" });
+    res.status(500).json({ message: "Server error while creating team." });
   }
 };
 
-// Get team details
-const getTeamDetails = async (req, res) => {
-  try {
-    const team = await Team.findOne({ leaderId: req.user.id }).populate("members", "name email");
-
-    if (!team) {
-      return res.status(404).json({ message: "No team found for this user." });
-    }
-
-    res.status(200).json({ team });
-  } catch (error) {
-    console.error("Error fetching team details:", error);
-    res.status(500).json({ message: "Server error while fetching team details" });
-  }
-};
-
-// Invite a member by email
-const inviteMember = async (req, res) => {
+// 📌 Send Invitation
+const sendInvite = async (req, res) => {
   try {
     const { teamId, email } = req.body;
 
@@ -59,6 +46,11 @@ const inviteMember = async (req, res) => {
       return res.status(404).json({ message: "Team not found" });
     }
 
+    // ✅ Check if the team leader's required fields exist
+    if (!team.leaderRollNo || !team.leaderName || !team.leaderEmail || !team.course) {
+      return res.status(400).json({ message: "Leader details are missing in the team." });
+    }
+
     if (team.members.length >= 5) {
       return res.status(400).json({ message: "Team is already full" });
     }
@@ -66,6 +58,7 @@ const inviteMember = async (req, res) => {
       return res.status(400).json({ message: "Maximum invitations reached" });
     }
 
+    // ✅ Check if the email is already invited
     const isAlreadyInvited = team.pendingInvitations.some(
       (invite) => invite.email === email && invite.status === "pending"
     );
@@ -73,7 +66,9 @@ const inviteMember = async (req, res) => {
       return res.status(400).json({ message: "This user has already been invited" });
     }
 
+    // ✅ Add the invitation with the correct status format
     team.pendingInvitations.push({ email, status: "pending" });
+
     await team.save();
 
     const user = await User.findOne({ email });
@@ -91,80 +86,89 @@ const inviteMember = async (req, res) => {
     res.status(500).json({ message: "Server error while inviting member" });
   }
 };
-
-// Respond to an invitation
-const respondToInvitation = async (req, res) => {
-  try {
-    const { notificationId, response } = req.body;
-
-    if (!["accepted", "rejected"].includes(response)) {
-      return res.status(400).json({ message: "Invalid response" });
-    }
-
-    const notification = await Notification.findById(notificationId);
-    if (!notification) {
-      return res.status(404).json({ message: "Notification not found" });
-    }
-
-    const team = await Team.findById(notification.teamId);
-    if (!team) {
-      return res.status(404).json({ message: "Team not found" });
-    }
-
-    const invitation = team.pendingInvitations.find(
-      (invite) => invite.email === req.user.email && invite.status === "pending"
-    );
-    if (!invitation) {
-      return res.status(404).json({ message: "Invitation not found" });
-    }
-
-    if (response === "accepted") {
-      if (team.members.length >= 5) {
-        return res.status(400).json({ message: "Team is already full" });
-      }
-
-      team.members.push(req.user.id);
-      invitation.status = "accepted";
-    } else if (response === "rejected") {
-      invitation.status = "rejected";
-    }
-
-    await team.save();
-    await Notification.findByIdAndDelete(notificationId);
-
-    res.status(200).json({ message: `Invitation ${response}` });
-  } catch (error) {
-    console.error("Error responding to invitation:", error);
-    res.status(500).json({ message: "Server error while responding to invitation" });
-  }
-};
 const fetchInvitations = async (req, res) => {
   try {
-    // Find teams with pending invitations for the logged-in user
     console.log("Fetching invitations for user:", req.user.email);
+
     const teams = await Team.find({
       "pendingInvitations.email": req.user.email,
-      "pendingInvitations.status": "pending",
+      "pendingInvitations.status": "Pending",
     });
 
     if (!teams.length) {
-      return res.json({ invitations: [] }); // No invitations
+      return res.json({ invitations: [] }); // No invitations found
     }
 
-    // Map team data to include only relevant details
-    console.log("Teams with pending invitations:", teams);
     const invitations = teams.map((team) => ({
       teamId: team._id,
       teamName: team.teamName,
       projectTitle: team.projectTitle,
+      notificationId: team.pendingInvitations.find(inv => inv.email === req.user.email)._id,
     }));
 
-    res.json({ invitations });
+    res.status(200).json({ invitations });
   } catch (error) {
     console.error("Error fetching invitations:", error);
     res.status(500).json({ message: "Failed to fetch invitations" });
   }
 };
+
+
+// 📌 Respond to Invitation
+const respondToInvitation = async (req, res) => {
+  try {
+    const { email, response } = req.body;
+
+    // Find the team where this email is invited
+    const team = await Team.findOne({ "pendingInvitations.email": email });
+    if (!team) {
+      return res.status(404).json({ message: "No invitation found." });
+    }
+
+    // Find the invitation and update its status
+    const invitation = team.pendingInvitations.find((inv) => inv.email === email);
+    if (!invitation || invitation.status !== "Pending") {
+      return res.status(400).json({ message: "Invalid or expired invitation." });
+    }
+
+    if (response === "Accepted") {
+      // Check if the team is full
+      if (team.members.length >= 5) {
+        return res.status(400).json({ message: "Team is already full." });
+      }
+
+      // Add the user to the team
+      const user = await User.findOne({ email });
+      if (user) {
+        team.members.push(user._id);
+      }
+    }
+
+    // Update the invitation status
+    invitation.status = response;
+    await team.save();
+
+    res.status(200).json({ message: `Invitation ${response}` });
+  } catch (error) {
+    console.error("Error responding to invitation:", error);
+    res.status(500).json({ message: "Server error while responding to invitation." });
+  }
+};
+
+// 📌 Fetch Team Details
+const getTeamDetails = async (req, res) => {
+  try {
+    const team = await Team.findOne({ leaderId: req.user.id }).populate("members", "name email");
+    if (!team) {
+      return res.status(404).json({ message: "No team found." });
+    }
+    res.status(200).json({ team });
+  } catch (error) {
+    console.error("Error fetching team details:", error);
+    res.status(500).json({ message: "Server error while fetching team details." });
+  }
+};
+
 const fetchNotifications = async (req, res) => {
   try {
     const notifications = await Notification.find({ userId: req.user.id });
@@ -178,10 +182,9 @@ const fetchNotifications = async (req, res) => {
 
 module.exports = {
   createTeam,
-  getTeamDetails,
-  inviteMember,
+  sendInvite,
   respondToInvitation,
+  getTeamDetails,
   fetchInvitations,
   fetchNotifications,
 };
-
