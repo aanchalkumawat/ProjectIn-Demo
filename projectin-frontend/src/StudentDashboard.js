@@ -3,17 +3,21 @@ import axios from "axios";
 import TeamForm from "./TeamFormationForm";
 import MentorForm from "./MentorForm";
 import ProjectDetailForm from "./ProjectDetailForm";
+import Submission1 from "./submission1";
+import Submission2 from "./submission2"; 
 
 const StudentDashboard = () => {
   const [showTeamForm, setShowTeamForm] = useState(false);
   const [showMentorForm, setShowMentorForm] = useState(false);
   const [showProjectForm, setShowProjectForm] = useState(false);
-  const [invitations, setInvitations] = useState([]); 
+  const [showSubmission1, setShowSubmission1] = useState(false);
+  const [showSubmission2, setShowSubmission2] = useState(false); // ✅ Added state for Submission2 form
+  const [invitations, setInvitations] = useState([]);
   const [notifications, setNotifications] = useState([]);
 
-  // Fetch invitations and notifications
+  // ✅ Fetch invitations & notifications
   useEffect(() => {
-    const fetchInvitationsAndNotifications = async () => {
+    const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
 
@@ -29,15 +33,15 @@ const StudentDashboard = () => {
         );
         setNotifications(notificationsRes.data.notifications);
       } catch (error) {
-        console.error("Error fetching invitations or notifications:", error);
+        console.error("Error fetching data:", error);
         alert("Failed to fetch data. Please try again.");
       }
     };
 
-    fetchInvitationsAndNotifications();
+    fetchData();
   }, []);
 
-  // Handle invitation response
+  // ✅ Handle invitation response
   const respondToInvitation = async (notificationId, response) => {
     try {
       const token = localStorage.getItem("token");
@@ -63,48 +67,46 @@ const StudentDashboard = () => {
     }
   };
 
-  // Handle Project Detail Form Submission
+  // ✅ Handle Project Detail Form Submission
   const handleProjectSubmit = async (projectData) => {
     try {
       const token = localStorage.getItem("token");
-  
+
       if (!token) {
         alert("🚨 Authentication failed. Please log in.");
         return;
       }
-  
-      console.log("🔍 Sending project data:", projectData); // ✅ Debug Log
-      console.log("🔍 Token:", token); // ✅ Debug Log
-  
+
+      console.log("🔍 Sending project data:", projectData);
+
       const res = await axios.post(
         "http://localhost:5000/api/project/submit",
         projectData,
         { headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" } }
       );
-  
+
       alert(res.data.message);
     } catch (error) {
       console.error("❌ Error submitting project:", error);
       alert(error.response?.data?.message || "Failed to submit project.");
     }
   };
-  
-  
+
   return (
     <div>
       <h2>Welcome to the Student Dashboard</h2>
 
-      {/* Team Formation */}
+      {/* ✅ Team Formation */}
       <button onClick={() => setShowTeamForm(!showTeamForm)}>
         {showTeamForm ? "Close Team Form" : "Open Team Form"}
       </button>
       {showTeamForm && <TeamForm />}
 
-      {/* Mentor Selection */}
+      {/* ✅ Mentor Selection */}
       <button onClick={() => setShowMentorForm(true)}>Mentor Selection</button>
       {showMentorForm && <MentorForm isOpen={showMentorForm} onClose={() => setShowMentorForm(false)} />}
 
-      {/* Project Details Submission */}
+      {/* ✅ Project Details Submission */}
       <button onClick={() => setShowProjectForm(true)}>Submit Project Details</button>
       {showProjectForm && (
         <ProjectDetailForm 
@@ -113,7 +115,15 @@ const StudentDashboard = () => {
         />
       )}
 
-      {/* Pending Invitations */}
+      {/* ✅ Submission1 Form Button */}
+      <button onClick={() => setShowSubmission1(true)}>Submit SRS / SDS / Synopsis</button>
+      {showSubmission1 && <Submission1 closeModal={() => setShowSubmission1(false)} />}
+
+      {/* ✅ Submission2 Form Button */}
+      <button onClick={() => setShowSubmission2(true)}>Submit Project Report</button>
+      {showSubmission2 && <Submission2 closeModal={() => setShowSubmission2(false)} />} {/* ✅ Submission2 added */}
+
+      {/* ✅ Pending Invitations */}
       <div>
         <h3>Pending Invitations</h3>
         {invitations.length > 0 ? (
@@ -135,7 +145,7 @@ const StudentDashboard = () => {
         )}
       </div>
 
-      {/* Notifications */}
+      {/* ✅ Notifications */}
       <div>
         <h3>Notifications</h3>
         {notifications.length > 0 ? (
