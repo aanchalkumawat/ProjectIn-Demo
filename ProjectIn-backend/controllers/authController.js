@@ -13,6 +13,9 @@ const registerUser = async (req, res) => {
     if (!name || !email || !password || !role) {
       return res.status(400).json({ message: "All fields are required" });
     }
+    if (!["student", "teacher", "coordinator"].includes(role)) {
+      return res.status(400).json({ message: "Invalid role" });
+    }
 
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
@@ -47,7 +50,7 @@ const loginUser = async (req, res) => {
   try {
     console.log("Login Request Body:", req.body); // Log the incoming request body
 
-    const { email, password } = req.body;
+    const { email, password,role } = req.body;
 
     // Validate input
     if (!email || !password) {
@@ -55,7 +58,7 @@ const loginUser = async (req, res) => {
     }
 
     // Check if the user exists
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email,role });
     if (!user) {
       console.log("Login Error: User not found");
       return res.status(404).json({ message: "User not found" });

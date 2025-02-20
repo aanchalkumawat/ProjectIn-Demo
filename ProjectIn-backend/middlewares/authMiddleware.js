@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify the token
-    req.user = {id: decoded.id,email: decoded.email}; // Attach user data to the request object
+    req.user = {id: decoded.id, role: decoded.role,email: decoded.email}; // Attach user data to the request object
     console.log("Token verified, user ID:", req.user.id);
     next(); // Proceed to the next middleware or route handler
   } catch (error) {
