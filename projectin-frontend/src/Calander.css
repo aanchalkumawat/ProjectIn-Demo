@@ -1,0 +1,125 @@
+/* Overlay for the Calendar Popup */
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+h3 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Darker color for better contrast */
+}
+
+/* Style for react-calendar */
+.react-calendar {
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for 3D effect */
+  max-width: 500px;
+  margin-bottom: 20px;
+  background-color: #ffffff; /* White background for the calendar */
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Tile styles */
+.react-calendar__tile {
+  border-radius: 8px; /* Rounded corners for tiles */
+  transition: background-color 0.2s ease, transform 0.2s ease; /* Smooth transition */
+}
+
+.react- calendar__tile:hover {
+  background-color: #e0f7fa; /* Light blue background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.react-calendar__tile.yellow-event {
+  background-color: #ffeb3b; /* Yellow for events */
+  color: black;
+  font-weight: bold;
+}
+
+/* Modal styles */
+.calendar-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  animation: slideIn 0.3s ease; /* Slide-in animation */
+}
+
+.calendar-modal-content h4 {
+  margin-bottom: 15px;
+  color: #4caf50; /* Green color for headings */
+}
+
+.calendar-modal-content textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for input */
+}
+
+/* Button styles */
+.calendar-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.calendar-modal-buttons button:first-child {
+  background-color: #4caf50; /* Green for save */
+  color: white;
+}
+
+.calendar-modal-buttons button:last-child {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+}
+
+.calendar-delete-button {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+  font-weight: bold;
+}
+
+/* Animation for modal */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

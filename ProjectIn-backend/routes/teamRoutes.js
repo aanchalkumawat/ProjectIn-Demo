@@ -1,23 +1,15 @@
-const express = require("express");
-const {
-  createTeam,
-  sendInvite,
-  respondToInvitation,
-  getTeamDetails,
-  fetchInvitations,
-  fetchNotifications,
-} = require("../controllers/teamController");
-const verifyToken = require("../middlewares/authMiddleware");
-
+const express = require('express');
 const router = express.Router();
+const { createTeam, sendInvite, updateInvitation , removeRejected,getTeam} = require('../controllers/teamController');
 
-router.post("/create", verifyToken, createTeam);
-router.post("/invite", verifyToken, sendInvite);
-router.post("/respond", verifyToken, respondToInvitation);
-router.get("/details", verifyToken, getTeamDetails);
-router.get("/invitations", verifyToken, fetchInvitations);
-router.get("/notifications", verifyToken, fetchNotifications);
+// Routes
+router.post('/create', createTeam);
+router.post('/send-invite', sendInvite);
+router.post('/update-invitation', updateInvitation);
+router.post('/remove-rejected', removeRejected);
+router.get('/:teamId', getTeam);
 
 module.exports = router;
+
 
 

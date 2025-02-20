@@ -1,130 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-//import './TeamFormationForm.css';
+import React, { useState } from 'react';
 
 const TeamFormationForm = () => {
+  const [name, setName] = useState('');
+  const [rollno, setRollno] = useState('');
   const [email, setEmail] = useState('');
+  const [course, setCourse] = useState('');
+  const [teamId, setTeamId] = useState(null);
+  const [inviteEmail, setInviteEmail] = useState('');
   const [invitations, setInvitations] = useState([]);
-  const [teamId, setTeamId] = useState(null); // Store team ID
 
-  // ✅ Fetch the team details on load
-  useEffect(() => {
-    const fetchTeamDetails = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5000/api/team/details', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+  // Create a team
+  const handleCreateTeam = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/team/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, rollno, email, course })
+      });
 
-        if (res.data.team) {
-          setTeamId(res.data.team._id);
-          setInvitations(res.data.team.pendingInvitations || []);
-        }
-      } catch (error) {
-        console.error('Error fetching team details:', error);
-      }
-    };
+      if (!response.ok) throw new Error('Failed to create team');
 
-    fetchTeamDetails();
-  }, []);
+      const data = await response.json();
+      setTeamId(data.team._id);
+      alert('Team created successfully!');
+    } catch (error) {
+      console.error('Error creating team:', error);
+      alert(error.message);
+    }
+  };
 
-  // ✅ Send invitation to a new member
+  // Send an invite
   const handleSendInvite = async () => {
-    if (email.trim() === '') return;
-    
-    /*if (!teamId) {
-      alert('No team found. Please create a team first.');
-      return;
-    }*/
-    if (invitations.some((inv) => inv.email === email)) {
-      alert('This email has already been invited.');
+    if (!inviteEmail.trim() || !teamId) {
+      alert('Enter a valid email and ensure the team is created.');
       return;
     }
 
     try {
-      const token = localStorage.getItem('token');
-      const res = await axios.post(
-        'http://localhost:5000/api/team/invite',
-        { teamId, email },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await fetch('http://localhost:5000/api/team/send-invite', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ teamId, email: inviteEmail })
+      });
 
-      alert(res.data.message);
-      setInvitations([...invitations, { email, status: 'Pending' }]);
-      setEmail('');
+      if (!response.ok) throw new Error('Failed to send invite');
+
+      const data = await response.json();
+      setInvitations(data.invitations);
+      setInviteEmail('');
+      alert('Invitation sent successfully!');
     } catch (error) {
-      console.error('Error sending invitation:', error);
-      alert('Failed to send invitation. Check if the user exists.');
+      console.error('Error sending invite:', error);
+      alert(error.message);
     }
   };
 
-  // ✅ Remove a rejected invitation
-  const handleRemoveRejected = (index) => {
-    const updatedInvitations = invitations.filter((_, idx) => idx !== index);
-    setInvitations(updatedInvitations);
+  // Accept or Reject an invite
+  const updateInvitationStatus = async (email, status) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/team/update-invitation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ teamId, email, status })
+      });
+
+      if (!response.ok) throw new Error('Failed to update invitation status');
+
+      const data = await response.json();
+      setInvitations(data.invitations);
+      alert(`Invitation ${status.toLowerCase()}!`);
+    } catch (error) {
+      console.error('Error updating status:', error);
+      alert(error.message);
+    }
   };
 
-  const acceptedCount = invitations.filter((inv) => inv.status === 'Accepted').length;
-
   return (
-    <div className='container'>
-      <div className='form-container'>
-        <div className='form'> 
-          <label>Student Name:</label>
-          <input type='text' placeholder='Enter your correct name' required /><br />
-          <label>Rollno:</label>
-          <input type='text' placeholder='Enter your correct rollno' required /><br />
-          <label>Course:</label>
-          <select id="course" required>
-            <option defaultValue="" disabled>--not selected--</option>
-            <option value="cs">CS</option>
-            <option value="it">IT</option>
-            <option value="cs-ai">CS-AI</option>
-          </select>
-          <br />
-          <label>Banasthali Email Id:</label>
-          <input type='email' placeholder='Enter your banasthali email' required /><br />
-          
-          <label>Send invite:</label>
-          <input 
-            type='email' 
-            placeholder='Enter the Banasthali email of the student' required
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-          />
-          <button onClick={handleSendInvite}>Send Invite</button><br />
+    <div style={{ maxWidth: '600px', margin: 'auto', padding: '20px', textAlign: 'center', border: '1px solid #ccc', borderRadius: '10px', boxShadow: '0px 0px 10px #ddd' }}>
+      <h2>Team Formation</h2>
 
-          {/* ✅ Display Invitation List */}
-          <div className='invitation-list'>
-            {invitations.map((invitation, index) => (
-              <div key={index} className='invitation-item'>
-                <span>{invitation.email}</span>
-                <span className={`status ${invitation.status.toLowerCase()}`}>
-                  {invitation.status}
-                </span>
-                {invitation.status === 'Rejected' && (
-                  <button 
-                    className='remove-btn' 
-                    onClick={() => handleRemoveRejected(index)}
-                  >
-                    ❌
-                  </button>
+      {!teamId ? (
+        <>
+          <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} style={{ marginBottom: '10px', padding: '8px', width: '80%' }} /><br />
+          <input type="text" placeholder="Roll Number" value={rollno} onChange={(e) => setRollno(e.target.value)} style={{ marginBottom: '10px', padding: '8px', width: '80%' }} /><br />
+          <input type="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ marginBottom: '10px', padding: '8px', width: '80%' }} /><br />
+          <input type="text" placeholder="Course" value={course} onChange={(e) => setCourse(e.target.value)} style={{ marginBottom: '10px', padding: '8px', width: '80%' }} /><br />
+          <button onClick={handleCreateTeam} style={{ padding: '10px 20px', background: 'blue', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '5px' }}>Create Team</button>
+        </>
+      ) : (
+        <>
+          <h3>Team ID: {teamId}</h3>
+          <input type="email" placeholder="Invite Email" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} style={{ marginBottom: '10px', padding: '8px', width: '80%' }} />
+          <button onClick={handleSendInvite} style={{ padding: '10px 20px', background: 'green', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '5px' }}>Send Invite</button>
+
+          <h3>Invitations</h3>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {invitations.map((invite, index) => (
+              <li key={index} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
+                {invite.email} - {invite.status}
+                {invite.status === 'Pending' && (
+                  <>
+                    <button onClick={() => updateInvitationStatus(invite.email, 'Accepted')} style={{ marginLeft: '10px', padding: '5px 10px', background: 'blue', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '5px' }}>Accept</button>
+                    <button onClick={() => updateInvitationStatus(invite.email, 'Rejected')} style={{ marginLeft: '10px', padding: '5px 10px', background: 'red', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '5px' }}>Reject</button>
+                  </>
                 )}
-              </div>
+              </li>
             ))}
-          </div>
-
-          {/* ✅ Show accepted members count */}
-          <p className='member-count'>
-            Accepted Members: {acceptedCount} / 5
-          </p>
-          {acceptedCount >= 5 && (
-            <p className='error'>Maximum team members reached. No more members can be accepted.</p>
-          )}
-        </div>
-      </div>
+          </ul>
+        </>
+      )}
     </div>
   );
 };
 
 export default TeamFormationForm;
+

@@ -1,31 +1,54 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #0C67A0;
-}
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+
+.popup-overlay {
+  position: fixed; /* Cover the entire screen */
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
 }
 
-.form-container {
+.team-form-container {
   background-color: white;
-  padding: 30px;
+  padding: 50px;
   border-radius: 10px;
+  position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 800px;
-  height: fit-content;
+  width: 600px;
+  max-height: 80vh; /* Prevent overflow */
+  overflow-y: auto; /* Add scrolling if content exceeds the height */
+  z-index: 10000;
 }
 
-button {
+.team-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.team-close-btn:hover {
+  background-color: #e60000;
+}
+
+.team-invite-button{
   width: 50%;
   padding: 10px;
   background-color: #033452;
@@ -36,51 +59,65 @@ button {
   border-radius: 5px;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form input {
+.team-form input, .team-form select {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  width: 100%;
 }
 
-.invitation-list {
+.team-invitation-list {
   margin-top: 20px;
 }
 
 .invitation-item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
   padding: 10px;
   background-color: #f9f9f9;
-  border-radius: 5px;
   border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-.invitation-item select {
-  margin: 0 10px;
-}
-
-.status {
+.team-status {
   font-weight: bold;
   padding: 5px 10px;
   border-radius: 5px;
 }
 
-.status.pending {
-  color: #ffc107; /* Yellow for pending */
+.team-status.pending {
+  color: #ffc107;
 }
 
-.status.accepted {
-  color: #28a745; /* Green for accepted */
+.team-status.accepted {
+  color: #28a745;
 }
 
-.status.rejected {
-  color: #dc3545; /* Red for rejected */
+.team-status.rejected {
+  color: #dc3545;
+}
+
+.team-remove-btn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.team-remove-btn:hover {
+  transform: scale(1.1);
 }

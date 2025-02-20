@@ -1,0 +1,302 @@
+/* Dashboard Container */
+.dashboard-container {
+  font-family:'Times New Roman', Times, serif;
+  width: 100%;  /* Ensures full width */
+  height: 100vh; /* Ensures full height */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color:#003366;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  z-index: 2;
+  box-shadow: 1px 1px 5px black;
+}
+
+/* Hamburger Icon */
+.hamburger-icon {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* Logo Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+
+}
+
+.logo {
+  background-image: url(images/logo1.jpeg);
+  background-size: contain;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  
+  margin-left: 20px;
+  transition: tranform 0.3s ease;
+}
+.logo:hover{
+  transform: scale(1.1);
+  box-shadow: 1px 1px 5px black;
+}
+/* User Name */
+.user-name {
+  text-align: center;
+  flex: 1;
+}
+
+.user-name h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Icon Container */
+.icon-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.icon:hover {
+  color: darkgrey;
+}
+
+/* Sidebar */
+.sidebar {
+  position:absolute;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color:#ccc; /* Darker background for better contrast */
+  color: #ecf0f1; /* Light text color */
+  transition: left 0.3s ease;
+  z-index: 1;
+  padding-top: 75px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  transform: translateX(-100%); /* Initially hidden */
+}
+
+/* When sidebar opens */
+.sidebar.open {
+  transform: translateX(0); /* Slide in */
+}
+
+/* Adjust Content Section when Sidebar is Open */
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 0; /* Default */
+}
+
+
+.sidebar.open {
+  left: 0;
+}
+
+/* Sidebar buttons */
+.sidebar-buttons button {
+  width: 90%;
+  padding: 15px;
+  background-color:#003366; /* Button background color */
+  color: #ecf0f1; /* Button text color */
+  border: none;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease-in-out; /* Transition for hover effect */
+}
+
+.sidebar-buttons button:hover {
+  box-shadow: 1px 1px 5px black; /* Change color on hover */
+}
+
+/* Logout Button */
+.logout-button {
+  width: 90%;
+  padding: 15px;
+  background-color:firebrick; /* Logout button color */
+  color: #ecf0f1; /* Logout button text color */
+  border: none;
+  margin: 5px 0;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Transition for hover effect */
+}
+
+.logout-button:hover {
+  background-color: #c0392b; /* Change color on hover */
+}
+
+/* Content Section */
+.content {
+  padding: 20px;
+}
+
+.content h2 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  align-content: center;
+}
+
+.content p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Progress Bar Container */
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 30px auto;
+  width: 80%;
+  position: relative;
+}
+
+/* Step Container */
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Progress Circle */
+.progress-circle {
+  width: 60px; /* Increased size for better aesthetics */
+  height: 60px; /* Increased size for better aesthetics */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff); /* Gradient background */
+  box-shadow: 5px 5px 15px #d1d1d1, -5px -5px 15px #ffffff; /* Soft shadow */
+  color: #555; /* Text color */
+  font-size: 20px; /* Increased font size */
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease; /* Transition for hover effect */
+}
+
+/* Completed and Pending Status */
+.progress-circle.completed {
+  background: linear-gradient(145deg, #4caf50, #3e8e41); /* Gradient for completed */
+  color: white; /* Change text color for completed */
+}
+
+.progress-circle.pending {
+  background: linear-gradient(145deg, #ddd, #f5f5f5); /* Lighter gradient for pending */
+}
+
+/* Progress Text */
+.progress-text {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+/* Hover Effect */
+.progress-circle:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
+  box-shadow: 8px 8px 20px #d1d1d1, -8px -8px 20px #ffffff; /* Enhanced shadow on hover */
+}
+
+/* Style the calendar container */
+.calendar-container {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon styles */
+.calendar-icon {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/*button {
+  width: 95%;
+  padding: 20px;
+  background-color: grey;
+  color: white;
+  border-bottom: 5px solid #444;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}*/
+
+
+button:hover {
+  background-color:#003366;
+}
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.popup p {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.popup button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #45a049;
+}
