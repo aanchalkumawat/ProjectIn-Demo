@@ -1,18 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Navigation
 import "./LoginForm.css";
 
 export default function LoginForm() {
-  const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
-  const [email, setEmail] = useState(""); // Email input
-  const [password, setPassword] = useState(""); // Password input
-  const [confirmPassword, setConfirmPassword] = useState(""); // Confirm Password for signup
-  const [error, setError] = useState(""); // Error message
+  const [isLogin, setIsLogin] = useState(true);
+  const [role, setRole] = useState(""); // User role selection
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Handle form submission
+  const navigate = useNavigate();
+
+  // 🔹 Ensure login form is the first screen (Prevent auto-redirection)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      // Redirect user to their role-based dashboard if already logged in
+      const savedRole = localStorage.getItem("role");
+      if (savedRole === "student") navigate("/student-dashboard");
+      else if (savedRole === "teacher") navigate("/teacher-dashboard");
+      else if (savedRole === "coordinator") navigate("/coordinator-dashboard");
+    }
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
+    setError("");
+
+    if (!role) {
+      setError("Please select a role.");
+      return;
+    }
 
     if (!email || !password) {
       setError("All fields are required.");
@@ -25,25 +46,31 @@ export default function LoginForm() {
     }
 
     try {
+      setLoading(true);
       const endpoint = isLogin
         ? "http://localhost:5000/api/auth/login"
         : "http://localhost:5000/api/auth/register";
 
-      const data = { email, password };
+      const data = { email, password, role };
       const res = await axios.post(endpoint, data);
 
       if (isLogin) {
-        // Save token in localStorage
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("role", role);
         alert("Login successful!");
-        window.location.href = "/dashboard"; // Redirect to dashboard
+
+        // 🔹 Redirect user based on role
+        if (role === "student") navigate("/Dashboard");
+        else if (role === "teacher") navigate("/TeacherDashboard");
+        else if (role === "coordinator") navigate("/CoordinatorDashboard");
       } else {
         alert("Signup successful! You can now log in.");
-        setIsLogin(true); // Switch to login form after successful signup
+        setIsLogin(true);
       }
     } catch (error) {
-      console.error("Error:", error);
       setError(error.response?.data?.message || "An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,6 +88,15 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit}>
           <div className="form">
             <h1>{isLogin ? "Login Form" : "Signup Form"}</h1>
+
+            {/* Role Selection */}
+            <select onChange={(e) => setRole(e.target.value)} value={role} required>
+              <option value="">Select Your Role</option>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              <option value="coordinator">Coordinator</option>
+            </select>
+
             <input
               type="email"
               placeholder="Enter Banasthali mail ID"
@@ -84,9 +120,12 @@ export default function LoginForm() {
                 required
               />
             )}
-            {isLogin && <a href="#">Forgot Password?</a>}
             {error && <p className="error-message">{error}</p>}
-            <button type="submit">{isLogin ? "Login" : "Signup"}</button>
+
+            <button type="submit" disabled={loading}>
+              {loading ? "Processing..." : isLogin ? "Login" : "Signup"}
+            </button>
+
             {isLogin ? (
               <p>
                 Not a Member? <a href="#" onClick={() => setIsLogin(false)}>Signup now</a>
@@ -102,5 +141,3 @@ export default function LoginForm() {
     </div>
   );
 }
-
-

@@ -1,4 +1,7 @@
 const User = require("../models/User");
+const Student = require("../models/Student");
+const Teacher = require("../models/Teacher");
+const Coordinator = require("../models/Coordinator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -8,17 +11,21 @@ const registerUser = async (req, res) => {
     console.log("Register Request Body:", req.body); // Log the incoming request body
 
     const { name, email, password, role } = req.body;
+    let userModel;
 
-    // Validate input
-    if (!name || !email || !password || !role) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-    if (!["student", "teacher", "coordinator"].includes(role)) {
-      return res.status(400).json({ message: "Invalid role" });
+    // Choose the correct database model
+    if (role === "student") {
+      userModel = Student;
+    } else if (role === "teacher") {
+      userModel = Teacher;
+    } else if (role === "coordinator") {
+      userModel = Coordinator;
+    } else {
+      return res.status(400).json({ message: "Invalid role selected" });
     }
 
     // Check if the user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await userModel.findOne({ email });
     if (existingUser) {
       console.log("Register Error: User already exists");
       return res.status(400).json({ message: "User already exists" });
@@ -28,11 +35,10 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Save the new user
-    const newUser = new User({
+    const newUser = new userModel({
       name,
       email,
       password: hashedPassword,
-      role,
     });
     await newUser.save();
 
@@ -51,6 +57,16 @@ const loginUser = async (req, res) => {
     console.log("Login Request Body:", req.body); // Log the incoming request body
 
     const { email, password,role } = req.body;
+    let user;
+    if (role === "student") {
+      user = await Student.findOne({ email });
+    } else if (role === "teacher") {
+      user = await Teacher.findOne({ email });
+    } else if (role === "coordinator") {
+      user = await Coordinator.findOne({ email });
+    } else {
+      return res.status(400).json({ message: "Invalid role selected" });
+    }
 
     // Validate input
     if (!email || !password) {
@@ -58,7 +74,6 @@ const loginUser = async (req, res) => {
     }
 
     // Check if the user exists
-    const user = await User.findOne({ email,role });
     if (!user) {
       console.log("Login Error: User not found");
       return res.status(404).json({ message: "User not found" });
