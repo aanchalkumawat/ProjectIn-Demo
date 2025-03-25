@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaBars, FaBell, FaCalendarAlt, FaUser  } from "react-icons/fa";
 import "./StudentDashboard.css";
 import Calander from "./Calander.js";
-import TeamFormationForm from "./TeamFormationForm";
+import TeamFormationForm from "./components/TeamForm.js";
 import MentorForm from "./MentorForm.js";
 import Submission1 from "./submission1.js";
 import Submission2 from "./submission2.js";
