@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaBars, FaBell, FaCalendarAlt, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "./StudentDashboard.css";
 import Calander from "../Student-components/Calander.js";
 import TeamFormationForm from "../Student-components/TeamForm.js";
@@ -10,6 +11,7 @@ import ProjectDetailForm from "../Student-components/ProjectDetailForm";
 import Profile from "../Student-components/Profile";
 
 const Dashboard = ({ userName }) => {
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
 
@@ -89,7 +91,7 @@ const Dashboard = ({ userName }) => {
               <button onClick={() => openSpecificForm("Submission2")}>Submission 2</button>
             </div>
             <br />
-            <button className="logout-button" onClick={() => alert("Logging out...")}>
+            <button className="logout-button" onClick={() => navigate("/login")}>
               Logout
             </button>
           </center>

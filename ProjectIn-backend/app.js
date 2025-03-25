@@ -40,7 +40,7 @@ app.use("/api/mentor", mentorRoutes);
 app.use("/api/notifications", notificationRoutes); 
 app.use("/api/submission", submissionRoutes);
 app.use("/api/project-report", projectReportRoutes);
-app.use("/api/project", projectRoutes);
+app.use("/api/projects", projectRoutes);
 
 // ✅ Logging Registered Routes
 console.log("\n📌 Registered API Routes:");
