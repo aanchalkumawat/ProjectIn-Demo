@@ -1,25 +1,25 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const TeamSchema = new mongoose.Schema({
-  leader: {
-    name: String,
-    rollno: String,
-    email: String,
-    course: String
+  teamID: { type: String, required: true, unique: true },
+  teamLeader: { 
+    fullName: { type: String, required: true },
+    enrollmentNumber: { type: String, required: true },
+    email: { type: String, required: false },
+    phoneNumber: { type: String, required: true },
+    subject: { type: String, required: true }
   },
-  invitations: [
+  teamSize: { type: Number, required: true },
+  teamMembers: [
     {
-      email: String,
-      status: {
-        type: String,
-        enum: ['Pending', 'Accepted', 'Rejected'],
-        default: 'Pending'
-      }
-    }
-  ]
+      fullName: { type: String, required: true },
+      enrollmentNumber: { type: String, required: true },
+      subject: { type: String, required: true }, // ✅ Kept the subject field
+      email: { type: String, required: true }, // ✅ Email field added for notifications
+      status: { type: String, enum: ["Pending", "Accepted", "Rejected"], default: "Pending" } // ✅ Accept/Reject Status field
+    },
+  ],
+  isNotified: { type: Boolean, default: false }
 });
 
-const Team = mongoose.model('Team', TeamSchema);
-
-module.exports = Team;
-
+module.exports = mongoose.model("Team", TeamSchema);
