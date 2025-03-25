@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login';
-import StudentDashboard from './StudentDashboard';
-import TeacherDashboard from './TeacherDashboard';
-import CoordinatorDashboard from './CoordinatorDashboard';
-import TeamInvitation from './components/TeamInvitation';
+import StudentDashboard from './Dashboards/StudentDashboard';
+import TeacherDashboard from './Dashboards/TeacherDashboard';
+import CoordinatorDashboard from './Dashboards/CoordinatorDashboard';
+import TeamInvitation from './Student-components/TeamInvitation';
 const PrivateRoute = ({ element, role }) => {
   const token = localStorage.getItem("token");
   const savedRole = localStorage.getItem("role");

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { FaBars, FaBell, FaCalendarAlt, FaUser } from "react-icons/fa";
 import "./StudentDashboard.css";
-import Calander from "./Calander.js";
-import TeamFormationForm from "./components/TeamForm.js";
-import MentorForm from "./MentorForm.js";
-import Submission1 from "./submission1.js";
-import Submission2 from "./submission2.js";
-import ProjectDetailForm from "./ProjectDetailForm";
-import Profile from "./Profile";
+import Calander from "../Student-components/Calander.js";
+import TeamFormationForm from "../Student-components/TeamForm.js";
+import MentorForm from "../Student-components/MentorForm.js";
+import Submission1 from "../Student-components/submission1.js";
+import Submission2 from "../Student-components/submission2.js";
+import ProjectDetailForm from "../Student-components/ProjectDetailForm";
+import Profile from "../Student-components/Profile";
 
 const Dashboard = ({ userName }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
