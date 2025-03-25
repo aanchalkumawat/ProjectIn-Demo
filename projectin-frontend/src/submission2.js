@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./submission2.css";
 
-function Submission2({ closeModal }) {
+function Submission2({ isOpen, onClose }) {
   const [reportFile, setReportFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -24,12 +24,19 @@ function Submission2({ closeModal }) {
       formData.append("reportFile", reportFile);
 
       const token = localStorage.getItem("token");
-      const response = await axios.post("http://localhost:5000/api/project-report/submit", formData, {
-        headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/project-report/submit",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       alert(response.data.message);
-      closeModal(); // Close modal after submission
+      onClose(); // ✅ Close modal after successful submission
     } catch (error) {
       console.error("Error submitting report:", error);
       alert("Submission failed. Please try again.");
@@ -37,9 +44,11 @@ function Submission2({ closeModal }) {
   };
 
   return (
-    <div className="popup-overlay">
+    <div className={`submission2-modal-overlay ${isOpen ? "open" : "closed"}`}>
       <div className="submission2-form-container">
-        <button className="submission2-close-btn" onClick={closeModal}>X</button>
+        <button className="submission2-close-btn" onClick={onClose}>
+          &times;
+        </button>
         <h1>Project Report Submission</h1>
 
         <label>Upload Project Report:</label>

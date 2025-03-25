@@ -12,25 +12,26 @@ const MentorForm = ({ isOpen, onClose }) => {
     mentorName: "",
   });
 
-  const [mentors, setMentors] = useState([]); // State to store mentor options
+  const [mentors, setMentors] = useState([]);
 
-  // Fetch mentors from the backend
   useEffect(() => {
-    const fetchMentors = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/mentor/mentors", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setMentors(res.data.mentors);
-      } catch (error) {
-        console.error("Error fetching mentors:", error);
-        alert("Failed to load mentors.");
-      }
-    };
+    if (isOpen) {
+      const fetchMentors = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const res = await axios.get("http://localhost:5000/api/mentor/mentors", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setMentors(res.data.mentors);
+        } catch (error) {
+          console.error("Error fetching mentors:", error);
+          alert("Failed to load mentors.");
+        }
+      };
 
-    fetchMentors();
-  }, []);
+      fetchMentors();
+    }
+  }, [isOpen]); // Fetch mentors only when modal opens
 
   const addMember = () => {
     if (formData.members.length < 5) {
@@ -70,17 +71,15 @@ const MentorForm = ({ isOpen, onClose }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert(res.data.message);
-      onClose(); // Close the modal after submission
+      onClose();
     } catch (error) {
       console.error("Error submitting mentor request:", error.response?.data || error.message);
       alert("Failed to submit mentor request.");
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="mentor-modal-overlay">
+    <div className={`mentor-modal-overlay ${isOpen ? "open" : "closed"}`}>
       <div className="mentor-modal-container">
         <h1>Mentor Request Form</h1>
         <button className="mentor-close-button" onClick={onClose}>
@@ -160,7 +159,7 @@ const MentorForm = ({ isOpen, onClose }) => {
             </option>
             {mentors.map((mentor) => (
               <option key={mentor._id} value={mentor.name}>
-                {mentor.name}({mentor.expertise})
+                {mentor.name} ({mentor.expertise})
               </option>
             ))}
           </select>

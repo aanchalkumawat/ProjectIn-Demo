@@ -3,10 +3,13 @@ const Project = require("../models/Project");
 // Submit a new project
 const submitProject = async (req, res) => {
   try {
-    const { groupID, mentorName, domain, description } = req.body;
+    const { groupID, projectName, mentorName, domain, description, researchBased } = req.body;
 
-    // ✅ Check if all fields are provided
-    if (!groupID || !mentorName || !domain || !description) {
+    // ✅ Debug: Check if data is coming from frontend
+    console.log("🔹 Received Data:", req.body);
+
+    // ✅ Check if all required fields are provided
+    if (!groupID || !projectName || !mentorName || !domain || !description) {
       return res.status(400).json({ message: "All fields are required." });
     }
 
@@ -16,15 +19,17 @@ const submitProject = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized: User ID is missing." });
     }
 
-    console.log("✅ User ID for project submission:", req.user.id); // ✅ Debug Log
+    console.log("✅ User ID for project submission:", req.user.id);
 
-    // ✅ Create Project with SubmittedBy
+    // ✅ Create Project object
     const newProject = new Project({
       groupID,
+      projectName,
       mentorName,
       domain,
       description,
-      submittedBy: req.user.id, // ✅ Ensure this field is populated
+      researchBased: researchBased || false, // ✅ Default to false if undefined
+      submittedBy: req.user.id,
     });
 
     await newProject.save();
@@ -39,10 +44,10 @@ const submitProject = async (req, res) => {
 // Fetch all projects (for displaying in dashboard)
 const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find().populate("createdBy", "name email");
+    const projects = await Project.find().populate("submittedBy", "name email");
     res.status(200).json({ projects });
   } catch (error) {
-    console.error("Error fetching projects:", error);
+    console.error("❌ Error fetching projects:", error);
     res.status(500).json({ message: "Server error while fetching projects" });
   }
 };

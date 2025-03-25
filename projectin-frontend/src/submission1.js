@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import "./submission1.css";
 
-function Submission1({ closeModal }) {
-  const [isResearchBased, setIsResearchBased] = useState("");
-  const [srsFile, setSrsFile] = useState(null);
-  const [sdsFile, setSdsFile] = useState(null);
-  const [synopsisFile, setSynopsisFile] = useState(null);
+function Submission1({ isOpen, onClose }) {
+  const [isResearchBased, setIsResearchBased] = React.useState("");
+  const [srsFile, setSrsFile] = React.useState(null);
+  const [sdsFile, setSdsFile] = React.useState(null);
+  const [synopsisFile, setSynopsisFile] = React.useState(null);
 
   const handleRadioChange = (event) => {
     setIsResearchBased(event.target.value);
-    // ✅ Clear files when option changes
     setSrsFile(null);
     setSdsFile(null);
     setSynopsisFile(null);
@@ -33,8 +32,7 @@ function Submission1({ closeModal }) {
 
       const formData = new FormData();
       formData.append("isResearchBased", isResearchBased);
-      
-      // ✅ Only send required files
+
       if (isResearchBased === "yes" && synopsisFile) {
         formData.append("synopsis", synopsisFile);
       } else if (isResearchBased === "no") {
@@ -46,70 +44,89 @@ function Submission1({ closeModal }) {
       }
 
       const token = localStorage.getItem("token");
-      const response = await axios.post("http://localhost:5000/api/submission", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:5000/api/submission",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       alert(response.data.message);
-      closeModal();
+      onClose(); // ✅ Close modal after submission
     } catch (error) {
       console.error("Error submitting project:", error);
-      alert(error.response?.data?.message || "Submission failed. Please try again.");
+      alert(
+        error.response?.data?.message || "Submission failed. Please try again."
+      );
     }
   };
 
   return (
-    <div className="popup-overlay">
+    <div className={`submission1-modal-overlay ${isOpen ? "open" : "closed"}`}>
       <div className="submission1-form-container">
-        <button className="submission1-close-btn" onClick={closeModal}>X</button>
+        <button className="submission1-close-btn" onClick={onClose}>
+          &times;
+        </button>
         <h1>SRS & SDS / Synopsis Submission</h1>
 
-        <label>Is your project Research based?</label><br /><br />
-        <input 
-          type="radio" 
-          name="researchBased" 
-          value="yes" 
+        <label>Is your project Research based?</label>
+        <br />
+        <br />
+        <input
+          type="radio"
+          name="researchBased"
+          value="yes"
           checked={isResearchBased === "yes"}
           onChange={handleRadioChange}
-        /> Yes
-        <input 
-          type="radio" 
-          name="researchBased" 
-          value="no" 
+        />{" "}
+        Yes
+        <input
+          type="radio"
+          name="researchBased"
+          value="no"
           checked={isResearchBased === "no"}
           onChange={handleRadioChange}
-        /> No
-        <br /><br />
+        />{" "}
+        No
+        <br />
+        <br />
 
         {isResearchBased === "yes" && (
           <div>
             <label>Synopsis (Research-based projects only):</label>
-            <input 
-              type="file" 
-              accept="application/pdf" 
-              onChange={(e) => handleFileChange(e, setSynopsisFile)} 
-            /><br /><br/>
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => handleFileChange(e, setSynopsisFile)}
+            />
+            <br />
+            <br />
           </div>
         )}
 
         {isResearchBased === "no" && (
           <div>
             <label>SRS (Software Requirement Specification):</label>
-            <input 
-              type="file" 
-              accept="application/pdf" 
-              onChange={(e) => handleFileChange(e, setSrsFile)} 
-            /><br /><br/>
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => handleFileChange(e, setSrsFile)}
+            />
+            <br />
+            <br />
 
             <label>SDS (Software Design Specification):</label>
-            <input 
-              type="file" 
-              accept="application/pdf" 
-              onChange={(e) => handleFileChange(e, setSdsFile)} 
-            /><br /><br/>
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => handleFileChange(e, setSdsFile)}
+            />
+            <br />
+            <br />
           </div>
         )}
 

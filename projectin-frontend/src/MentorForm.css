@@ -118,3 +118,10 @@
   margin-bottom: 10px;
   justify-content: space-between; /* Ensure horizontal arrangement */
 }
+.mentor-modal-overlay.open {
+  display: flex;
+}
+
+.mentor-modal-overlay.closed {
+  display: none;
+}

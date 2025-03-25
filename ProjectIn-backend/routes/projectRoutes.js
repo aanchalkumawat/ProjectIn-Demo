@@ -5,9 +5,9 @@ const verifyToken = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 // Route to submit a project
-router.post("/submit", verifyToken, submitProject);
+router.post("/", verifyToken, submitProject);
 
 // Route to fetch all projects
-router.get("/all", verifyToken, getProjects);
+router.get("/", verifyToken, getProjects);
 
 module.exports = router;

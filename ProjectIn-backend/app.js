@@ -7,6 +7,7 @@ const path = require("path"); // ✅ Import path module for serving files
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 const teamRoutes = require("./routes/teamRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 const mentorRoutes = require("./routes/mentorRoutes");
@@ -39,6 +40,7 @@ app.use("/api/mentor", mentorRoutes);
 app.use("/api/notifications", notificationRoutes); 
 app.use("/api/submission", submissionRoutes);
 app.use("/api/project-report", projectReportRoutes);
+app.use("/api/project", projectRoutes);
 
 // ✅ Logging Registered Routes
 console.log("\n📌 Registered API Routes:");

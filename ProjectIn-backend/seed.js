@@ -1,60 +1,57 @@
-require("dotenv").config();
 const mongoose = require("mongoose");
-const Student = require("./models/Student");
-const Teacher = require("./models/Teacher");
-const Coordinator = require("./models/Coordinator");
-const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+const Project = require("./models/Project");
+const User = require("./models/User"); // Import User model
 
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ MongoDB Connected for Seeding"))
-  .catch((err) => console.error("❌ MongoDB Connection Failed:", err));
+dotenv.config();
 
-// Encrypt passwords before storing
-const hashPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return bcrypt.hash(password, salt);
-};
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ Database connected successfully!"))
+.catch((err) => console.error("❌ Database connection error:", err));
 
-// Sample data for Students
-const students = [
-  { name: "Aanchal Kumawat", email: "aanchal@banasthali.in", password: "password123", rollNo: "BTCTC22014" },
-  { name: "Komal tyagi", email: "komal@banasthali.in", password: "password123", rollNo: "BTBTI22098" },
-  { name: "Astha Shukla", email: "astha@banasthali.in", password: "password123", rollNo: "BTBTE3485" }
-];
-
-// Sample data for Teachers
-const teachers = [
-  { name: "Dr. Ravi Sharma", email: "ravi@banasthali.in", password: "password123", subject: "Computer Science" },
-  { name: "Dr. Neha Verma", email: "neha@banasthali.in", password: "password123", subject: "AI/ML" }
-];
-
-// Sample data for Coordinators
-const coordinators = [
-  { name: "Prof. Meera Gupta", email: "meera@banasthali.in", password: "password123", department: "CS & IT" }
-];
-
-// Function to insert data into the database
 const seedDatabase = async () => {
   try {
-    // Hash passwords
-    for (let student of students) student.password = await hashPassword(student.password);
-    for (let teacher of teachers) teacher.password = await hashPassword(teacher.password);
-    for (let coordinator of coordinators) coordinator.password = await hashPassword(coordinator.password);
+    await Project.deleteMany(); // Clear existing projects
+    console.log("🗑️ Existing projects deleted.");
 
-    // Insert data
-    await Student.insertMany(students);
-    await Teacher.insertMany(teachers);
-    await Coordinator.insertMany(coordinators);
+    // Fetch a user from the database
+    let user = await User.findOne();
+    
+    // If no users exist, create a dummy user
+    if (!user) {
+      user = new User({ name: "Dummy User", email: "dummy@example.com", password: "password123" });
+      await user.save();
+      console.log("👤 Dummy user created:", user._id);
+    }
 
-    console.log("✅ Data Seeded Successfully!");
-    mongoose.connection.close();
+    // Sample projects data
+    const projectSeeds = [
+      { groupID: "CSD0001", projectName: "Smart Attendance System", mentorName: "Dr. Sharma", domain: "standalone-web", description: "A web app for automated attendance tracking.", researchBased: false, submittedBy: user._id },
+      { groupID: "CSD0002", projectName: "AI Chatbot", mentorName: "Dr. Verma", domain: "web-based", description: "A chatbot using AI to assist users.", researchBased: true, submittedBy: user._id },
+      { groupID: "CSD0003", projectName: "Blockchain Voting System", mentorName: "Prof. Mehta", domain: "web-based", description: "Secure online voting using blockchain.", researchBased: true, submittedBy: user._id },
+      { groupID: "CSD0004", projectName: "IoT Smart Home", mentorName: "Dr. Kapoor", domain: "android", description: "Home automation system using IoT.", researchBased: false, submittedBy: user._id },
+      { groupID: "CSD0005", projectName: "AI-Powered Resume Screener", mentorName: "Dr. Roy", domain: "standalone-web", description: "An AI tool for resume screening.", researchBased: true, submittedBy: user._id },
+      { groupID: "CSD0006", projectName: "Autonomous Delivery Drone", mentorName: "Prof. Iyer", domain: "arvr", description: "A drone delivery system using AI.", researchBased: true, submittedBy: user._id },
+      { groupID: "CSD0007", projectName: "E-commerce Recommendation System", mentorName: "Dr. Singh", domain: "web-based", description: "Personalized recommendations using AI.", researchBased: false, submittedBy: user._id },
+      { groupID: "CSD0008", projectName: "Cybersecurity Threat Detection", mentorName: "Dr. Choudhary", domain: "standalone-web", description: "Detecting cyber threats using ML.", researchBased: true, submittedBy: user._id },
+      { groupID: "CSD0009", projectName: "AI-Powered Medical Diagnosis", mentorName: "Dr. Patel", domain: "android", description: "An AI tool for medical disease detection.", researchBased: true, submittedBy: user._id },
+      { groupID: "CSD0010", projectName: "Smart Farming System", mentorName: "Prof. Reddy", domain: "arvr", description: "Using AI & IoT to improve farming.", researchBased: false, submittedBy: user._id },
+      { groupID: "CSD0011", projectName: "Automated Code Review System", mentorName: "Dr. Gupta", domain: "standalone-web", description: "An AI tool for code quality checks.", researchBased: true, submittedBy: user._id },
+      { groupID: "CSD0012", projectName: "AI-Driven Stock Market Predictor", mentorName: "Dr. Bose", domain: "web-based", description: "Stock prediction using deep learning.", researchBased: true, submittedBy: user._id },
+    ];
+
+    // Insert projects
+    await Project.insertMany(projectSeeds);
+    console.log("✅ 12 projects seeded successfully!");
+
+    mongoose.connection.close(); // Close DB connection
   } catch (error) {
-    console.error("❌ Error Seeding Data:", error);
-    mongoose.connection.close();
+    console.error("❌ Error seeding database:", error);
   }
 };
 
-// Run the function
 seedDatabase();

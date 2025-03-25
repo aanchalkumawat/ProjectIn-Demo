@@ -1,15 +1,29 @@
 /* Popup Overlay */
-.popup-overlay {
+.submission2-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dim background */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Ensure it's above other elements */
+  z-index: 9999;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* When modal is closed, hide it */
+.submission2-modal-overlay.closed {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* When modal is open, show it */
+.submission2-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Form Container */
@@ -19,9 +33,10 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-  width: 600px; /* Adjusted width for simpler form */
-  max-height: 80vh; /* Prevent overflow */
-  overflow-y: auto; /* Add scrolling if content exceeds height */
+  width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10000;
 }
 
 /* Close Button (X) */
@@ -29,19 +44,18 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border: none;
   border-radius: 50%;
   background-color: #ff4d4d;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .submission2-close-btn:hover {
@@ -56,21 +70,4 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-
-/* Heading and Labels */
-.submission2-form-container h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.submission2-form-container label {
-  font-size: 14px;
-  color: #333;
-}
-
-.submission2-form-container p {
-  font-size: 14px;
-  color: #666;
 }
