@@ -5,33 +5,39 @@ import StudentDashboard from './Dashboards/StudentDashboard';
 import TeacherDashboard from './Dashboards/TeacherDashboard';
 import CoordinatorDashboard from './Dashboards/CoordinatorDashboard';
 import TeamInvitation from './Student-components/TeamInvitation';
-const PrivateRoute = ({ element, role }) => {
+
+const PrivateRoute = ({ children, role }) => {
   const token = localStorage.getItem("token");
   const savedRole = localStorage.getItem("role");
 
-  return token && savedRole === role ? element : <Navigate to="/" />;
+  return token && savedRole === role ? children : <Navigate to="/" />;
 };
 
 function App () {
-  return(
-  <Router>
-    <Routes>
-      <Route path="/" element={<Login />} />
+  return (
+    <Router>
+      <Routes>
+        {/* Public Route */}
+        <Route path="/" element={<Login />} />
 
-      <Route path="/dashboard" element={<PrivateRoute element={<StudentDashboard />} role="student" />} />
-      <Route path="/TeacherDashboard" element={<PrivateRoute element={<TeacherDashboard />} role="teacher" />} />
-        <Route path="/CoordinatorDashboard" element={<PrivateRoute element={<CoordinatorDashboard />} role="coordinator" />} />
+        {/* Student Routes */}
+        <Route path="/dashboard" element={<PrivateRoute role="student"><StudentDashboard /></PrivateRoute>} />
+
+        {/* Teacher Routes */}
+        <Route path="/teacher-dashboard" element={<PrivateRoute role="teacher"><TeacherDashboard /></PrivateRoute>} />
+
+        {/* Coordinator Routes (Nested Routing) */}
+        <Route path="/coordinator-dashboard/*" element={<PrivateRoute role="coordinator"><CoordinatorDashboard /></PrivateRoute>} />
+
+        {/* Team Invitation Routes */}
         <Route path="/accept" element={<TeamInvitation />} />
         <Route path="/reject" element={<TeamInvitation />} />
 
         {/* Redirect Unmatched Routes */}
         <Route path="*" element={<Navigate to="/" />} />
-
-
-    </Routes>
-  </Router>
-);
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
-
