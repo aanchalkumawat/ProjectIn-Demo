@@ -1,0 +1,240 @@
+.panel-formation-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.panel-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px; 
+}
+
+/* Search Bar, Back Button, and Form Panel Button */
+.search-container.fixed {
+    width: 100%;
+    gap: 10px;
+    padding: 10px 0;
+    position: sticky; 
+    top: 70px;  
+    background: white;  
+    z-index: 1000;  
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.back-button, .form-panel-button, .show-panel-button {
+    padding: 8px 12px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 36px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.back-button {
+    background-color: #007bff;
+}
+
+.form-panel-button {
+    background-color: green;
+    font-weight: bold;
+}
+
+.form-panel-button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.show-panel-button {
+    background-color: #007bff;
+}
+
+/* Panel Count */
+.panel-count-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    margin-top: 10px;
+}
+
+.panel-count-container h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Teachers List */
+.teachers-list {
+    width: 100%;
+    gap: 15px;
+    margin-top: 200px;
+    padding-top: 20px;
+}
+
+.teacher-flashcard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    background: #eee;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+/* Selection Button */
+.select-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.select-button:hover {
+    background-color: darkgreen;
+}
+
+.selected {
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Panel Section */
+.panels-section {
+    margin-top: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+.panel-card {
+    background: #d9edf7;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px auto;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+    position: relative;
+}
+
+.panel-card.expanded {
+    max-height: 500px;
+}
+
+/* Detail & Allot Teams Buttons - Same Style */
+.details-button, .allot-teams-button {
+    padding: 8px 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 5px;
+    height: 36px;
+    min-width: 120px;
+    text-align: center;
+}
+
+.details-button:hover, .allot-teams-button:hover {
+    background-color: #0056b3;
+}
+
+/* Allot Teams Popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    text-align: center;
+}
+
+.popup h3 {
+    margin-bottom: 15px;
+}
+
+.popup ul {
+    list-style: none;
+    padding: 0;
+}
+
+.popup li {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin: 5px 0;
+    gap: 10px;
+}
+
+/* Align checkbox with team name */
+.popup input {
+    width: 16px;
+    height: 16px;
+}
+
+/* Close Button */
+.close-popup {
+    background: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.close-popup:hover {
+    background: darkred;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .teacher-flashcard {
+        width: 80%;
+    }
+
+    .search-bar {
+        width: 50%;
+    }
+
+    .back-button, .form-panel-button, .show-panel-button {
+        min-width: 80px;
+        height: 36px;
+    }
+
+    .popup {
+        width: 80%;
+    }
+}

@@ -1,0 +1,127 @@
+/* Main Content */
+.content {
+  transition: margin-left 0.3s ease;
+}
+
+.content.shifted {
+  margin-left: 260px; /* Moves content when sidebar is open */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 15px;
+  position: fixed;
+  top: 60px; /* Below the top banner */
+  bottom: 0;
+  left: -250px; /* Initially hidden */
+  transition: left 0.3s ease;
+}
+
+.sidebar.open {
+  left: 0; /* Visible when open */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+/* Sidebar Main Buttons (Student, Team) */
+.sidebar-button {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  text-align: left;
+  border: none;
+  background: linear-gradient(90deg, #2b2393, #dddee4); /* Blue gradient */
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.sidebar-button:hover {
+  background: linear-gradient(90deg, #222a5c, #361c71); /* Dark blue gradient */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.sidebar-button:active {
+  transform: translateY(0); /* Reset lift on click */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow on click */
+}
+
+/* Secondary Buttons (Marks, Request Submission, Team Export Details) */
+.secondary-button {
+  width: 100% !important; /* Ensuring uniform width */
+  padding: 12px 20px;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+  background: white;
+  color: black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: block;
+  box-shadow: none;
+  outline: none;
+  text-decoration: none !important; /* Removes underline */
+}
+
+/* Add spacing between "Request Submission" and "Team Export Details" */
+.secondary-button + .secondary-button {
+  margin-top: 12px !important; /* Adds gap */
+}
+
+/* Hover Effect for Secondary Buttons */
+.secondary-button:hover {
+  background: #e0e0e0;
+}
+
+/* Remove Background Shadow from Dropdown */
+.dropdown {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Remove any grey background or border around dropdown items */
+.dropdown li {
+  background: transparent !important;
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown li:hover {
+  background: #e0e0e0;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 0;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.shifted {
+  margin-left: 250px; /* Matches the width of the sidebar */
+}
+
+.center-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+

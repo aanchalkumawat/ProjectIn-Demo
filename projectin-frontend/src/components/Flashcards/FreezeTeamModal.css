@@ -1,0 +1,135 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Darkened background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background: white;
+    width: 400px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Modal Title */
+  .modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #2b2393;
+  }
+  
+  /* Modal Text */
+  .modal-content p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Buttons Container */
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* Close Button */
+  .close-btn {
+    background: #ccc;
+    color: #000;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .close-btn:hover {
+    background: #bbb;
+  }
+  
+  /* Freeze Button */
+  .freeze-btn {
+    background: #2b2393;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .freeze-btn:hover {
+    background: #1a1875;
+  }
+  
+  /* Confirm Dialog */
+  .confirm-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 380px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Confirm Dialog Content */
+  .confirm-content p {
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 20px;
+  }
+  
+  /* Confirm Dialog Buttons */
+  .confirm-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Cancel Button */
+  .cancel-btn {
+    background: #ccc;
+    color: #000;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .cancel-btn:hover {
+    background: #bbb;
+  }
+  
+  /* Confirm Button */
+  .confirm-btn {
+    background: #d9534f;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .confirm-btn:hover {
+    background: #c9302c;
+  }
+  

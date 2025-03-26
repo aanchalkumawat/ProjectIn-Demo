@@ -13,14 +13,17 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
+  useEffect(() => {
+    console.log("🔍 Clearing old session...");
+    localStorage.clear();
+  }, []);
   // 🔹 Ensure login form is the first screen (Prevent auto-redirection)
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       // Redirect user to their role-based dashboard if already logged in
       const savedRole = localStorage.getItem("role");
-      if (savedRole === "student") navigate("/student-dashboard");
+      if (savedRole === "student") navigate("/dashboard");
       else if (savedRole === "teacher") navigate("/teacher-dashboard");
       else if (savedRole === "coordinator") navigate("/coordinator-dashboard");
     }
@@ -60,9 +63,9 @@ export default function LoginForm() {
         alert("Login successful!");
 
         // 🔹 Redirect user based on role
-        if (role === "student") navigate("/Dashboard");
-        else if (role === "teacher") navigate("/TeacherDashboard");
-        else if (role === "coordinator") navigate("/CoordinatorDashboard");
+        if (role === "student") navigate("/dashboard");
+        else if (role === "teacher") navigate("/teacher-dashboard");
+        else if (role === "coordinator") navigate("/coordinator-dashboard");
       } else {
         alert("Signup successful! You can now log in.");
         setIsLogin(true);
