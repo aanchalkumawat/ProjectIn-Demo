@@ -38,6 +38,8 @@ const marksRoutes = require("./routes/marksRoutes");
 const exportRoutes = require("./routes/exportRoutes");
 const freezeRoutes = require("./routes/freezeRoutes");
 const teamLimitRoutes = require("./routes/teamLimitRoutes");
+const studentRoutes = require("./routes/studentRoutes");
+const coordinatorRoutes = require("./routes/coordinatorRoutes"); // ✅ Added Coordinator Routes
 
 // ✅ API Routes
 app.use("/api/auth", authRoutes);
@@ -53,6 +55,8 @@ app.use("/api/panel", panelRoutes);
 app.use("/api/remarks", remarksRoutes);
 app.use("/api/marks", marksRoutes);
 app.use("/api", exportRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/coordinators", coordinatorRoutes);
 
 // ✅ Logging Registered Routes
 console.log("\n📌 Registered API Routes:");

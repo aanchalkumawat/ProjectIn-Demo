@@ -2,9 +2,32 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import TeamExportPopup from "./TeamExportPopup";
+import ImportStudentDataPopup from "./ImportStudentDataPopup";
+import ImportMentorDataPopup from "./ImportMentorDataPopup";
+import ImportCoordinatorDataPopup from "./ImportCoordinatorDataPopup";
 
-const Sidebar = ({ isSidebarOpen, toggleStudentDropdown, toggleTeamDropdown, isStudentDropdownOpen, isTeamDropdownOpen, openRequestSubmissionPopup }) => {
-  const [showExportPopup, setShowExportPopup] = useState(false);
+const Sidebar = ({
+  isSidebarOpen,
+  toggleStudentDropdown,
+  toggleTeamDropdown,
+  isStudentDropdownOpen,
+  isTeamDropdownOpen,
+  openRequestSubmissionPopup,
+}) => {
+  const [isTeamExportPopupOpen, setIsTeamExportPopupOpen] = useState(false);
+  const [isImportDropdownOpen, setIsImportDropdownOpen] = useState(false);
+  const [isStudentImportPopupOpen, setIsStudentImportPopupOpen] = useState(false);
+  const [isMentorImportPopupOpen, setIsMentorImportPopupOpen] = useState(false);
+  const [isCoordinatorImportPopupOpen, setIsCoordinatorImportPopupOpen] = useState(false);
+
+  const handleFileUpload = (file, role) => {
+    if (!file) {
+      alert(`No file selected for ${role}.`);
+      return;
+    }
+    console.log(`Uploading ${role} file:`, file);
+    alert(`File "${file.name}" uploaded successfully for ${role}!`);
+  };
 
   return (
     <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
@@ -16,7 +39,7 @@ const Sidebar = ({ isSidebarOpen, toggleStudentDropdown, toggleTeamDropdown, isS
           {isStudentDropdownOpen && (
             <ul className="dropdown">
               <li>
-                <Link to="/coordinator-dashboard/marks" className="marks-button" style={{ textDecoration: 'none' }}> 
+                <Link to="/coordinator-dashboard/marks" className="marks-button">
                   <button className="secondary-button">Marks</button>
                 </Link>
               </li>
@@ -36,8 +59,33 @@ const Sidebar = ({ isSidebarOpen, toggleStudentDropdown, toggleTeamDropdown, isS
                 </button>
               </li>
               <li>
-                <button className="export-btn" onClick={() => setShowExportPopup(true)}>
+                <button className="secondary-button" onClick={() => setIsTeamExportPopupOpen(true)}>
                   Team Export Details
+                </button>
+              </li>
+            </ul>
+          )}
+        </li>
+
+        <li>
+          <button className="sidebar-button primary" onClick={() => setIsImportDropdownOpen(!isImportDropdownOpen)}>
+            Import
+          </button>
+          {isImportDropdownOpen && (
+            <ul className="dropdown">
+              <li>
+                <button className="secondary-button" onClick={() => setIsStudentImportPopupOpen(true)}>
+                  Import Student Data
+                </button>
+              </li>
+              <li>
+                <button className="secondary-button" onClick={() => setIsMentorImportPopupOpen(true)}>
+                  Import Mentor Data
+                </button>
+              </li>
+              <li>
+                <button className="secondary-button" onClick={() => setIsCoordinatorImportPopupOpen(true)}>
+                  Import Coordinator Data
                 </button>
               </li>
             </ul>
@@ -45,7 +93,10 @@ const Sidebar = ({ isSidebarOpen, toggleStudentDropdown, toggleTeamDropdown, isS
         </li>
       </ul>
 
-      {showExportPopup && <TeamExportPopup onClose={() => setShowExportPopup(false)} />}
+      {isTeamExportPopupOpen && <TeamExportPopup onClose={() => setIsTeamExportPopupOpen(false)} />}
+      {isStudentImportPopupOpen && <ImportStudentDataPopup onClose={() => setIsStudentImportPopupOpen(false)} onFileUpload={handleFileUpload} />}
+      {isMentorImportPopupOpen && <ImportMentorDataPopup onClose={() => setIsMentorImportPopupOpen(false)} onFileUpload={handleFileUpload} />}
+      {isCoordinatorImportPopupOpen && <ImportCoordinatorDataPopup onClose={() => setIsCoordinatorImportPopupOpen(false)} onFileUpload={handleFileUpload} />}
     </div>
   );
 };

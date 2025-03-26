@@ -26,16 +26,17 @@
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar li {
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Increased spacing between items */
 }
 
-/* Sidebar Main Buttons (Student, Team) */
+/* Sidebar Main Buttons (Student, Team, Import) */
 .sidebar-button {
   width: 100%;
-  padding: 12px 20px;
+  padding: 14px 20px;
   font-size: 16px;
   text-align: left;
   border: none;
@@ -45,6 +46,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+  margin-top: 15px; /* Added margin to create spacing from the top banner */
+}
+
+.sidebar-button:first-child {
+  margin-top: 20px; /* Ensuring Student button has extra space */
 }
 
 .sidebar-button:hover {
@@ -58,9 +64,9 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow on click */
 }
 
-/* Secondary Buttons (Marks, Request Submission, Team Export Details) */
+/* Secondary Buttons (Marks, Request Submission, Import Data) */
 .secondary-button {
-  width: 100% !important; /* Ensuring uniform width */
+  width: 100%;
   padding: 12px 20px;
   font-size: 16px;
   text-align: center;
@@ -71,14 +77,13 @@
   cursor: pointer;
   transition: background 0.3s ease;
   display: block;
-  box-shadow: none;
   outline: none;
   text-decoration: none !important; /* Removes underline */
 }
 
-/* Add spacing between "Request Submission" and "Team Export Details" */
+/* Add spacing between dropdown buttons */
 .secondary-button + .secondary-button {
-  margin-top: 12px !important; /* Adds gap */
+  margin-top: 12px !important;
 }
 
 /* Hover Effect for Secondary Buttons */
@@ -120,8 +125,93 @@
   margin-left: 250px; /* Matches the width of the sidebar */
 }
 
+/* Centered Heading */
 .center-heading {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Import Buttons */
+.import-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.import-buttons button {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  background: #4caf50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.import-buttons button:hover {
+  background: #388e3c; /* Darker green */
+}
+
+.import-buttons button:active {
+  background: #2e7d32;
+}
+
+/* Popup Styling */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h2 {
+  margin-bottom: 15px;
+}
+
+.popup-content input {
+  margin-bottom: 15px;
+}
+
+.popup-content button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-content button.upload {
+  background: #2196f3;
+  color: white;
+}
+
+.popup-content button.upload:hover {
+  background: #1976d2;
+}
+
+.popup-content button.close {
+  background: #d32f2f;
+  color: white;
+}
+
+.popup-content button.close:hover {
+  background: #b71c1c;
+}
