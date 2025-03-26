@@ -4,6 +4,8 @@ const Team = require("../models/Team");
 const Student = require("../models/Student");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
+const { getTeamStats } = require("../controllers/teamController");
+const { getTeams } = require("../controllers/teamControllers");
 
 // Nodemailer setup
 const transporter = nodemailer.createTransport({
@@ -184,5 +186,7 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ message: "Error deleting team", error });
   }
 });
+router.get("/stats", getTeamStats);
+router.get("/getTeams", getTeams);
 
 module.exports = router;

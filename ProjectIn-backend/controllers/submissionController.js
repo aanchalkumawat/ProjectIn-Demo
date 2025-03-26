@@ -1,4 +1,5 @@
 const Submission = require("../models/submissionModel");
+const SubmissionRequest = require("../models/SubmissionRequest");
 const multer = require("multer");
 const path = require("path");
 
@@ -48,5 +49,51 @@ const submitProject = async (req, res) => {
     res.status(500).json({ message: "Server error while submitting project" });
   }
 };
+const createSubmissionRequest = async (req, res) => {
+  try {
+    const { submissionType, deadlineDate } = req.body;
 
-module.exports = { upload, submitProject };
+    if (!submissionType || !deadlineDate) {
+      return res.status(400).json({ error: "Both submission type and deadline date are required." });
+    }
+
+    const newSubmission = new SubmissionRequest({
+      submissionType,
+      deadlineDate,
+    });
+
+    await newSubmission.save();
+    res.status(201).json({ message: "Submission request created successfully!", submission: newSubmission });
+  } catch (error) {
+    console.error("Error creating submission request:", error);
+    res.status(500).json({ error: "Failed to create submission request" });
+  }
+};
+
+// ✅ Fetch all submission requests
+const getAllSubmissionRequests = async (req, res) => {
+  try {
+    const submissions = await SubmissionRequest.find();
+    res.json(submissions);
+  } catch (error) {
+    console.error("Error fetching submission requests:", error);
+    res.status(500).json({ error: "Failed to fetch submission requests" });
+  }
+};
+
+// ✅ Delete a submission request
+const deleteSubmissionRequest = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await SubmissionRequest.findByIdAndDelete(id);
+    res.json({ message: "Submission request deleted successfully!" });
+  } catch (error) {
+    console.error("Error deleting submission request:", error);
+    res.status(500).json({ error: "Failed to delete submission request" });
+  }
+};
+
+
+module.exports = { upload, submitProject,createSubmissionRequest,
+  getAllSubmissionRequests,
+  deleteSubmissionRequest, };
