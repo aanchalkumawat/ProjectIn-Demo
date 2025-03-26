@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Remarks from "./Remarks";
 import "./Marks.css";
+import { FaCheckCircle } from "react-icons/fa"; // Import check icon
 
 const Marks = () => {
   const navigate = useNavigate();
@@ -19,8 +20,33 @@ const Marks = () => {
         const response = await fetch("http://localhost:5000/api/team/getTeams");
         const data = await response.json();
         setTeams(data);
+
+        const enrollmentNumbers = data.flatMap((team) => [
+          team.teamLeader.enrollmentNumber,
+          ...team.teamMembers.map((member) => member.enrollmentNumber),
+        ]);
+
+        const marksResponse = await fetch("http://localhost:5000/api/marks/fetch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ enrollmentNumbers }),
+        });
+
+        const marksData = await marksResponse.json();
+        const fetchedMarks = {};
+        const fetchedSubmittedTeams = {};
+
+        marksData.forEach(({ enrollmentNumber, marks }) => {
+          fetchedMarks[enrollmentNumber] = marks;
+          if (marks !== null && marks !== undefined) {
+            fetchedSubmittedTeams[enrollmentNumber] = true;
+          }
+        });
+
+        setMarks(fetchedMarks);
+        setSubmittedTeams(fetchedSubmittedTeams);
       } catch (error) {
-        console.error("Error fetching teams:", error);
+        console.error("Error fetching teams or marks:", error);
       }
     };
     fetchTeams();
@@ -54,33 +80,29 @@ const Marks = () => {
 
   const toggleMarksTable = (teamId) => {
     setMarksTableVisible(marksTableVisible === teamId ? null : teamId);
-    if (!marks[teamId]) {
-      setMarks((prev) => ({
-        ...prev,
-        [teamId]: {},
-      }));
-    }
   };
 
   const handleSubmitMarks = async (teamId) => {
     const team = teams.find((t) => t.teamID === teamId);
-    if (!team || !marks[teamId]) return;
+    if (!team) return;
+
+    const allStudents = [team.teamLeader, ...team.teamMembers];
+    const studentsToSubmit = allStudents.map((student) => ({
+      enrollmentNumber: student.enrollmentNumber,
+      fullName: student.fullName,
+      marks: marks[student.enrollmentNumber],
+    }));
+
+    if (studentsToSubmit.some((student) => student.marks === undefined || student.marks === "")) {
+      alert("Please enter marks for all students before submitting.");
+      return;
+    }
 
     try {
-      const allStudents = [team.teamLeader, ...team.teamMembers];
-      const studentsToSubmit = allStudents.map((student) => ({
-        enrollmentNumber: student.enrollmentNumber,
-        fullName: student.fullName,
-        marks: marks[teamId][student.enrollmentNumber],
-      }));
-
       const response = await fetch("http://localhost:5000/api/marks/assign", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          teamID: teamId,
-          students: studentsToSubmit,
-        }),
+        body: JSON.stringify({ teamID: teamId, students: studentsToSubmit }),
       });
 
       const data = await response.json();
@@ -121,16 +143,13 @@ const Marks = () => {
             <div className="flashcard-header">
               <h3>{team.teamID}</h3>
               <div className="button-group">
-                <button
-                  className="action-button"
-                  onClick={() => toggleMarksTable(team.teamID)}
-                >
+                {submittedTeams[team.teamLeader.enrollmentNumber] && (
+                  <FaCheckCircle className="check-icon" color="green" size={20} />
+                )}
+                <button className="action-button" onClick={() => toggleMarksTable(team.teamID)}>
                   Assign Marks
                 </button>
-                <button
-                  className="action-button"
-                  onClick={() => toggleRemarks(team.teamID)}
-                >
+                <button className="action-button" onClick={() => toggleRemarks(team.teamID)}>
                   View Remarks
                 </button>
               </div>
@@ -144,35 +163,28 @@ const Marks = () => {
                     <tr>
                       <th>Enrollment Number</th>
                       <th>Name</th>
-                      <th>Marks Obtained(out of 100)</th>
+                      <th>Marks Obtained (out of 100)</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[team.teamLeader, ...team.teamMembers].map((member) => (
                       <tr key={member.enrollmentNumber}>
                         <td>{member.enrollmentNumber}</td>
-                        <td>{
-                          member.enrollmentNumber === team.teamLeader.enrollmentNumber
-                            ? `${member.fullName} (Leader)`
-                            : member.fullName
-                        }</td>
+                        <td>{member.fullName}</td>
                         <td>
                           <input
                             type="number"
                             min="0"
                             max="100"
                             placeholder="Enter Marks"
-                            value={marks[team.teamID]?.[member.enrollmentNumber] || ""}
+                            value={marks[member.enrollmentNumber] || ""}
                             onChange={(e) =>
                               setMarks((prev) => ({
                                 ...prev,
-                                [team.teamID]: {
-                                  ...prev[team.teamID],
-                                  [member.enrollmentNumber]: e.target.value,
-                                },
+                                [member.enrollmentNumber]: parseInt(e.target.value, 10) || "",
                               }))
                             }
-                            disabled={submittedTeams[team.teamID]}
+                            disabled={submittedTeams[member.enrollmentNumber]}
                           />
                         </td>
                       </tr>
@@ -182,9 +194,14 @@ const Marks = () => {
                 <button
                   className="submit-button"
                   onClick={() => handleSubmitMarks(team.teamID)}
-                  disabled={submittedTeams[team.teamID] || ![team.teamLeader, ...team.teamMembers].every(member => marks[team.teamID]?.[member.enrollmentNumber])}
+                  disabled={
+                    submittedTeams[team.teamLeader.enrollmentNumber] ||
+                    [team.teamLeader, ...team.teamMembers].some(
+                      (member) => marks[member.enrollmentNumber] === undefined || marks[member.enrollmentNumber] === ""
+                    )
+                  }
                 >
-                  {submittedTeams[team.teamID] ? "Marks Submitted" : "Submit Marks"}
+                  {submittedTeams[team.teamLeader.enrollmentNumber] ? "Marks Submitted" : "Submit Marks"}
                 </button>
               </div>
             )}
