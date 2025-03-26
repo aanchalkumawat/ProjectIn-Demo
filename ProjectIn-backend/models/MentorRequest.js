@@ -12,8 +12,9 @@ const mentorRequestSchema = new mongoose.Schema({
       phone: { type: String },
     },
   ],
+  mentorId: { type: mongoose.Schema.Types.ObjectId, ref: "Mentor", required: true },
   mentorName: { type: String, required: true },
-  leaderId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  leaderId: { type: mongoose.Schema.Types.ObjectId, ref: "Student", required: true },
   status: { type: String, default: "Pending" }, // Pending, Approved, Rejected
   createdAt: { type: Date, default: Date.now },
 });

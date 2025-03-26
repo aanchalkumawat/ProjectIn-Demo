@@ -1,4 +1,5 @@
 const MentorRequest = require("../models/MentorRequest");
+const Mentor = require("../models/Mentor");
 
 // Create a new mentor request
 const createMentorRequest = async (req, res) => {
@@ -9,7 +10,7 @@ const createMentorRequest = async (req, res) => {
       projectDescription,
       technologyDetails,
       members,
-      mentorName,
+      mentorName, // Mentor Name received from frontend
     } = req.body;
 
     // Validate required fields
@@ -17,15 +18,23 @@ const createMentorRequest = async (req, res) => {
       return res.status(400).json({ message: "All fields are required." });
     }
 
-    // Create a new mentor request
+    // Find mentor by name to get the mentorId
+    const mentor = await Mentor.findOne({ name: mentorName });
+
+    if (!mentor) {
+      return res.status(404).json({ message: "Selected mentor not found." });
+    }
+
+    // Create a new mentor request storing both mentorId and mentorName
     const mentorRequest = new MentorRequest({
       projectName,
       isResearchBased,
       projectDescription,
       technologyDetails,
       members,
-      mentorName,
-      leaderId: req.user.id, // From the token
+      mentorName: mentor.name, // Store mentor name
+      mentorId: mentor._id, // Store mentor ID fetched from database
+      leaderId: req.user.id, // Leader ID from token
     });
 
     await mentorRequest.save();
@@ -36,17 +45,6 @@ const createMentorRequest = async (req, res) => {
   }
 };
 
-// Get all mentor requests (for admin/mentor view)
-const getMentorRequests = async (req, res) => {
-  try {
-    const mentorRequests = await MentorRequest.find().populate("leaderId", "name email");
-    res.status(200).json({ mentorRequests });
-  } catch (error) {
-    console.error("Error fetching mentor requests:", error);
-    res.status(500).json({ message: "Failed to fetch mentor requests." });
-  }
-};
-const Mentor = require("../models/Mentor");
 
 // Fetch all mentors
 const fetchMentors = async (req, res) => {
@@ -70,4 +68,4 @@ const fetchMentors = async (req, res) => {
 
 
 
-module.exports = { createMentorRequest, getMentorRequests,fetchMentors };
+module.exports = { createMentorRequest,fetchMentors };
