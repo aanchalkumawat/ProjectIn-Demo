@@ -269,7 +269,7 @@ const PanelFormation = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className="back-button" onClick={() => navigate("/")}>
+          <button className="back-button" onClick={() => navigate("/coordinator-dashboard")}>
             Back
           </button>
           <button className="form-panel-button" onClick={formPanel} disabled={selectedTeachers.length === 0}>

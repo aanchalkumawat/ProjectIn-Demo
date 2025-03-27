@@ -29,7 +29,7 @@ const TeamExportPopup = ({ onClose }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        <h2>Download the Team Details</h2>
+         <h5>Download the Team Details</h5> 
         <button className="export-button" onClick={handleExportExcel}>
           Export as Excel
         </button>

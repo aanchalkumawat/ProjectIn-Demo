@@ -9,10 +9,6 @@ const TopBanner = ({ toggleSidebar, toggleProfileDropdown, isProfileDropdownOpen
         <span className="brand-title">Coordinator Dashboard</span>
       </div>
       <div className="top-right">
-        <div className="notification-icon">
-          <i className="icon-bell">&#128276;</i>
-          <span className="badge">3</span>
-        </div>
         <div
           className="profile-container"
           onClick={toggleProfileDropdown}

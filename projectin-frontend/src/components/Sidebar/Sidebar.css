@@ -13,10 +13,11 @@
   background-color: #f4f4f4;
   padding: 15px;
   position: fixed;
-  top: 60px; /* Below the top banner */
+  top: 73px; /* Below the top banner */
   bottom: 0;
   left: -250px; /* Initially hidden */
   transition: left 0.3s ease;
+  z-index: 9999;
 }
 
 .sidebar.open {
@@ -26,17 +27,16 @@
 .sidebar ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
 }
 
 .sidebar li {
-  margin-bottom: 15px; /* Increased spacing between items */
+  margin-bottom: 10px;
 }
 
-/* Sidebar Main Buttons (Student, Team, Import) */
+/* Sidebar Main Buttons (Student, Team) */
 .sidebar-button {
   width: 100%;
-  padding: 14px 20px;
+  padding: 12px 20px;
   font-size: 16px;
   text-align: left;
   border: none;
@@ -46,11 +46,6 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
-  margin-top: 15px; /* Added margin to create spacing from the top banner */
-}
-
-.sidebar-button:first-child {
-  margin-top: 20px; /* Ensuring Student button has extra space */
 }
 
 .sidebar-button:hover {
@@ -64,9 +59,9 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reset shadow on click */
 }
 
-/* Secondary Buttons (Marks, Request Submission, Import Data) */
+/* Secondary Buttons (Marks, Request Submission, Team Export Details) */
 .secondary-button {
-  width: 100%;
+  width: 100% !important; /* Ensuring uniform width */
   padding: 12px 20px;
   font-size: 16px;
   text-align: center;
@@ -77,13 +72,14 @@
   cursor: pointer;
   transition: background 0.3s ease;
   display: block;
+  box-shadow: none;
   outline: none;
   text-decoration: none !important; /* Removes underline */
 }
 
-/* Add spacing between dropdown buttons */
+/* Add spacing between "Request Submission" and "Team Export Details" */
 .secondary-button + .secondary-button {
-  margin-top: 12px !important;
+  margin-top: 12px !important; /* Adds gap */
 }
 
 /* Hover Effect for Secondary Buttons */
@@ -125,20 +121,16 @@
   margin-left: 250px; /* Matches the width of the sidebar */
 }
 
-/* Centered Heading */
 .center-heading {
   text-align: center;
   margin-bottom: 20px;
 }
-
-/* Import Buttons */
 .import-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 10px 0;
 }
-
 .import-buttons button {
   width: 100%;
   padding: 10px;
@@ -151,7 +143,6 @@
   cursor: pointer;
   transition: background 0.3s ease;
 }
-
 .import-buttons button:hover {
   background: #388e3c; /* Darker green */
 }
@@ -159,23 +150,11 @@
 .import-buttons button:active {
   background: #2e7d32;
 }
-
-/* Popup Styling */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .popup-content {
-  background: white;
+  background:black;
   padding: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   border-radius: 8px;
   width: 300px;
   text-align: center;
@@ -205,13 +184,4 @@
 
 .popup-content button.upload:hover {
   background: #1976d2;
-}
-
-.popup-content button.close {
-  background: #d32f2f;
-  color: white;
-}
-
-.popup-content button.close:hover {
-  background: #b71c1c;
 }

@@ -54,7 +54,7 @@ const ImportMentorDataPopup = ({ onClose }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        <h2>📂 Import Mentor Data</h2>
+        <h6>📂 Import Mentor Data</h6>
         <input type="file" accept=".xlsx" onChange={handleFileChange} />
         {selectedFile && <p>📄 Selected File: {selectedFile.name}</p>}
 
@@ -62,11 +62,11 @@ const ImportMentorDataPopup = ({ onClose }) => {
         {uploadMessage && <p className="upload-message">{uploadMessage}</p>}
 
         <div className="popup-buttons">
-          <button className="upload" onClick={handleUpload} disabled={isUploading}>
-            {isUploading ? "Uploading..." : "📤 Upload"}
+          <button className="export-button"s onClick={handleUpload} disabled={isUploading}>
+            {isUploading ? "Uploading..." : " Upload"}
           </button>
-          <button className="close" onClick={onClose} disabled={isUploading}>
-            ❌ Close
+          <button className="close-button" onClick={onClose} disabled={isUploading}>
+           Close
           </button>
         </div>
       </div>

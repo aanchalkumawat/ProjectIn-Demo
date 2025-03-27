@@ -4,16 +4,20 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background: linear-gradient(90deg, #2b2393, #020f55);
+  background: linear-gradient(90deg, #003366, #003366);
   color: white;
   position: fixed; /* Keep it always on top */
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw; /* Ensuring full viewport width */
+  max-width: 100%; /* Prevents overflow */
   z-index: 1000;
-  height: 60px;
+  height: 13vh;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; /* Ensures padding doesn't add to width */
+  overflow: hidden; /* Prevents any excess content from overflowing */
 }
+
 
 /* Left Side */
 .top-left {
