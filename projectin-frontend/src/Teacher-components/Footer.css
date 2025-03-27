@@ -1,0 +1,17 @@
+.dashboard-footer {
+  background: #004d99;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  font-size: 0.9em;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.dashboard-footer p {
+  margin: 0;
+}
+.dashboard-footer p:hover {
+  text-decoration: underline;
+}

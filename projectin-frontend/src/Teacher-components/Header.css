@@ -1,0 +1,193 @@
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1000;
+}
+
+.dashboard-header {
+  background: #004d99;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1em;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 60px; /* Ensure header height is fixed */
+}
+
+.dashboard-header-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  align-items: center;
+  align-content: center;
+  margin: 0 auto;
+}
+
+.logout-button {
+  padding: 0.6em 1.2em;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.logout-button:hover {
+  background: #d43f3f;
+}
+
+.calendar-container {
+  position: relative;
+  margin-right: 1em;
+}
+
+.calendar-icon {
+  font-size: 1.8em;
+  cursor: pointer;
+  color: white;
+}
+
+.calendar-popup {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.custom-calendar {
+  border: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  background: #fff;
+  color: #000;
+}
+
+.custom-calendar .react-calendar__tile {
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  color: #000;
+}
+
+.custom-calendar .react-calendar__tile:hover {
+  background: #f0f0f0;
+}
+
+.custom-calendar .react-calendar__tile--active {
+  background: #004d99;
+  color: white;
+  border-radius: 5px;
+}
+
+.custom-calendar .react-calendar__month-view__days__day {
+  color: #000;
+}
+
+.custom-calendar .react-calendar__navigation button {
+  color: #000;
+}
+
+.event-dot {
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.event-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.event-input input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.event-input button {
+  padding: 5px;
+  background: #004d99;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.event-dot:hover::after {
+  content: attr(title);
+  position: absolute;
+  background: #333;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.8em;
+}
+/* Profile Styles */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  font-size: 1.8em;
+  cursor: pointer;
+  color: white;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: rgb(176, 174, 174);
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  text-align: left;
+  font-size: 14px;
+  z-index: 1000;
+  text-align: center;
+}
+
+.profile-dropdown p {
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+/* Logout Button */
+.logout-button {
+  margin-left: 15px;
+  padding: 0.4em 1.2em;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.logout-button:hover {
+  background: #d43f3f;
+}

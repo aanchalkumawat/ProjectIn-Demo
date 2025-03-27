@@ -1,0 +1,152 @@
+.requests-section {
+  background: #e0f7fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: visible;
+  width: 100%;
+  margin: 1em auto 1em 1em;
+  max-width: calc(100% - 20px);
+  margin-top: 200px; /* Adjust this based on your top bar's height */
+  position: relative; /* Ensure it doesn't get overlapped */
+
+}
+body {
+  overflow-y: auto;
+  padding-top: 60px; /* Ensure content starts below the top bar */
+}
+.requests-section{
+  position: relative;
+  margin-top: 100px;
+}
+/* .requests-list{
+  margin-top: 200px;
+} */
+.request-item {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(246, 246, 246);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1em;
+  margin-bottom: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.request-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.request-item h4 {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.request-item .request-buttons {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 20px;
+}
+
+.request-item .request-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.request-item .request-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.request-item .request-info h4 {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.request-item .request-buttons {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 20px;
+}
+.request-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.request-buttons {
+  display: flex;
+  gap: 0.5em;
+}
+
+button {
+  padding: 0.5em 1em;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.accept-button {
+  background: #4caf50;
+}
+
+.reject-button {
+  background: #f44336;
+}
+
+.revise-button {
+  background: #ff9800;
+}
+
+.more-button {
+  background: #2196f3;
+  position: relative;
+}
+
+.more-button:hover + .dropdown-list {
+  display: block;
+}
+
+.dropdown-list {
+  display: none;
+  position: absolute;
+  background: rgb(251, 251, 251);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5em;
+  list-style: none;
+  margin-top: 0.5em;
+  z-index: 10;
+}
+.dropdown-list {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  list-style: none;
+}
+
+.dropdown:hover .dropdown-list {
+  display: block; /* Show list on hover */
+}
+/* Ensure visibility */
+.request-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Prevent accidental hiding */
+.request-section.hidden {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}

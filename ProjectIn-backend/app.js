@@ -26,6 +26,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ✅ Import Routes
 const authRoutes = require("./routes/authRoutes");
+const authoneRoutes = require("./routes/authoneRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const teamRoutes = require("./routes/teamRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
@@ -40,14 +41,22 @@ const freezeRoutes = require("./routes/freezeRoutes");
 const teamLimitRoutes = require("./routes/teamLimitRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 const coordinatorRoutes = require("./routes/coordinatorRoutes"); // ✅ Added Coordinator Routes
+const requestRoutes = require("./routes/requestRoutes");
+const acceptedTeamsRoutes = require("./routes/acceptedTeamsRoutes");
+const reviseRequestRoutes = require("./routes/reviseRequestRoutes");
+const mentormeetRoutes = require("./routes/mentormeet");
+const evaluationRoutes = require("./routes/evaluationRoutes");
+const AcceptedTeam = require("./models/AcceptedRequest");
+const mentorToken = require("./middlewares/mentorMiddleware");
 
 // ✅ API Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/authone", authoneRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/team", teamRoutes);
 app.use("/api/team/freeze", freezeRoutes);
 app.use("/api/team-limits", teamLimitRoutes);
-app.use("/api/mentor", mentorRoutes);
+app.use("/api/mentor", mentorToken,mentorRoutes);
 app.use("/api/notifications", notificationRoutes); 
 app.use("/api/submission", submissionRoutes);
 app.use("/api/project-report", projectReportRoutes);
@@ -57,6 +66,35 @@ app.use("/api/marks", marksRoutes);
 app.use("/api", exportRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/coordinators", coordinatorRoutes);
+app.use("/api/mentor-requests", requestRoutes);
+app.use("/api/accepted-requests", acceptedTeamsRoutes);
+app.use("/api/revised-requests", reviseRequestRoutes);
+app.use("/api/mentormeets", mentormeetRoutes);
+app.use("/api/evaluation", evaluationRoutes);
+
+// Store Accepted Requests
+app.post("/api/accepted-requests", async (req, res) => {
+  console.log("📥 Received data:", req.body);
+  const { teamName, projectName, teamMembers, description } = req.body;
+
+  if (!teamName || !projectName || !teamMembers || !description) {
+    return res.status(400).json({ error: "Missing required fields", received: req.body });
+  }
+
+  try {
+    const newAcceptedTeam = new AcceptedTeam({
+      teamName,
+      projectName,
+      teamMembers,
+      description,
+    });
+    await newAcceptedTeam.save();
+    res.status(201).json(newAcceptedTeam);
+  } catch (error) {
+    console.error("❌ Backend Error:", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // ✅ Logging Registered Routes
 console.log("\n📌 Registered API Routes:");

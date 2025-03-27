@@ -64,7 +64,6 @@ export default function LoginForm() {
 
         // 🔹 Redirect user based on role
         if (role === "student") navigate("/dashboard");
-        else if (role === "teacher") navigate("/teacher-dashboard");
         else if (role === "coordinator") navigate("/coordinator-dashboard");
       } else {
         alert("Signup successful! You can now log in.");
@@ -96,7 +95,6 @@ export default function LoginForm() {
             <select onChange={(e) => setRole(e.target.value)} value={role} required>
               <option value="">Select Your Role</option>
               <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
               <option value="coordinator">Coordinator</option>
             </select>
 

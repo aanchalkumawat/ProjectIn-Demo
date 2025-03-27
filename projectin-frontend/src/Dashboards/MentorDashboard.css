@@ -1,0 +1,115 @@
+/* app.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full viewport height */
+    min-width: 100vh;
+    width: 100vw;
+    
+    background-color: #f0f8ff;
+  }
+  .dashboard-header {
+    background-color: #004d99;
+    color: white;
+    padding: 1em;
+    padding-right: 1em;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    flex-shrink: 0; /* Prevent shrinking */
+    width: 100%; /* Increase the width of the header */
+    height: 70px; /* Increase the height of the header */
+    top: 0; /* Set the top position of the header to 0 */
+    z-index: 1000; /* Set the z-index of the header to 1000 */
+    position: fixed; /* Fix the position of the header */
+  }
+  
+  .dashboard-main {
+    flex: 1; /* Allows main content to take available space */
+    padding: 1em;
+    padding-left: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-top: 100px;
+    /* margin-top: 500px; */
+  }
+  
+  .requests-section, .accepted-section {
+    flex: 1; /* Take equal space */
+    padding: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    background: #4b6568;
+    margin: 1em 0 1em 1em; /* Remove the right margin */
+    margin-right: 20px; /* Add a margin of 20px to the right */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-width: calc(100% - 20px);
+    flex-basis: 48%; /* For equal width on larger screens */
+  }
+  /* scroll feature */
+  .requests-section {
+    /* margin-top: 20px; ✅ Add some margin so it doesn’t touch the header */
+    margin-top: 520px;
+    max-height: calc(100vh - 150px); /* ✅ Adjust max height to prevent overflow */
+    overflow-y: auto;
+  }
+  
+  .request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .request-buttons button {
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-left: 0.5em;
+    cursor: pointer;
+  }
+  
+  .dashboard-footer {
+    background-color: #004d99;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    font-size: 0.9em;
+    flex-shrink: 0;
+  }
+  .accepted-section.full-width {
+    flex: 1;
+    width: 100%;
+    overflow-x: hidden;
+  }
+  /* General styles */
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* .dashboard-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  } */
