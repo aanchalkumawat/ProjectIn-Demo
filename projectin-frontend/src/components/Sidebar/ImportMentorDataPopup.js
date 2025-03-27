@@ -35,7 +35,7 @@ const ImportMentorDataPopup = ({ onClose }) => {
       setUploadMessage(""); // Clear previous messages
 
       const response = await axios.post(
-        "http://localhost:5000/api/mentors/import", // ✅ Mentor API Endpoint
+        "http://localhost:5000/api/mentor/import", // ✅ Mentor API Endpoint
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );        

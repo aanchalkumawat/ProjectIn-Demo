@@ -18,9 +18,15 @@ const transporter = nodemailer.createTransport({
 
 // Function to generate unique Team_ID
 async function generateTeamID() {
-  const lastTeam = await Team.findOne().sort({ _id: -1 });
+  const lastTeam = await Team.findOne({ teamID: /^CSD\d{4}$/ })
+    .sort({ teamID: -1 }) // Sorting in descending order
+    .lean(); // Use `.lean()` to optimize query performance
+
   if (!lastTeam || !lastTeam.teamID) return "CSD0001";
-  let lastID = parseInt(lastTeam.teamID.replace("CSD", ""));
+
+  let lastID = parseInt(lastTeam.teamID.replace("CSD", ""), 10);
+  
+  console.log("LAST Team ID:", lastID);
   return `CSD${String(lastID + 1).padStart(4, "0")}`;
 }
 

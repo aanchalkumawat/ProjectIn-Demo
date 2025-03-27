@@ -1,5 +1,5 @@
 const MentorRequest = require("../models/MentorRequest");
-const Mentor = require("../models/Mentor");
+const Mentor = require("../models/Teacher");
 
 // Create a new mentor request
 const createMentorRequest = async (req, res) => {
