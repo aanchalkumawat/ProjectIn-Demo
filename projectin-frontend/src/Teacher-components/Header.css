@@ -1,3 +1,6 @@
+body {
+  padding-top: 70px; /* Adjust this value if needed */
+}
 
 .header {
   position: fixed;
@@ -6,6 +9,22 @@
   width: 100%;
   height: 60px;
   z-index: 1000;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;  /* Adds spacing between icons */
+  position: absolute;
+  right: 20px; /* Aligns items to the right */
+  top: 50%;
+  transform: translateY(-50%); /* Centers vertically */
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;  /* Ensures both icons are vertically aligned */
+  gap: 15px;  /* Adds space between icons */
 }
 
 .dashboard-header {
@@ -50,6 +69,8 @@
 }
 
 .calendar-icon {
+  width: 35px; /* Adjust size if necessary */
+  height: 35px;
   font-size: 1.8em;
   cursor: pointer;
   color: white;
@@ -63,7 +84,7 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .custom-calendar {
@@ -150,6 +171,8 @@
 }
 
 .profile-icon {
+  width: 40px; /* Keep similar size */
+  height: 40px;
   font-size: 1.8em;
   cursor: pointer;
   color: white;
@@ -158,16 +181,16 @@
 .profile-dropdown {
   position: absolute;
   top: 40px;
-  right: 0;
-  background: rgb(176, 174, 174);
-  color: black;
+  right: 10px;
+  background-color: rgb(176, 174, 174);
+  color: rgb(255, 255, 255);
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   width: 300px;
   text-align: left;
   font-size: 14px;
-  z-index: 1000;
+  z-index: 1500;
   text-align: center;
 }
 
@@ -178,7 +201,7 @@
 
 /* Logout Button */
 .logout-button {
-  margin-left: 15px;
+  margin-left: 20px;
   padding: 0.4em 1.2em;
   background: #ff4d4d;
   color: white;
@@ -186,8 +209,12 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9em;
+  width: fit-content;
 }
 
 .logout-button:hover {
   background: #d43f3f;
+}
+.sidebar {
+  margin-top: 60px;  /* Push it down so it doesn't overlap */
 }

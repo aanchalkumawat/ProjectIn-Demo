@@ -145,7 +145,7 @@ import EvaluationPanel from "../Teacher-components/EvaluationPanel";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./MentorDashboard.css";
+import "./MentorDashboard.module.css";
 
 const MentorDashboard = () => {
   const [requests, setRequests] = useState([]);
