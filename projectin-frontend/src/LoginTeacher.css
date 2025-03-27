@@ -1,0 +1,86 @@
+/* Centering the form container */
+.teacher-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa, #80deea);
+}
+
+/* White box with shadow */
+.teacher-form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Slightly wider */
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+.teacher-form-container:hover {
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading */
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Input fields */
+.teacher-input {
+  width: 100%;
+  padding: 14px; /* Increased padding */
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.teacher-input::placeholder {
+  font-size: 1.1rem; /* Bigger placeholder text */
+  color: #888;
+}
+
+.teacher-input:focus {
+  border-color: #007bff;
+  box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Login Button */
+.teacher-button {
+  width: 100%; /* Full width */
+  padding: 16px; /* Bigger button */
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 1.2rem; /* Bigger text */
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  margin-top: 15px; /* Spacing below input */
+}
+
+.teacher-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Disabled button */
+.teacher-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Error message */
+.teacher-error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}

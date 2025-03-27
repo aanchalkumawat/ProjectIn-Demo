@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./LoginForm.css";
+import "./LoginTeacher.css"; // ✅ Uses existing styles
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -10,33 +10,25 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Run once on mount
   useEffect(() => {
-   document.body.classList.add("login-page");
+    document.body.classList.add("login-page");
 
     const token = localStorage.getItem("token");
-    console.log("Checking token:", token); // ✅ Debugging
     if (token) {
-      // Delay navigation to avoid maximum depth loop
       setTimeout(() => {
-        console.log("Redirecting to /mentor-dashboard");
         navigate("/mentor-dashboard", { replace: true });
-      }, 100); 
+      }, 100);
     }
-    else {
-      console.log("No token found, staying on login page.");
-       navigate("/login-teacher", { replace: true });
-    }
+    
     return () => {
       document.body.classList.remove("login-page");
     };
-  }, [navigate]); 
+  }, [navigate]);
 
-  // Form submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    localStorage.removeItem("token"); // Clear old token before new login
+    localStorage.removeItem("token");
 
     if (!email || !password) {
       setError("All fields are required.");
@@ -49,9 +41,7 @@ export default function LoginForm() {
         { email, password }, 
         { headers: { "Content-Type": "application/json" } }
       );
-      console.log("Login Response:", res.data);
 
-      // Save token and user data
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("mentor", JSON.stringify(res.data.user));
       alert("Login successful!");
@@ -64,17 +54,16 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-container">
+    <div className="container">  {/* ✅ Matches student login styling */}
+      <div className="form-container"> {/* ✅ Matches student login styling */}
         <form onSubmit={handleSubmit}>
-          <h1>Mentor Login</h1>
-
+          <h2>Mentor Login</h2>  {/* ✅ Matches student login styling */}
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email" // ✅ Fix for autocomplete
+            autoComplete="email"
             required
           />
 
@@ -83,7 +72,7 @@ export default function LoginForm() {
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password" // ✅ Fix for autocomplete
+            autoComplete="current-password"
             required
           />
 
