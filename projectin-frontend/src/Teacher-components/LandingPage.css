@@ -1,79 +1,135 @@
-/* General Container */
+/* Ensures full-page layout */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  width:100vw;
+  background-size:cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: left 400px;
+  min-height: 100vh;
+}
+
+/* Push content to take up full space before footer */
 .landing-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw; /* Ensures full-width */
-    background: linear-gradient(145deg, #4b6cb7, #182848);
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-    margin: 0; /* Removes any default margin */
-    box-sizing: border-box;
-  }
+  flex-grow: 1; /* Allows content to expand and push footer down */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  width: 100vw; /* Full width */
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.5);
   
-  /* Page Title */
+}
+
+/* Page Title */
+.landing-container h1 {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px #00000050;
+}
+
+/* Subtitle */
+.landing-container p {
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+  opacity: 0.9;
+}
+
+/* Role Selection Buttons */
+.role-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Individual Button */
+.role-buttons button {
+  background-color: #1f4068;
+  color: white;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect */
+.role-buttons button:hover {
+  background-color: #162447;
+  transform: scale(1.05);
+}
+
+/* Active/Focus Effect */
+.role-buttons button:focus {
+  outline: none;
+  border: 2px solid #1b1b2f;
+  box-shadow: 0 0 10px #1f4068;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .landing-container h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-shadow: 2px 2px #00000050;
+    font-size: 2.2rem;
   }
-  
-  /* Subtitle */
-  .landing-container p {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    opacity: 0.9;
-  }
-  
-  /* Role Selection Buttons */
+
   .role-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+    gap: 10px;
   }
-  
-  /* Individual Button */
+
   .role-buttons button {
-    background-color: #1f4068;
-    color: #fff;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    padding: 10px 18px;
   }
-  
-  /* Hover Effect */
-  .role-buttons button:hover {
-    background-color: #162447;
-    transform: scale(1.05);
-  }
-  
-  /* Active/Focus Effect */
-  .role-buttons button:focus {
-    outline: none;
-    border: 2px solid #1b1b2f;
-    box-shadow: 0 0 10px #1f4068;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .landing-container h1 {
-      font-size: 2.5rem;
-    }
-    
-    .role-buttons button {
-      font-size: 1rem;
-      padding: 12px 20px;
-    }
-  }
-  
+}
+
+/* Top Banner */
+.top-banner {
+  display: flex;
+  align-items: center;
+  background-color: #1f4068; /* Slight transparency */
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Styling */
+.banner-logo {
+  width: 60px; /* Adjust size as needed */
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+/* Text Styling */
+.banner-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: hsl(0, 0%, 100%);
+}
+
+/* Ensure Landing Page Content Adjusts */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding-top: 80px; /* Adjust for fixed banner */
+}

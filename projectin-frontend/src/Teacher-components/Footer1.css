@@ -1,0 +1,43 @@
+/* Footer Container */
+.footer {
+    width: 100%;
+    background-color: #1f4068;
+    color: white;
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+/* Footer Content: Left-Aligned */
+.footer-content {
+    max-width: 800px;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 0.8rem;
+}
+
+/* Social Icons positioned at the bottom-right */
+.social-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.3rem;
+    transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.15);
+}

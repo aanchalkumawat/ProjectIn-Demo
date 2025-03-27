@@ -121,7 +121,7 @@
 .sidebar-buttons button {
   width: 90%;
   padding: 15px;
-  background-color:#003366; /* Button background color */
+  background: linear-gradient(90deg,#004d99, #dddee4);  /* Button background color */
   color: #ecf0f1; /* Button text color */
   border: none;
   margin: 8px 0;
