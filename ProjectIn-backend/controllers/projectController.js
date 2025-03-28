@@ -51,5 +51,24 @@ const getProjects = async (req, res) => {
     res.status(500).json({ message: "Server error while fetching projects" });
   }
 };
+async function getProjectWithTeamDomain(req, res) {
+  try {
+    const { projectId } = req.params; // Get projectId from request parameters
+    const project = await Project.findById(projectId).populate({
+      path: "groupID", // 🔹 Populate groupID instead of teamID
+      select: "domain" // Fetch only the domain field
+    });
 
-module.exports = { submitProject, getProjects };
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    res.json(project); // Send project data as response
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
+module.exports = { submitProject, getProjects, getProjectWithTeamDomain};

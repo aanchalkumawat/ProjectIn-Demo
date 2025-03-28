@@ -4,7 +4,7 @@ const Team = require("../models/Team");
 const Student = require("../models/Student");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-const { getTeamStats } = require("../controllers/teamController");
+const { getTeamStats,getGroupIDs } = require("../controllers/teamController");
 const { getTeams } = require("../controllers/teamControllers");
 
 // Nodemailer setup
@@ -194,5 +194,6 @@ router.delete("/:id", async (req, res) => {
 });
 router.get("/stats", getTeamStats);
 router.get("/getTeams", getTeams);
+router.post("/get-group-ids", getGroupIDs);
 
 module.exports = router;

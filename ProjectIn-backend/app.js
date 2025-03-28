@@ -48,11 +48,13 @@ const mentormeetRoutes = require("./routes/mentormeet");
 const evaluationRoutes = require("./routes/evaluationRoutes");
 const AcceptedTeam = require("./models/AcceptedRequest");
 const mentorToken = require("./middlewares/mentorMiddleware");
+//const projectRoutes = require("./routes/projectRoutes");
 
 // ✅ API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/authone", authoneRoutes);
 app.use("/api/projects", projectRoutes);
+console.log("✅ Registering Team Routes at /api/team");
 app.use("/api/team", teamRoutes);
 app.use("/api/team/freeze", freezeRoutes);
 app.use("/api/team-limits", teamLimitRoutes);
@@ -71,7 +73,7 @@ app.use("/api/accepted-requests", acceptedTeamsRoutes);
 app.use("/api/revised-requests", reviseRequestRoutes);
 app.use("/api/mentormeets", mentormeetRoutes);
 app.use("/api/evaluation", evaluationRoutes);
-
+app.use("/app", projectRoutes);
 // Store Accepted Requests
 app.post("/api/accepted-requests", async (req, res) => {
   console.log("📥 Received data:", req.body);

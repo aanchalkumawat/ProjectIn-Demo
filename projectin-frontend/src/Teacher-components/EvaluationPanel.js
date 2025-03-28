@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./EvaluationPanel.css";
-
+import Sidebar from "./Sidebar"
+import Header from "./Header"
 const EvaluationPanel = () => {
   const [teams, setTeams] = useState([]);
   const [expandedTeam, setExpandedTeam] = useState(null);
@@ -94,6 +95,7 @@ const EvaluationPanel = () => {
     }
   };
   return (
+    <><Header></Header><Sidebar></Sidebar>
     <div className="evaluation-panel">
       <h2 className="heading">Assigned Teams</h2>
       <div className="team-list">
@@ -215,7 +217,7 @@ const EvaluationPanel = () => {
           <p className="no-teams">No assigned teams available.</p>
         )}
       </div>
-    </div>
+    </div></>
   );
 };
 

@@ -27,4 +27,16 @@ const getTeamStats = async (req, res) => {
   }
 };
 
-module.exports = { getTeamStats };
+const getGroupIDs = async (req, res) => {
+  try {
+    const { teamIds } = req.body; // Expecting an array of ObjectIds
+    const teams = await Team.find({ _id: { $in: teamIds } }).select("groupID");
+
+    const groupIDs = teams.map((team) => team.groupID); // Extract groupIDs
+    res.status(200).json({ groupIDs });
+  } catch (error) {
+    console.error("❌ Error fetching group IDs:", error);
+    res.status(500).json({ error: "Failed to fetch group IDs." });
+  }
+};
+module.exports = { getTeamStats,getGroupIDs };

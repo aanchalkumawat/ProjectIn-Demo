@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ProjectSchema = new mongoose.Schema({
-  groupID: { type: String, required: true },
+  groupID: { type: mongoose.Schema.Types.ObjectId, ref: "Team", required: true },
   projectName: { type: String, required: true }, // Added Project Name
   mentorName: { type: String, required: true },
   domain: { type: String, required: true },
