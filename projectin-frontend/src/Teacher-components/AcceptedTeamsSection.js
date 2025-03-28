@@ -83,7 +83,7 @@ const AcceptedTeamsSection = ({ mentor }) => {
 ) : (
   acceptedTeamsState.map((team) => (
     <div key={team._id} className="team-card">
-      <h3>{team.teamName}</h3>
+      <h4 className= "teamName" >{team.teamName}</h4>
       <p>{team.projectName}</p>
       <p>{team.description}</p>
       <button

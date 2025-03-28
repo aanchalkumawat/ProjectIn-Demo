@@ -72,6 +72,7 @@ function Submission1({ isOpen, onClose }) {
           &times;
         </button>
         <h1>SRS & SDS / Synopsis Submission</h1>
+        <br></br>
 
         <label>Is your project Research based?</label>
         <br />

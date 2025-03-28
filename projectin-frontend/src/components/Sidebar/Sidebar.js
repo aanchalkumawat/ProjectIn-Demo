@@ -69,7 +69,7 @@ const Sidebar = ({
 
         <li>
           <button className="sidebar-button primary" onClick={() => setIsImportDropdownOpen(!isImportDropdownOpen)}>
-            Import
+            Import Data
           </button>
           {isImportDropdownOpen && (
             <ul className="dropdown">
@@ -80,7 +80,7 @@ const Sidebar = ({
               </li>
               <li>
                 <button className="secondary-button" onClick={() => setIsMentorImportPopupOpen(true)}>
-                  Import Mentor Data
+                  Import Teacher Data
                 </button>
               </li>
               <li>

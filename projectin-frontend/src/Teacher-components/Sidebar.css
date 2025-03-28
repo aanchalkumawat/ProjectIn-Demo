@@ -28,14 +28,14 @@
   padding: 10px 0; /* Adjust padding for consistency */
   margin: 5px 0; /* Space between buttons */
   border: none;
-  background-color: #007bff;
+  background-color: #003366;
   color: white;
   font-size: 16px;
   cursor: pointer;
 }
 
 .sidebar-btn:hover {
-  background-color: #555;
+  background-color: #205182;;
   transform: scale(1.05); /* Slight scaling effect on hover */
 }
 

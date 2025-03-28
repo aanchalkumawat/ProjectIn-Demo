@@ -50,7 +50,7 @@ function Submission2({ isOpen, onClose }) {
           &times;
         </button>
         <h1>Project Report Submission</h1>
-
+        <br></br>
         <label>Upload Project Report:</label>
         <input type="file" accept="application/pdf" onChange={handleFileChange} />
         <br /><br />

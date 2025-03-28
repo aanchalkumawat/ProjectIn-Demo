@@ -18,7 +18,6 @@
   overflow: hidden; /* Prevents any excess content from overflowing */
 }
 
-
 /* Left Side */
 .top-left {
   display: flex;
@@ -59,6 +58,7 @@
   padding: 2px 6px;
 }
 
+/* Profile Section */
 .profile-container {
   position: relative;
   cursor: pointer;
@@ -78,27 +78,30 @@
 
 /* Profile Dropdown */
 .profile-dropdown {
-  position: absolute;
-  top: 50px;
+  position:fixed;
+  margin-top: 45px;
+  top: 45px; /* Adjusted for better spacing */
   right: 0;
-  background: rgb(3, 0, 0);
+  background: #9b0606; /* Dark gray instead of pure black */
   border: 1px solid #ccc;
   border-radius: 5px;
   list-style-type: none;
-  padding: 10px 0;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-}
-
-.profile-dropdown li {
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 14px;
+  min-width: 130px; /* Ensuring better layout */
   text-align: center;
 }
 
-.profile-dropdown li:hover {
-  background: #545252;
+.profile-dropdown li {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 15px;
+  color: white;
+  transition: background 0.3s ease-in-out;
 }
 
-
+.profile-dropdown li:hover {
+  background: #6d0000;
+  color: #fffcfc; /* Adding a slight color effect */
+}

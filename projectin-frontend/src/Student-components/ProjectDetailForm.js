@@ -49,6 +49,7 @@ const ProjectDetailForm = ({ onClose, onSubmit }) => {
     <div className="popup-overlay">
       <div className="project-form-container">
         <h1>Project Details</h1>
+        <br></br>
         <button className="project-close-btn" onClick={onClose}>✖</button>
         <div className="project-form">
           <label>Group ID:</label>

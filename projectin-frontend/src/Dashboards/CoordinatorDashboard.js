@@ -30,7 +30,7 @@ const CoordinatorDashboard = () => {
 
   const handleLogout = () => {
     sessionStorage.clear();
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (

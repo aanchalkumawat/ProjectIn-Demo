@@ -82,6 +82,7 @@ const MentorForm = ({ isOpen, onClose }) => {
     <div className={`mentor-modal-overlay ${isOpen ? "open" : "closed"}`}>
       <div className="mentor-modal-container">
         <h1>Mentor Request Form</h1>
+        <br></br>
         <button className="mentor-close-button" onClick={onClose}>
           &times;
         </button>

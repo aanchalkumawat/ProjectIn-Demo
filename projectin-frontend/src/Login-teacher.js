@@ -57,7 +57,7 @@ export default function LoginForm() {
     <div className="container">  {/* ✅ Matches student login styling */}
       <div className="form-container"> {/* ✅ Matches student login styling */}
         <form onSubmit={handleSubmit}>
-          <h2>Mentor Login</h2>  {/* ✅ Matches student login styling */}
+          <h2>Login Form</h2>  {/* ✅ Matches student login styling */}
           <input
             type="email"
             placeholder="Enter your email"

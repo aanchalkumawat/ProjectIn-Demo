@@ -1,3 +1,6 @@
+body {
+  padding-top: 70px; /* Adjust this value if needed */
+}
 
 .header {
   position: fixed;
@@ -25,13 +28,13 @@
 }
 
 .dashboard-header {
-  background: #004d99;
+  background: #003366;
   color: white;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 1em;
-  /* position: fixed; */
+  position: fixed;
   top: 0;
   z-index: 1000;
   width: 100%;
@@ -39,11 +42,11 @@
 }
 
 .dashboard-header-text {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
-  align-items: center;
-  align-content: center;
-  margin: 0 450px;
+  text-align: left;
+  white-space: nowrap; /* Prevents text from wrapping */
+  margin: 0 auto; /* Centers the text */
 }
 
 .logout-button {
@@ -60,16 +63,23 @@
   background: #d43f3f;
 }
 
-.calendar-container {
-  position: relative;
-  margin-right: 1em;
-  margin-top:-6.5em;
+.calendar-icon{
+  cursor: pointer;
+  font-size: 24px;
 }
 
+.calendar-container {
+  position: fixed;
+  margin-right: 11em;
+  margin-top:-1.8em;
+  margin-left: 2em;
+  background-color: #003366;
+  border-color: #003366;
+}
 
 .custom-calendar .react-calendar__tile {
-  padding: 10px;
-  border-radius: 5px;
+  padding: 8px;
+  border-radius: 3px;
   transition: background 0.3s ease;
   color: #000;
 }
@@ -79,8 +89,8 @@
 }
 
 .custom-calendar .react-calendar__tile--active {
-  background: #004d99;
-  color: white;
+  background: #003366;
+  color: rgb(239, 216, 11);
   border-radius: 5px;
 }
 
@@ -115,7 +125,7 @@
 
 .event-input button {
   padding: 5px;
-  background: #004d99;
+  background: #003366;
   color: white;
   border: none;
   border-radius: 5px;
@@ -146,7 +156,7 @@
   height: 40px;
   font-size: 1.8em;
   cursor: pointer;
-  color: white;
+  color: rgb(40, 44, 52);
 }
 
 .profile-dropdown {
@@ -175,7 +185,7 @@
   margin-left: 20px;
   padding: 0.4em 1.2em;
   background: #ff4d4d;
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
   cursor: pointer;

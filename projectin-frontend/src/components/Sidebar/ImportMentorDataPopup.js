@@ -54,7 +54,7 @@ const ImportMentorDataPopup = ({ onClose }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        <h6>📂 Import Mentor Data</h6>
+        <h6>📂 Import Teacher Data</h6>
         <input type="file" accept=".xlsx" onChange={handleFileChange} />
         {selectedFile && <p>📄 Selected File: {selectedFile.name}</p>}
 

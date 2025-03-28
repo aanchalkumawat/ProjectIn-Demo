@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaBars, FaBell, FaCalendarAlt, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "./StudentDashboard.css";
+import "./StudentDashboardmodule.css";
 import Calander from "../Student-components/Calander.js";
 import TeamFormationForm from "../Student-components/TeamForm.js";
 import MentorForm from "../Student-components/MentorForm.js";

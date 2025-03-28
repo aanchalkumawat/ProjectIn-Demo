@@ -1,11 +1,12 @@
 .requests-section {
-  background: #e0f7fa;
+  background: #c0e0ff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow-y: visible;
   width: 100%;
   margin: 1em auto 1em 1em;
+  margin-left: auto;
   max-width: calc(100% - 20px);
   margin-top: 200px; /* Adjust this based on your top bar's height */
   position: relative; /* Ensure it doesn't get overlapped */

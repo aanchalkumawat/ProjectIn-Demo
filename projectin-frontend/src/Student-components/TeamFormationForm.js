@@ -78,7 +78,7 @@ const TeamFormationForm = () => {
   return (
     <div style={{ maxWidth: '600px', margin: 'auto', padding: '20px', textAlign: 'center', border: '1px solid #ccc', borderRadius: '10px', boxShadow: '0px 0px 10px #ddd' }}>
       <h2>Team Formation</h2>
-
+      <br></br>
       {!teamId ? (
         <>
           <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} style={{ marginBottom: '10px', padding: '8px', width: '80%' }} /><br />

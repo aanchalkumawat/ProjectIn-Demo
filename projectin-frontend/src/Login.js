@@ -80,12 +80,6 @@ export default function LoginForm() {
     <div className="container">
       <div className="form-container">
         <div className="form-toggle">
-          <button className={isLogin ? "active" : ""} onClick={() => setIsLogin(true)}>
-            Login
-          </button>
-          <button className={!isLogin ? "active" : ""} onClick={() => setIsLogin(false)}>
-            Signup
-          </button>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form">
@@ -129,7 +123,7 @@ export default function LoginForm() {
 
             {isLogin ? (
               <p>
-                Not a Member? <a href="#" onClick={() => setIsLogin(false)}>Signup now</a>
+                <a href="#" onClick={() => setIsLogin(false)}></a>
               </p>
             ) : (
               <p>
