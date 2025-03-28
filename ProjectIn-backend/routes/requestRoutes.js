@@ -30,6 +30,7 @@ router.post("/accepted-requests", async (req, res) => {
     // Check if the request exists
     const request = await MentorRequest.findById(requestId);
     if (!request) return res.status(404).json({ message: "Request not found" });
+    const {projectName} =req.params;
 
     // Move to AcceptedRequests collection
     const acceptedRequest = new AcceptedRequest({
@@ -40,9 +41,12 @@ router.post("/accepted-requests", async (req, res) => {
       acceptedAt: new Date(),
     });
 
-    await acceptedRequest.save(); // Save in AcceptedRequests
-    // await MentorRequest.findByIdAndDelete(id); // Uncomment if you want to remove from requests after accepting
-
+    await acceptedRequest.save(); 
+    const deletedRequest=await MentorRequest.findOneAndDelete({projectName});
+    if(!deletedRequest)
+    {
+      return res.status(404).json({message:"no matching request found to delete"});
+    }
     res.status(200).json({ message: "Request accepted successfully", acceptedRequest });
   } catch (error) {
     console.error("Error accepting request:", error);
