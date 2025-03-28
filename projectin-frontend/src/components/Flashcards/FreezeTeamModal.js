@@ -41,7 +41,7 @@ const FreezeTeamModal = ({ onClose }) => {
 
   const confirmFreeze = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/team/freeze", {
+        const response = await fetch("http://localhost:5000/api/team-freeze/freeze", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
         });

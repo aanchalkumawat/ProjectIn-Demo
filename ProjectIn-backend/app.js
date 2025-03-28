@@ -56,7 +56,7 @@ app.use("/api/authone", authoneRoutes);
 app.use("/api/projects", projectRoutes);
 console.log("✅ Registering Team Routes at /api/team");
 app.use("/api/team", teamRoutes);
-app.use("/api/team/freeze", freezeRoutes);
+app.use("/api/team-freeze", freezeRoutes);
 app.use("/api/team-limits", teamLimitRoutes);
 app.use("/api/mentor",teacherRoutes);
 app.use("/api/notifications", notificationRoutes); 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeamForm.css"; // ✅ Regular CSS for styling
 
@@ -12,13 +12,23 @@ const TeamForm = ({ onClose }) => {
   });
 
   const [teamSize, setTeamSize] = useState(1);
-  const [teamMembers, setTeamMembers] = useState([
-    { fullName: "", enrollmentNumber: "", subject: "CS" },
-  ]);
+  const [teamMembers, setTeamMembers] = useState([{ fullName: "", enrollmentNumber: "", subject: "CS" }]);
+  const [isFrozen, setIsFrozen] = useState(false); // ✅ Freeze Status State
+
+  // ✅ Fetch freeze status on component mount
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/team-freeze/freeze-status")
+      .then(response => {
+        setIsFrozen(response.data.isFrozen);
+      })
+      .catch(error => {
+        console.error("Error fetching freeze status:", error);
+      });
+  }, []);
 
   // Function to update team members list
   const handleAddMember = () => {
-    setTeamMembers([...teamMembers, { fullName: "", enrollmentNumber: "", subject: "" }]);
+    setTeamMembers([...teamMembers, { fullName: "", enrollmentNumber: "", subject: "CS" }]);
     setTeamSize(teamSize + 1);
   };
 
@@ -69,6 +79,9 @@ const TeamForm = ({ onClose }) => {
       <div className="team-form">
         <h2>Create a Team</h2>
 
+        {/* Display Freeze Message if Frozen */}
+        {isFrozen && <p className="freeze-message">🚫 Team creation is currently frozen by the Coordinator.</p>}
+
         {/* Team Leader Details */}
         <input type="text" placeholder="Full Name" value={teamLeader.fullName} onChange={(e) => setTeamLeader({ ...teamLeader, fullName: e.target.value })} />
         <input type="text" placeholder="Enrollment Number" value={teamLeader.enrollmentNumber} onChange={(e) => setTeamLeader({ ...teamLeader, enrollmentNumber: e.target.value })} />
@@ -118,10 +131,10 @@ const TeamForm = ({ onClose }) => {
         ))}
 
         {/* Add Member Button */}
-        <button className="add-btn" onClick={handleAddMember}>Add New Member</button>
+        <button className="add-btn" onClick={handleAddMember} disabled={isFrozen}>Add New Member</button>
 
         {/* Submit Button - Calls handleSubmit */}
-        <button className="submit-btn" onClick={handleSubmit}>Create Team</button>
+        <button className="submit-btn" onClick={handleSubmit} disabled={isFrozen}>Create Team</button>
       </div>
     </div>
   );
