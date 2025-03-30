@@ -31,7 +31,7 @@ h2 {
 }
 
 /* Input fields */
-input {
+/* input {
   width: 100%;
   padding: 14px;
   margin: 12px 0;
@@ -40,7 +40,7 @@ input {
   font-size: 1rem;
   outline: none;
   transition: 0.3s ease;
-}
+} */
 
 input::placeholder {
   font-size: 1.1rem;

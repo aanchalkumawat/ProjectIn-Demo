@@ -102,9 +102,8 @@ const AcceptedTeamsSection = ({ mentor }) => {
       {showForm && (
         <div className="popup-overlay">
           <div className="popup-form">
-            <span className="close-btn"  aria-label="Close form" onClick={() => setShowForm(false)}>
-              &times;
-            </span>
+  
+  
             <h3>Scheduled Meeting for {selectedTeam.teamName}</h3>
             <form onSubmit={handleFormSubmit}>
               {/* Team id */}
