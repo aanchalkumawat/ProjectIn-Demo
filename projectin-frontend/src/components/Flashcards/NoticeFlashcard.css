@@ -1,0 +1,29 @@
+.notice-flashcard {
+  position: fixed;
+  bottom: 20px; /* Places it at the bottom */
+  right: 20px;  /* Moves it to the rightmost corner */
+  width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #003366;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  color:white;
+}
+
+.notice-flashcard:hover {
+  transform: scale(1.05); /* Ensures it scales properly */
+}
+
+.notice-flashcard h3 {
+  margin: 0;
+  font-size: 20px;
+  color:white 
+}
+
+.notice-flashcard p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}

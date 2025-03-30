@@ -1,10 +1,8 @@
 const express = require("express");
-const { fetchNotifications } = require("../controllers/notificationController");
-const verifyToken = require("../middlewares/authMiddleware");
-
 const router = express.Router();
+const { addNotification, getNotifications } = require("../controllers/notificationController");
 
-// Define the route for fetching notifications
-router.get("/notifications", verifyToken, fetchNotifications);
+// Route to fetch all notifications
+router.get("/all", getNotifications);
 
 module.exports = router;

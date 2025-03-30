@@ -24,6 +24,9 @@ mongoose
 // ✅ Serve Uploaded Files (e.g., PDFs, images)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// import models
+const Notification = require("./models/Notification");
+
 // ✅ Import Routes
 const authRoutes = require("./routes/authRoutes");
 const authoneRoutes = require("./routes/authoneRoutes");
@@ -59,7 +62,8 @@ app.use("/api/team", teamRoutes);
 app.use("/api/team-freeze", freezeRoutes);
 app.use("/api/team-limits", teamLimitRoutes);
 app.use("/api/mentor",teacherRoutes);
-app.use("/api/notifications", notificationRoutes); 
+app.use("/api/notifications", notificationRoutes);
+console.log("Notification routes loaded!");  
 app.use("/api/submission", submissionRoutes);
 app.use("/api/project-report", projectReportRoutes);
 app.use("/api/panel", panelRoutes);
@@ -74,6 +78,7 @@ app.use("/api/revised-requests", reviseRequestRoutes);
 app.use("/api/mentormeets", mentormeetRoutes);
 app.use("/api/evaluation", evaluationRoutes);
 app.use("/app", projectRoutes);
+
 // Store Accepted Requests
 app.post("/api/accepted-requests", async (req, res) => {
   console.log("📥 Received data:", req.body);
@@ -95,6 +100,27 @@ app.post("/api/accepted-requests", async (req, res) => {
   } catch (error) {
     console.error("❌ Backend Error:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ✅ Define the POST /api/notifications/add route
+app.post("/api/notifications/add", async (req, res) => {
+  console.log("✅ POST /api/notifications/add triggered!"); // Log to confirm request is received
+
+  const { message } = req.body;
+  if (!message) {
+    console.log("❌ Missing message field in request body");
+    return res.status(400).json({ success: false, error: "Message is required" });
+  }
+
+  try {
+    const newNotification = new Notification({ message });
+    await newNotification.save();
+    console.log("✅ Notification saved successfully!");
+    res.status(201).json({ success: true, message: "Notification added!" });
+  } catch (error) {
+    console.error("❌ Error saving notification:", error);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 

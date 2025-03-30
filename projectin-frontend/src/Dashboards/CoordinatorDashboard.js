@@ -6,6 +6,8 @@ import Flashcards from "../components/Flashcards/Flashcards";
 import PanelFormation from "../components/Flashcards/PanelFormation";
 import RequestSubmissionModal from "../components/Sidebar/RequestSubmissionModal";
 import Marks from "../components/Sidebar/Marks"; // ✅ Importing Marks Component
+import NoticeFlashcard from "../components/Flashcards/NoticeFlashcard";
+import NoticeForm from "../components/Flashcards/NoticeForm";
 
 const CoordinatorDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -13,6 +15,7 @@ const CoordinatorDashboard = () => {
   const [isTeamDropdownOpen, setIsTeamDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isRequestSubmissionPopupOpen, setIsRequestSubmissionPopupOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const navigate = useNavigate(); // ✅ For Redirecting
 
@@ -58,6 +61,8 @@ const CoordinatorDashboard = () => {
           <Route path="marks" element={<Marks />} />
         </Routes>
       </main>
+      <NoticeFlashcard onOpen={() => setIsFormOpen(true)} />
+      {isFormOpen && <NoticeForm onClose={() => setIsFormOpen(false)} />}
 
       <RequestSubmissionModal
         isOpen={isRequestSubmissionPopupOpen}
