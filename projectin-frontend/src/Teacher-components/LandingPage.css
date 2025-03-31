@@ -1,34 +1,131 @@
-/* Ensures full-page layout */
+/* Landing Page Styling */
 .landing-page {
   display: flex;
   flex-direction: column;
-  width:100vw;
-  background-size:cover;
+  width: 100vw;
+  background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  margin: left 400px;
   min-height: 100vh;
+  padding-top: 80px;
 }
 
-/* Push content to take up full space before footer */
+/* Top Banner */
+.top-banner {
+  display: flex;
+  align-items: center;
+  background-color: #1f4068;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.banner-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.banner-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 13vh;
+  left: 0;
+  width: 100%;
+  background: rgba(85, 81, 81, 0.719);
+  padding: 10px 0;
+  text-align: center;
+  z-index: 999;
+  transition: all 0.5s ease-in-out, 
+}
+
+.navbar.solid {
+  background-color: #808080 !important; /* Grey color */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar.solid .nav-links a {
+  color: white !important;
+}
+
+.navbar.solid .nav-links a:hover {
+  color: #f0f0f0 !important;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+.navbar ul li:hover {
+  transform: scale(1.1);
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.651);
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover {
+  color: white;
+}
+
+/* Landing Container */
 .landing-container {
-  flex-grow: 1; /* Allows content to expand and push footer down */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
-  width: 100vw; /* Full width */
+  backdrop-filter: blur(2px);
+  width: 100vw;
   height: 100vh;
-  box-sizing: border-box;
   padding: 20px;
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.5);
-  
 }
 
-/* Page Title */
 .landing-container h1 {
   font-size: 2.8rem;
   font-weight: bold;
@@ -36,14 +133,13 @@
   text-shadow: 2px 2px #00000050;
 }
 
-/* Subtitle */
 .landing-container p {
   font-size: 1.2rem;
   margin-bottom: 18px;
   opacity: 0.9;
 }
 
-/* Role Selection Buttons */
+/* Role Buttons */
 .role-buttons {
   display: flex;
   gap: 15px;
@@ -51,7 +147,6 @@
   flex-wrap: wrap;
 }
 
-/* Individual Button */
 .role-buttons button {
   background-color: #1f4068;
   color: white;
@@ -65,71 +160,364 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Hover Effect */
 .role-buttons button:hover {
   background-color: #162447;
   transform: scale(1.05);
 }
 
-/* Active/Focus Effect */
 .role-buttons button:focus {
   outline: none;
   border: 2px solid #1b1b2f;
   box-shadow: 0 0 10px #1f4068;
 }
 
-/* Responsive Design */
+/* Section Headings */
+.section-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #1f4068;
+  margin-bottom: 30px;
+  padding-top: 20px;
+}
+
+/* Slideshow Section */
+.info-section {
+  width: 100%;
+  padding: 20px 0 40px;
+  background-color: white;
+  scroll-margin-top: 100px;
+}
+
+.slideshow {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slides-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.8s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  transition: all 0.6s ease;
+}
+
+/* Flipped Slide State */
+.slide.flipped-slide {
+  background-color: #1f4068;
+}
+
+.slide.flipped-slide .slide-content h2,
+.slide.flipped-slide .slide-content p {
+  color: white;
+}
+
+/* Flip Card */
+.flip-card {
+  width: 400px;
+  height: 350px;
+  perspective: 1000px;
+  margin-right: 200px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flip-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px  10px rgba(0, 0, 0, 0.5);
+}
+
+.flip-card-front {
+  background: white;
+}
+
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.flip-card-back {
+  background:white ;
+  color: #1f4068;
+  transform: rotateY(180deg);
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+}
+
+.flip-card-back h3 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.flip-card-back p {
+  margin: 5px 0;
+  font-size: 1.1rem;
+}
+
+.flip-card-back .leader-contact {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.flip-card-back .leader-contact h4 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.flip-card-back .leader-contact a {
+  display: block;
+  color: #1f4068;
+  margin: 8px 0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.flip-card-back .leader-contact a:hover {
+  color: #4fc3f7;
+  text-decoration: underline;
+}
+
+.flip-card-back .leader-contact a[href^="mailto"] {
+  word-break: break-all;
+}
+
+/* Slide Content */
+.slide-content {
+  flex: 1;
+  padding: 20px;
+  max-width: 600px;
+}
+
+.slide-content h2 {
+  font-size: 2rem;
+  color: #1f4068;
+  margin-bottom: 15px;
+  transition: color 0.6s ease;
+}
+
+.slide-content p {
+  font-size: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+  transition: color 0.6s ease;
+  margin-bottom: 15px;
+}
+
+/* FAQ Section */
+.faq-section {
+  width: 100%;
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  scroll-margin-top: 100px;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.faq-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.faq-question {
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question h3 {
+  font-size: 1.2rem;
+  color: #1f4068;
+  margin: 0;
+  flex: 1;
+}
+
+.faq-toggle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f4068;
+  margin-left: 20px;
+}
+
+.faq-answer {
+  padding: 20px;
+  background-color: white;
+  border-top: 1px solid #eee;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Animation for FAQ answers */
+.faq-item .faq-answer {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .slide {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  
+  .flip-card {
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 350px;
+    height: 300px;
+  }
+}
+
 @media (max-width: 768px) {
   .landing-container h1 {
     font-size: 2.2rem;
   }
-
+  
+  .section-heading {
+    font-size: 2rem;
+  }
+  
+  .slideshow {
+    height: auto;
+    min-height: 500px;
+  }
+  
+  .slide-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .slide-content p {
+    font-size: 1rem;
+  }
+  
+  .flip-card {
+    width: 300px;
+    height: 250px;
+  }
+  
+  .flip-card-back h3 {
+    font-size: 1.2rem;
+  }
+  
+  .flip-card-back p {
+    font-size: 1rem;
+  }
+  
+  .faq-question h3 {
+    font-size: 1.1rem;
+  }
+  
+  .faq-section {
+    padding: 40px 15px;
+  }
+  
   .role-buttons {
     gap: 10px;
   }
-
+  
   .role-buttons button {
     font-size: 1rem;
     padding: 10px 18px;
   }
 }
 
-/* Top Banner */
-.top-banner {
-  display: flex;
-  align-items: center;
-  background-color: #1f4068; /* Slight transparency */
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Logo Styling */
-.banner-logo {
-  width: 60px; /* Adjust size as needed */
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 12px;
-}
-
-/* Text Styling */
-.banner-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: hsl(0, 0%, 100%);
-}
-
-/* Ensure Landing Page Content Adjusts */
-.landing-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  padding-top: 80px; /* Adjust for fixed banner */
+@media (max-width: 480px) {
+  .banner-text {
+    font-size: 1.2rem;
+  }
+  
+  .landing-container h1 {
+    font-size: 1.8rem;
+  }
+  
+  .section-heading {
+    font-size: 1.8rem;
+  }
+  
+  .slide {
+    padding: 30px 15px;
+  }
+  
+  .flip-card {
+    width: 250px;
+    height: 200px;
+  }
+  
+  .faq-question {
+    padding: 15px;
+  }
+  
+  .faq-question h3 {
+    font-size: 1rem;
+  }
+  
+  .faq-answer {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .navbar ul {
+    gap: 15px;
+  }
+  
+  .navbar ul li a {
+    font-size: 1rem;
+    padding: 8px 12px;
+  }
 }

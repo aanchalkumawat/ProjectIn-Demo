@@ -1,0 +1,126 @@
+/* Overall Container */
+.roadmap-container {
+  background-color: #f4f8ff; /* Subtle pastel blue background */
+  padding: 100px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  height: fit-content;
+}
+
+/* Title */
+.roadmap-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1B3A57; /* Navy Blue */
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+/* Grid Layout */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Roadmap Step Card */
+.roadmap-card {
+  background-color: #A7C7E7; /* Pastel Blue */
+  width: 100%;
+  height: 150px;
+  border-radius: 25px;
+  text-align: center;
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+/* Flipping Effect */
+.roadmap-card-front,
+.roadmap-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s ease-in-out;
+  border-radius: 25px;
+}
+
+/* Front Side */
+.roadmap-card-front {
+  background-color: #A7C7E7; /* Pastel Blue */
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius:25px ;
+}
+
+/* Back Side */
+.roadmap-card-back {
+  background-color: #1B3A57; /* Navy Blue */
+  color: white;
+  transform: rotateY(180deg);
+  padding: 10px;
+  border-radius: 25px;
+}
+
+/* Step Number */
+.roadmap-step-number {
+  background-color: #1B3A57; /* Navy Blue */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Icon */
+.roadmap-icon {
+  font-size: 28px;
+  color: #1B3A57; /* Navy Blue */
+  margin-bottom: 10px;
+}
+
+/* Label */
+.roadmap-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1B3A57; /* Navy Blue */
+}
+
+/* Flip the card when clicked */
+.roadmap-card.flipped .roadmap-card-front {
+  transform: rotateY(180deg);
+}
+
+.roadmap-card.flipped .roadmap-card-back {
+  transform: rotateY(0deg);
+}
+/* Responsive */
+@media (max-width: 1024px) {
+  .roadmap-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .roadmap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .roadmap-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
