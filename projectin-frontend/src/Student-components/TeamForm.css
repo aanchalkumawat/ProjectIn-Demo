@@ -1,80 +1,125 @@
-.team-form {
-  width: 50%;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #f9f9f9;
+/* Background overlay */
+.team-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dark transparent background */
   display: flex;
-  flex-direction: column;
-  gap: 11px;
-}
-
-.team-member {
-  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  z-index: 1000; /* Ensures it appears above everything */
+  transition: opacity 0.3s ease-in-out;
 }
 
-.team-member input,
-.team-member select,
-.team-form input,
-.team-form select {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Hide overlay when form is closed */
+.team-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.add-btn,
-.remove-btn {
+/* Popup form container - Increased width & height */
+.team-popup {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 50%; /* Increased width */
+  min-width: 500px; /* Increased min-width */
+  max-width: 800px; /* Increased max-width */
+  max-height: 650px; /* Increased max-height */
+  position: relative;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  animation: popupFade 0.3s ease-in-out;
+  overflow-y: auto; /* Enable scrolling if content exceeds height */
+}
+
+/* Smooth popup animation */
+@keyframes popupFade {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close button (❌) */
+.team-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
   background: #ff4d4d;
   color: white;
   border: none;
-  padding: 8px 12px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease-in-out;
 }
 
-.add-btn {
-  background: #28a745;
+.team-close-btn:hover {
+  background: #cc0000;
 }
 
-.remove-btn:hover {
-  background: #d43f3f;
+/* Form layout */
+.team-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.add-btn:hover {
-  background: #218838;
+/* Input and select fields */
+.team-form input,
+.team-form select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 17px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+  font-family: "Times New Roman", Times, serif;
 }
 
-.submit-btn {
-  background: #007bff;
+.team-form input:focus,
+.team-form select:focus {
+  border: 1px solid #4CAF50;
+}
+
+/* Submit button */
+.team-form button {
+  background:green;
   color: white;
-  padding: 10px;
   border: none;
-  border-radius: 5px;
+  padding: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  border-radius: 10px;
+  font-size: 17px;
+  transition: background 0.2s ease-in-out;
+  font-family: "Times New Roman", Times, serif;
 }
 
-.submit-btn:hover {
-  background: #0056b3;
-}
-.disabled-btn {
-  background-color: gray;
-  cursor: not-allowed;
+.team-form button:hover {
+  background:#4CAF50;
 }
 
-.active-btn {
-  background-color: blue;
-  cursor: pointer;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .team-popup {
+    width: 85%;
+    min-width: unset;
+    max-height: 600px;
+  }
 }
-
-.freeze-message {
-  color: red;
-  font-weight: bold;
-  margin-bottom: 10px;
+h2{
+  font-family: "Times New Roman", Times, serif;
 }

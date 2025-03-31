@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dim background */
+  background-color: rgba(0, 0, 0, 0.6); /* Dim background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,25 +80,29 @@
 }
 
 .mentor-modal-container .mentor-add-button {
-  background-color: #4caf50; /* Green button */
+  background-color:green; /* Green button */
+  width:100%;
+  border-radius: 5px;
 }
 
 .mentor-modal-container .mentor-add-button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color:darkgreen; /* Darker green on hover */
 }
 
 .mentor-modal-container .mentor-remove-button {
-  background-color: #d9534f; /* Red button */
+  background-color:#e60000; /* Red button */
+  width:100%;
+  border-radius: 5px;
 }
 
 .mentor-modal-container .mentor-remove-button:hover {
-  background-color: #c9302c; /* Darker red on hover */
+  background-color:#f31e1e ; /* Darker red on hover */
 }
 
 /* Submit Button */
 .mentor-modal-container .mentor-submit-button {
   padding: 10px 20px;
-  background-color: #033452;
+  background-color:green;
   color: white;
   border: none;
   border-radius: 5px;

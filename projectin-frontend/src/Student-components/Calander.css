@@ -1,49 +1,51 @@
 /* Overlay for the Calendar Popup */
-.calendar-container {
+.student-calendar-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
   padding: 10px;
+  z-index: 9999;
+  align-items: center;
 }
 
-h3 {
+.student-calendar-container h3 {
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: bold;
-  color: #333; /* Darker color for better contrast */
+  color: #333;
 }
 
 /* Style for react-calendar */
-.react-calendar {
-  border: none; /* Remove default border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for 3D effect */
+.student-calendar-container .react-calendar {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   max-width: 500px;
   margin-bottom: 20px;
-  background-color: #ffffff; /* White background for the calendar */
-  overflow: hidden; /* Prevent overflow */
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
 /* Tile styles */
-.react-calendar__tile {
-  border-radius: 8px; /* Rounded corners for tiles */
-  transition: background-color 0.2s ease, transform 0.2s ease; /* Smooth transition */
+.student-calendar-container .react-calendar__tile {
+  border-radius: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.react- calendar__tile:hover {
-  background-color: #e0f7fa; /* Light blue background on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
+.student-calendar-container .react-calendar__tile:hover {
+  background-color: #e0f7fa;
+  transform: scale(1.05);
 }
 
-.react-calendar__tile.yellow-event {
-  background-color: #ffeb3b; /* Yellow for events */
+.student-calendar-container .react-calendar__tile.student-yellow-event {
+  background-color: #ffeb3b;
   color: black;
   font-weight: bold;
 }
 
 /* Modal styles */
-.calendar-modal {
+.student-calendar-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -53,9 +55,10 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
-.calendar-modal-content {
+.student-calendar-modal-content {
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -64,56 +67,58 @@ h3 {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
   position: relative;
-  animation: slideIn 0.3s ease; /* Slide-in animation */
+  animation: student-slideIn 0.3s ease;
 }
 
-.calendar-modal-content h4 {
+.student-calendar-modal-content h4 {
   margin-bottom: 15px;
-  color: #4caf50; /* Green color for headings */
+  color: #4caf50;
 }
 
-.calendar-modal-content textarea {
+.student-calendar-modal-content textarea {
   width: 100%;
   resize: none;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for input */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Button styles */
-.calendar-modal-buttons {
+.student-calendar-modal-buttons {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
-.calendar-modal-buttons button {
+.student-calendar-modal-buttons button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Transition for hover effect */
+  transition: background-color 0.3s ease;
+  flex: 1;
 }
 
-.calendar-modal-buttons button:first-child {
-  background-color: #4caf50; /* Green for save */
+.student-calendar-modal-buttons button:first-child {
+  background-color: #4caf50;
   color: white;
 }
 
-.calendar-modal-buttons button:last-child {
-  background-color: #f44336; /* Red for delete */
+.student-calendar-modal-buttons button:last-child {
+  background-color: #f44336;
   color: white;
 }
 
-.calendar-delete-button {
-  background-color: #f44336; /* Red for delete */
+.student-calendar-delete-button {
+  background-color: #f44336;
   color: white;
   font-weight: bold;
 }
 
 /* Animation for modal */
-@keyframes slideIn {
+@keyframes student-slideIn {
   from {
     transform: translateY(-20px);
     opacity: 0;

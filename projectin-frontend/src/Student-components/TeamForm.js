@@ -72,69 +72,72 @@ const TeamForm = ({ onClose }) => {
   };
 
   return (
-    <div className="team-form-container">
-      {/* Close Button (❌) */}
-      <button className="close-btn" onClick={onClose}>❌</button>
+    <div className="team-overlay">
+      <div className="team-popup">
+        <button className="team-close-btn" onClick={onClose}>
+          &times;
+        </button>
 
-      <div className="team-form">
         <h2>Create a Team</h2>
 
         {/* Display Freeze Message if Frozen */}
         {isFrozen && <p className="freeze-message">🚫 Team creation is currently frozen by the Coordinator.</p>}
 
-        {/* Team Leader Details */}
-        <input type="text" placeholder="Full Name" value={teamLeader.fullName} onChange={(e) => setTeamLeader({ ...teamLeader, fullName: e.target.value })} />
-        <input type="text" placeholder="Enrollment Number" value={teamLeader.enrollmentNumber} onChange={(e) => setTeamLeader({ ...teamLeader, enrollmentNumber: e.target.value })} />
-        <input type="email" placeholder="Email" value={teamLeader.email} onChange={(e) => setTeamLeader({ ...teamLeader, email: e.target.value })} />
-        <input type="text" placeholder="Phone Number" value={teamLeader.phoneNumber} onChange={(e) => setTeamLeader({ ...teamLeader, phoneNumber: e.target.value })} />
+        <form className="team-form" onSubmit={handleSubmit}>
+          {/* Team Leader Details */}
+          <input type="text" placeholder="Full Name" value={teamLeader.fullName} onChange={(e) => setTeamLeader({ ...teamLeader, fullName: e.target.value })} />
+          <input type="text" placeholder="Enrollment Number" value={teamLeader.enrollmentNumber} onChange={(e) => setTeamLeader({ ...teamLeader, enrollmentNumber: e.target.value })} />
+          <input type="email" placeholder="Email" value={teamLeader.email} onChange={(e) => setTeamLeader({ ...teamLeader, email: e.target.value })} />
+          <input type="text" placeholder="Phone Number" value={teamLeader.phoneNumber} onChange={(e) => setTeamLeader({ ...teamLeader, phoneNumber: e.target.value })} />
 
-        {/* Subject Dropdown */}
-        <select value={teamLeader.subject} onChange={(e) => setTeamLeader({ ...teamLeader, subject: e.target.value })}>
-          <option value="">Select Subject</option>
-          <option value="CS">CS</option>
-          <option value="IT">IT</option>
-          <option value="AI">AI</option>
-        </select>
+          {/* Subject Dropdown */}
+          <select value={teamLeader.subject} onChange={(e) => setTeamLeader({ ...teamLeader, subject: e.target.value })}>
+            <option value="">Select Subject</option>
+            <option value="CS">CS</option>
+            <option value="IT">IT</option>
+            <option value="AI">AI</option>
+          </select>
 
-        <h3>Team Members</h3>
-        {teamMembers.map((member, index) => (
-          <div key={index} className="team-member">
-            <input type="text" placeholder="Full Name" value={member.fullName} onChange={(e) => {
-              const updatedMembers = [...teamMembers];
-              updatedMembers[index].fullName = e.target.value;
-              setTeamMembers(updatedMembers);
-            }} />
+          <h3>Team Members</h3>
+          {teamMembers.map((member, index) => (
+            <div key={index} className="team-member">
+              <input type="text" placeholder="Full Name" value={member.fullName} onChange={(e) => {
+                const updatedMembers = [...teamMembers];
+                updatedMembers[index].fullName = e.target.value;
+                setTeamMembers(updatedMembers);
+              }} />
 
-            <input type="text" placeholder="Enrollment Number" value={member.enrollmentNumber} onChange={(e) => {
-              const updatedMembers = [...teamMembers];
-              updatedMembers[index].enrollmentNumber = e.target.value;
-              setTeamMembers(updatedMembers);
-            }} />
+              <input type="text" placeholder="Enrollment Number" value={member.enrollmentNumber} onChange={(e) => {
+                const updatedMembers = [...teamMembers];
+                updatedMembers[index].enrollmentNumber = e.target.value;
+                setTeamMembers(updatedMembers);
+              }} />
 
-            {/* Subject Dropdown for Team Members */}
-            <select value={member.subject} onChange={(e) => {
-              const updatedMembers = [...teamMembers];
-              updatedMembers[index].subject = e.target.value;
-              setTeamMembers(updatedMembers);
-            }}>
-              <option value="">Select Subject</option>
-              <option value="CS">CS</option>
-              <option value="IT">IT</option>
-              <option value="AI">AI</option>
-            </select>
+              {/* Subject Dropdown for Team Members */}
+              <select value={member.subject} onChange={(e) => {
+                const updatedMembers = [...teamMembers];
+                updatedMembers[index].subject = e.target.value;
+                setTeamMembers(updatedMembers);
+              }}>
+                <option value="">Select Subject</option>
+                <option value="CS">CS</option>
+                <option value="IT">IT</option>
+                <option value="AI">AI</option>
+              </select>
 
-            {/* Remove Button */}
-            {teamMembers.length > 1 && (
-              <button className="remove-btn" onClick={() => handleRemoveMember(index)}>Remove</button>
-            )}
-          </div>
-        ))}
+              {/* Remove Button */}
+              {teamMembers.length > 1 && (
+                <button className="remove-btn" onClick={() => handleRemoveMember(index)}>Remove</button>
+              )}
+            </div>
+          ))}
 
-        {/* Add Member Button */}
-        <button className="add-btn" onClick={handleAddMember} disabled={isFrozen}>Add New Member</button>
+          {/* Add Member Button */}
+          <button type="button" className="add-btn" onClick={handleAddMember} disabled={isFrozen}>Add New Member</button>
 
-        {/* Submit Button - Calls handleSubmit */}
-        <button className="submit-btn" onClick={handleSubmit} disabled={isFrozen}>Create Team</button>
+          {/* Submit Button - Calls handleSubmit */}
+          <button type="submit" className="submit-btn" disabled={isFrozen}>Create Team</button>
+        </form>
       </div>
     </div>
   );

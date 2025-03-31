@@ -142,14 +142,14 @@ const MentorForm = ({ isOpen, onClose }) => {
                 required
               />
               {index > 0 && (
-                <button type="button" onClick={() => removeMember(index)}>
+                <button className="mentor-remove-button"type="button" onClick={() => removeMember(index)}>
                   Remove
                 </button>
               )}
             </div>
           ))}
 
-          <button type="button" onClick={addMember}>
+          <button className="mentor-add-button" type="button" onClick={addMember}>
             Add Member
           </button>
 
@@ -165,7 +165,7 @@ const MentorForm = ({ isOpen, onClose }) => {
             ))}
           </select>
 
-          <button type="submit">Send Request</button>
+          <button className=" mentor-submit-button"type="submit">Send Request</button>
         </form>
       </div>
     </div>

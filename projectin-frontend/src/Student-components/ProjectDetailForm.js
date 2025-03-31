@@ -50,7 +50,9 @@ const ProjectDetailForm = ({ onClose, onSubmit }) => {
       <div className="project-form-container">
         <h1>Project Details</h1>
         <br></br>
-        <button className="project-close-btn" onClick={onClose}>✖</button>
+        <button className="project-close-btn" onClick={onClose}>
+          &times;
+        </button>
         <div className="project-form">
           <label>Group ID:</label>
           <input type="text" placeholder="Enter your group ID" value={groupID} onChange={(e) => setGroupID(e.target.value)} required /><br />
