@@ -10,7 +10,9 @@ const TopBanner = ({ toggleSidebar, toggleProfileDropdown, isProfileDropdownOpen
         <i className="icon-menu" onClick={toggleSidebar}></i>
         <img src={logo} alt="Banasthali Vidyapeeth Logo" className="coordinator-logo" />
         <img src={logo2} alt="Banasthali Vidyapeeth Logo" className="coordinator-our-logo" />
+        <div className="brand-title">
         <span className="brand-title">Coordinator Dashboard</span>
+        </div>
       </div>
       <div className="top-right">
         <div

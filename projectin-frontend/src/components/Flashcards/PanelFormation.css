@@ -251,6 +251,92 @@ body, html {
     height: 16px;
 }
 
+/* Close Button Inside Popup */
+.close-btn {
+    position: absolute;
+    top: 77px;
+    left: 29%;
+    transform: translateX(-50%);
+    background-color: rgb(215, 38, 38);
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    width: 40%;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+}
+
+/* Close Button Hover */
+.close-btn:hover {
+    background-color: rgb(151, 32, 32);
+    color: white;
+}
+
+/* Submit Button inside Popup */
+.submit-popup {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 22px;
+    font-size: 16px;
+    width: 40%;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+    /* Center alignment on larger screens */
+    margin-left: 50%;
+}
+
+/* Submit Button Hover */
+.submit-popup:hover {
+    background-color: #165323;
+}
+
+/* Adjust popup width when close and submit buttons are present */
+.popup {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Adjust the button container (for close and submit buttons) */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap; /* Allows wrapping if buttons don't fit in one line */
+    justify-content: center; /* Center the buttons on small screens */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .popup {
+        width: 80%; /* Adjust the popup width on smaller screens */
+        padding: 15px;
+    }
+
+    .close-btn, .submit-popup {
+        width: 80%; /* Buttons take 80% of the width on smaller screens */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .popup-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 15px; /* Increased gap between buttons */
+    }
+}
+
 
 
 /* Responsive Design */

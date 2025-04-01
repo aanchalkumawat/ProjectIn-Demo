@@ -32,8 +32,9 @@
 }
 
 .brand-title {
-  font-size: 18px;
+  font-size:4vh;
   font-weight: bold;
+  text-align: center;
 }
 .coordinator-logo{
   width: 8vh;

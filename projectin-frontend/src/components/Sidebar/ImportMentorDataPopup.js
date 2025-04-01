@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./ImportDataPopup.css";
 
 const ImportMentorDataPopup = ({ onClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -54,18 +55,18 @@ const ImportMentorDataPopup = ({ onClose }) => {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
-        <h6>📂 Import Teacher Data</h6>
-        <input type="file" accept=".xlsx" onChange={handleFileChange} />
+        <h3>📂 Import Teacher Data</h3>
+        <input  className="fileupload" type="file" accept=".xlsx" onChange={handleFileChange} />
         {selectedFile && <p>📄 Selected File: {selectedFile.name}</p>}
 
         {/* ✅ Display success or error message */}
         {uploadMessage && <p className="upload-message">{uploadMessage}</p>}
 
         <div className="popup-buttons">
-          <button className="export-button"s onClick={handleUpload} disabled={isUploading}>
+          <button className="import-button"s onClick={handleUpload} disabled={isUploading}>
             {isUploading ? "Uploading..." : " Upload"}
           </button>
-          <button className="close-button" onClick={onClose} disabled={isUploading}>
+          <button className="iclose-button" onClick={onClose} disabled={isUploading}>
            Close
           </button>
         </div>

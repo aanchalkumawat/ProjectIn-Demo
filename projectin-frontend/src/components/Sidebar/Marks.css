@@ -1,4 +1,4 @@
-
+/* Base Styles */
 .marks-page {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -6,9 +6,6 @@
     padding: 0;
     overflow-x: hidden; /* Prevents horizontal scroll */
     width: 100vw;
-       
-     
-   
 }
 
 /* Search Bar & Back Button */
@@ -16,10 +13,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0%;
+    margin: 20px 0;
     gap: 10px;
-    position: sticky;
-    z-index: 999;
 }
 
 .back-button {
@@ -51,11 +46,12 @@
 /* Flashcard Container */
 .flashcard {
     background-color: white;
-    width: 80%;
+    width: 60%;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
+    margin-bottom: 10px;
 }
 
 .flashcard:hover {
@@ -69,17 +65,23 @@
     align-items: center;
 }
 
-.flashcard h3 {
-    margin: 0;
-    font-size: 18px;
-}
-
-/* Button Group (Reduced Gap) */
+/* Button Group */
 .button-group {
     display: flex;
-    gap: 4px; /* Reduced gap between buttons */
+    gap: 4px;
 }
 
+/* Common Button Styling */
+.action-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
 
 .action-button:hover {
     background-color: #218838;
@@ -88,17 +90,25 @@
 /* Remarks Section */
 .remarks-section {
     margin-top: 10px;
-    padding: 10px;
     background: #f9f9f9;
+    padding: 10px;
     border-radius: 5px;
 }
 
-.remark {
-    background: #e8f5e9;
-    padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    font-size: 14px;
+.remarks-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.remarks-table th, .remarks-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.remarks-table th {
+    background-color: #4CAF50;
+    color: white;
 }
 
 /* Marks Table */
@@ -132,109 +142,8 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-.marks-page {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-}
 
-/* Search Bar & Back Button */
-.search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-    gap: 10px;
-}
-
-.back-button {
-    background-color: #1e1a9a;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.search-bar {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Flashcards */
-.flashcards {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-/* Flashcard Container */
-.flashcard {
-    background-color: white;
-    width: 80%;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-}
-
-/* Flashcard Header */
-.flashcard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Button Group */
-.button-group {
-    display: flex;
-    gap: 4px;
-}
-
-/* Common Button Styling */
-.action-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.action-button:hover {
-    background-color: #218838;
-}
-
-/* Remarks Table */
-.remarks-section {
-    margin-top: 10px;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.remarks-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.remarks-table th, .remarks-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.remarks-table th {
-    background-color: #4CAF50;
-    color: white;
-}
-/* Styling for the Marks button in the sidebar */
+/* Sidebar Marks Button */
 .sidebar .marks-button {
     color: white;
     font-weight: bold;
@@ -247,74 +156,7 @@
     transition: background 0.3s;
 }
 
-.marks-page {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-}
-
-.search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-    gap: 10px;
-}
-
-.back-button {
-    background-color: #1e1a9a;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.search-bar {
-    width: 50%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.flashcards {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-.flashcard {
-    background-color: white;
-    width: 80%;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.flashcard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.button-group {
-    display: flex;
-    gap: 4px;
-}
-
-.action-button{
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
+/* Submit Button */
 .submit-button {
     background-color: #28a745;
     color: white;
@@ -332,26 +174,6 @@
     cursor: not-allowed;
 }
 
-.marks-table {
-    margin-top: 10px;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-}
-
-.marks-table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.remarks-section {
-    margin-top: 10px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-radius: 5px;
-}
-
 .remarks-input {
     width: 100%;
     min-height: 50px;
@@ -359,4 +181,79 @@
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+    /* Adjusting search bar and back button */
+    .search-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        width: 80%; /* Make the search bar 80% width */
+        margin-bottom: 10px;
+    }
+
+    .back-button {
+        width: 50%; /* Make back button span the full width */
+    }
+
+    /* Flashcards */
+    .flashcard {
+        width: 80%; /* Flashcard width adjusts to 90% on smaller screens */
+    }
+
+    /* Button Group */
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Adjusting Table Inputs */
+    .marks-table input {
+        width: 60px; /* Decrease input width on smaller screens */
+    }
+
+    /* Adjusting button width */
+    .submit-button, .action-button {
+        width: 100%; /* Make buttons full width */
+        margin-top: 10px;
+    }
+
+    .remarks-table th, .remarks-table td {
+        padding: 6px; /* Reduce padding for table cells */
+    }
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+    .search-bar {
+        width: 100%; /* Search bar takes full width on very small screens */
+    }
+
+    .back-button {
+        padding: 8px 12px; /* Smaller padding for smaller screens */
+    }
+
+    .flashcard {
+        width: 95%; /* Flashcard takes almost full width */
+        padding: 10px; /* Reduced padding */
+    }
+
+    .action-button {
+        font-size: 12px; /* Reduce font size for buttons */
+        padding: 6px 10px;
+    }
+
+    .remarks-section {
+        padding: 8px; /* Adjust padding for remarks section */
+    }
+
+    .marks-table {
+        font-size: 12px; /* Slightly smaller font size in table */
+    }
 }

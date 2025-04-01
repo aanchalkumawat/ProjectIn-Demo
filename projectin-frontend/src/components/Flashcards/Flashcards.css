@@ -1,11 +1,12 @@
 /* Ensure the search bar and back button are centered */
 .search-container.fixed {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Align vertically */
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 10px 0;
-  gap: 10px; /* Adds spacing between the back button and search bar */
+  gap: 10px;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .back-button {
@@ -15,47 +16,51 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 .search-bar {
-  width: 50%;
+  flex: 1;
+  max-width: 500px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  min-width: 200px;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .search-container.fixed {
-      flex-direction: column; /* Stack elements vertically on smaller screens */
+      flex-direction: column;
       align-items: center;
   }
-
   .search-bar {
       width: 80%;
       margin-top: 10px;
   }
 }
-.content{
+
+.content {
   margin-top: 90px;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 /* Flashcards */
 .flashcards-container {
- width: 200vh;
- height: 100vh;
- display: flex;
- position: relative;
- margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for small screens */
+  justify-content: center;
   gap: 20px;
-  height: 150px;
-  top:-70px;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 10px;
 }
 
 .fflashcard {
-  top:200px;
-  color:#757575;
+  color: #757575;
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -63,10 +68,9 @@
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: white;
-  width: 80%;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
 }
 
 .flashcard:hover {
@@ -74,11 +78,10 @@
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.flashcardheader{
+.flashcardheader {
   font-size: 18px;
   color: #3f51b5;
   margin-bottom: 10px;
-  
 }
 
 .flashcard p {
@@ -96,7 +99,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 100%;
+  max-width: 400px;
   padding: 10px;
   margin: 10px 0;
   background-color: #f8f9fa;

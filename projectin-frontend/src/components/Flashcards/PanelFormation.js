@@ -293,7 +293,7 @@ const PanelFormation = () => {
         {showAllotPopup && (
           <div className="popup-overlay">
             <div className="popup">
-              <button className="close-btn" onClick={() => setShowAllotPopup(false)}>✖</button>
+              <button className="close-btn" onClick={() => setShowAllotPopup(false)}>Cancel</button>
               <h3>Allot Teams to Panel</h3>
               <ul>
                 {unallottedTeams.map((team) => (
@@ -317,4 +317,3 @@ const PanelFormation = () => {
 };
 
 export default PanelFormation;
- 

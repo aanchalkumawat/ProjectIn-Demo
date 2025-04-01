@@ -1,80 +1,154 @@
+/* Modal Overlay */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+.modal-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease; /* Smooth transition for responsive changes */
+}
+
+/* Modal Title */
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Radio Labels */
+.radio-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* Deadline Input */
+.deadline-input {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+/* Deadline Label */
+.deadline-label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Date Input */
+input[type="date"] {
+  width: 100%;
+  padding: 5px;
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Cancel Button */
+.btn-cancel {
+  background-color: #ce2828;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: normal;
+  font-size: smaller;
+}
+
+/* Submit Button */
+.btn-submit {
+  background-color: #25a74e;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: normal;
+  font-size: smaller;
+}
+
+/* Cancel Button Hover */
+.btn-cancel:hover {
+  background-color: #942828;
+}
+
+/* Submit Button Hover */
+.btn-submit:hover {
+  background-color: #215920;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+  /* Modal Container */
   .modal-container {
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-    width: 400px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 90%; /* Make the modal container width 90% of screen */
+      padding: 15px; /* Adjust padding for smaller screens */
   }
-  
+
+  /* Modal Title */
   .modal-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+      font-size: 1.25rem; /* Reduce font size slightly for smaller screens */
   }
-  
-  .radio-label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1rem;
+
+  /* Buttons */
+  .btn-cancel, .btn-submit {
+      padding: 8px 10px; /* Reduce padding for buttons */
+      font-size: 14px; /* Adjust font size */
   }
-  
-  .deadline-input {
-    margin-top: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .deadline-label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  input[type="date"] {
-    width: 100%;
-    padding: 5px;
-  }
-  
+
+  /* Modal Actions */
   .modal-actions {
-    display: flex;
-    justify-content: space-between;
+      flex-direction: column; /* Stack buttons vertically */
+      gap: 10px; /* Add space between buttons */
+      align-items: center; /* Center align the buttons */
   }
-  
-  .btn-cancel {
-    background-color: #ccc;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+}
+
+/* For screens smaller than 480px */
+@media (max-width: 480px) {
+  /* Modal Container */
+  .modal-container {
+      width: 95%; /* Make the modal container width 95% of screen */
+      padding: 10px; /* Reduce padding further */
   }
-  
-  .btn-submit {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+  /* Modal Title */
+  .modal-title {
+      font-size: 1.1rem; /* Further reduce font size */
   }
-  
-  .btn-cancel:hover {
-    background-color: #bbb;
+
+  /* Buttons */
+  .btn-cancel, .btn-submit {
+      padding: 8px 10px; /* Keep button padding smaller */
+      font-size: 13px; /* Further reduce font size */
   }
-  
-  .btn-submit:hover {
-    background-color: #0056b3;
+
+  /* Modal Actions */
+  .modal-actions {
+      flex-direction: column; /* Stack buttons vertically */
+      gap: 8px; /* Reduced gap between buttons */
+      align-items: center; /* Center align the buttons */
   }
-  
+}

@@ -60,7 +60,7 @@ const Sidebar = ({
               </li>
               <li>
                 <button className="secondary-button" onClick={() => setIsTeamExportPopupOpen(true)}>
-                  Team Export Details
+                  Export Team Details
                 </button>
               </li>
             </ul>
