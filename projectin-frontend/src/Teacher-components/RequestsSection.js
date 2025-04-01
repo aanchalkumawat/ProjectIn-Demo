@@ -263,7 +263,7 @@ const handleRevise = async (request) => {
         await sendEmailNotification(
           studentEmail,
           "Revised",
-          `Your projectrequires revision. Please check the mentor's comments and update accordingly.`,
+          `Your projectrequires revision. Please contact ${mentor.name} for more discussion then you may send the updated request again accordingly.`,
           request
         );
       }

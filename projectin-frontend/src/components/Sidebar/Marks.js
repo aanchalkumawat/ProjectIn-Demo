@@ -178,12 +178,13 @@ const Marks = () => {
                             max="100"
                             placeholder="Enter Marks"
                             value={marks[member.enrollmentNumber] || ""}
-                            onChange={(e) =>
+                            onChange={(e) =>{
+                              const value = parseInt(e.target.value, 10);
                               setMarks((prev) => ({
                                 ...prev,
-                                [member.enrollmentNumber]: parseInt(e.target.value, 10) || "",
+                                [member.enrollmentNumber]: value >100 ? 100 :value || "",
                               }))
-                            }
+                            }}
                             disabled={submittedTeams[member.enrollmentNumber]}
                           />
                         </td>

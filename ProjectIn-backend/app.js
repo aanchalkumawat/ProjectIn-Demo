@@ -213,15 +213,18 @@ app.post("/api/send-email", async (req, res) => {
     switch (action) {
       case "Accepted":
         emailSubject = `Project "${projectName}" Accepted! 🎉`;
-        emailMessage = `Your project "${projectName}" has been accepted by the mentor.`;
+        // emailMessage = `Your project "${projectName}" has been accepted by the mentor.`;
+        emailMessage = `"${message}"`
         break;
       case "Rejected":
         emailSubject = `Project "${projectName}" Rejected 😞`;
-        emailMessage = `Unfortunately, your project "${projectName}" has been rejected. Please contact your mentor for further details.`;
+        // emailMessage = `Unfortunately, your project "${projectName}" has been rejected. Please contact your mentor for further details.`;
+        emailMessage = `"${message}"`
         break;
       case "Revised":
         emailSubject = `Project "${projectName}" Needs Revision ✍️`;
-        emailMessage = `Your project "${projectName}" has been marked for revision. Please check your dashboard for required changes.`;
+        // emailMessage = `Your project "${projectName}" has been marked for revision. Please check your dashboard for required changes.`;
+        emailMessage = `"${message}"`
         break;
       default:
         return res.status(400).json({ error: "Invalid action" });
