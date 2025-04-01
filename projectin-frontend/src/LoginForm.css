@@ -209,7 +209,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 139, 0.3); /* Slight blue overlay */
+  background: rgba(42, 82, 152, 0.5); /* Slight blue overlay */
   z-index: 1;
 }
 

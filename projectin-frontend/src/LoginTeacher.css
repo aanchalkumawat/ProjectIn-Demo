@@ -228,7 +228,7 @@ h2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 139, 0.3); /* Slight blue overlay */
+  background: rgba(42, 82, 152, 0.5); /* Slight blue overlay */
 }
 
 /* Ensure the form is above the overlay */
@@ -254,6 +254,7 @@ h2 {
   height: 450px; /* Increased height */
   text-align: center;
   transition: 0.3s ease-in-out;
+  background: rgba(42, 82, 152, 0.5);
 }
 
 /* Adjust the form elements to fit the increased size */
