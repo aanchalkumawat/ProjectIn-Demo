@@ -240,7 +240,7 @@ const PanelFormation = () => {
           {teachers.map((teacher) => (
             <div key={teacher._id} className="teacher-flashcard">
               <span>{teacher.name}</span>
-              <button onClick={() => toggleSelection(teacher)}>
+              <button className="select-button" onClick={() => toggleSelection(teacher)}>
                 {selectedTeachers.some(t => t._id === teacher._id) ? "Deselect" : "Select in Panel"}
               </button>
             </div>
@@ -317,3 +317,4 @@ const PanelFormation = () => {
 };
 
 export default PanelFormation;
+ 

@@ -1,28 +1,28 @@
 .requests-section {
   background: #c0e0ff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2vw; /* Replaced px with vw for relative padding */
+  border-radius: 1rem; /* Replaced px with rem for relative radius */
+  box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.1); /* Replaced px with vw for relative shadow */
   overflow-y: visible;
-  width: 100%;
+  width: 95%;
   margin: 1em auto 1em 1em;
   margin-left: auto;
-  max-width: calc(100% - 20px);
-  margin-top: 200px; /* Adjust this based on your top bar's height */
-  position: relative; /* Ensure it doesn't get overlapped */
-
+  max-width: calc(100% - 2vw); /* Replaced px with vw for relative max-width */
+  position: relative;
 }
+
 body {
   overflow-y: auto;
-  padding-top: 60px; /* Ensure content starts below the top bar */
+  padding-top: 6vw; /* Replaced px with vw for responsive padding */
+  font-family: 'Times New Roman', Times, serif;
 }
-.requests-section{
+
+.requests-section {
   position: relative;
-  margin-top: 100px;
+  margin-top: 17vh; /* Used vh for responsive margin-top */
+  
 }
-/* .requests-list{
-  margin-top: 200px;
-} */
+
 .request-item {
   color: black;
   display: flex;
@@ -30,87 +30,148 @@ body {
   align-items: center;
   background: rgb(246, 246, 246);
   border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 1em;
-  margin-bottom: 1em;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem; /* Replaced px with rem for relative radius */
+  padding: 2vw; /* Replaced px with vw for relative padding */
+  margin-bottom: 2vw; /* Replaced px with vw for relative margin */
+  box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.1); /* Replaced px with vw for relative shadow */
 }
 
 .request-item h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 1.8rem; /* Replaced px with rem for relative font size */
+  margin-bottom: 1vw; /* Replaced px with vw for relative margin */
 }
 
 .request-item h4 {
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: 1.6rem; /* Replaced px with rem for relative font size */
+  margin-bottom: 2vw; /* Replaced px with vw for relative margin */
 }
 
 .request-item .request-buttons {
   display: flex;
-  gap: 0.5em;
-  margin-top: 20px;
+  gap: 1vw; /* Replaced px with vw for responsive gap */
+  margin-top: 2vw; /* Replaced px with vw for relative margin */
 }
 
 .request-item .request-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2vw; /* Replaced px with vw for relative margin */
 }
 
 .request-item .request-info h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 1.8rem; /* Replaced px with rem for relative font size */
+  margin-bottom: 1vw; /* Replaced px with vw for relative margin */
 }
 
 .request-item .request-info h4 {
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: 1.6rem; /* Replaced px with rem for relative font size */
+
 }
 
 .request-item .request-buttons {
   display: flex;
-  gap: 0.5em;
-  margin-top: 20px;
+  gap: 1vw; /* Replaced px with vw for responsive gap */
 }
+
 .request-item:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.2); /* Replaced px with vw for relative shadow */
 }
 
-.request-buttons {
-  display: flex;
-  gap: 0.5em;
+.req {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5em;
+  font-family: 'Times New Roman', Times, serif;
 }
 
-button {
-  padding: 0.5em 1em;
-  color: white;
+.accept-button,
+.reject-button,
+.revise-button,
+.more-button {
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 0.9em;
+  font-size: 1rem;
+  width: 100%;
+  color: white;
+  font-weight: normal;
+  transition: 0.3s ease-in-out;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .accept-button {
   background: #4caf50;
 }
 
+.accept-button:hover {
+  background: #265b28;
+}
+
+
 .reject-button {
   background: #f44336;
 }
+
+.reject-button:hover {
+  background: #d32f2f;
+}
+
 
 .revise-button {
   background: #ff9800;
 }
 
+.revise-button:hover {
+  background: #c66900;
+}
+
+
 .more-button {
   background: #2196f3;
-  position: relative;
+}
+
+.more-button:hover {
+  background: #1976d2;
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .accept-button,
+  .reject-button,
+  .revise-button,
+  .more-button {
+    padding: 0rem 1rem; /* Smaller padding for tablets */
+    font-size: 0.9rem; /* Smaller font size */
+  }
+}
+
+@media (max-width: 768px) {
+  .accept-button,
+  .reject-button,
+  .revise-button,
+  .more-button {
+    padding: 0.6rem 1.2rem; /* Even smaller padding for mobile screens */
+    font-size: 0.85rem; /* Smaller font size */
+  }
+}
+
+@media (max-width: 600px) {
+  .accept-button,
+  .reject-button,
+  .revise-button,
+  .more-button {
+    padding: 0.5rem 1rem; /* Smallest padding for small screens */
+    font-size: 0.8rem; /* Small font size */
+  }
 }
 
 .more-button:hover + .dropdown-list {
   display: block;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .dropdown-list {
@@ -118,34 +179,34 @@ button {
   position: absolute;
   background: rgb(251, 251, 251);
   border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 0.5em;
+  border-radius: 0.5rem; /* Replaced px with rem for relative radius */
+  padding: 1vw; /* Replaced px with vw for relative padding */
   list-style: none;
-  margin-top: 0.5em;
+  margin-top: 1vw; /* Replaced px with vw for relative margin */
   z-index: 10;
 }
+
 .dropdown-list {
   display: none;
   position: absolute;
   background: white;
   border: 1px solid #ccc;
-  padding: 5px;
+  padding: 1vw; /* Replaced px with vw for relative padding */
   list-style: none;
 }
 
 .dropdown:hover .dropdown-list {
   display: block; /* Show list on hover */
 }
-/* Ensure visibility */
+
 .request-section {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 20px;
+  padding: 2vw; /* Replaced px with vw for relative padding */
   background-color: #f9f9f9;
 }
 
-/* Prevent accidental hiding */
 .request-section.hidden {
   display: block;
   visibility: visible;

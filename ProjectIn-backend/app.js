@@ -4,6 +4,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path"); // ✅ Import path module for serving files
+// const sendEmail = require("../utils/emailService"); // Import email service
+const MentorRequest = require("./models/MentorRequest");
+const Student = require("./models/Student");
+const sendEmail = require("./utils/emailService");
 
 const app = express();
 
@@ -51,6 +55,8 @@ const mentormeetRoutes = require("./routes/mentormeet");
 const evaluationRoutes = require("./routes/evaluationRoutes");
 const AcceptedTeam = require("./models/AcceptedRequest");
 const mentorToken = require("./middlewares/mentorMiddleware");
+// const emailRoutes = require("./routes/emailRoutes"); // Import email routes
+
 //const projectRoutes = require("./routes/projectRoutes");
 
 // ✅ API Routes
@@ -61,6 +67,7 @@ console.log("✅ Registering Team Routes at /api/team");
 app.use("/api/team", teamRoutes);
 app.use("/api/team-freeze", freezeRoutes);
 app.use("/api/team-limits", teamLimitRoutes);
+console.log("✅ Team Limits routes registered at /api/team-limits");
 app.use("/api/mentor",teacherRoutes);
 app.use("/api/notifications", notificationRoutes);
 console.log("Notification routes loaded!");  
@@ -78,6 +85,9 @@ app.use("/api/revised-requests", reviseRequestRoutes);
 app.use("/api/mentormeets", mentormeetRoutes);
 app.use("/api/evaluation", evaluationRoutes);
 app.use("/app", projectRoutes);
+// app.use("/api/send-email", emailRoutes); // Use email routes
+console.log("✅ Email routes loaded successfully!"); // Debug log
+
 
 // Store Accepted Requests
 app.post("/api/accepted-requests", async (req, res) => {
@@ -100,6 +110,130 @@ app.post("/api/accepted-requests", async (req, res) => {
   } catch (error) {
     console.error("❌ Backend Error:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+// Endpoint to send email when a request is accepted/rejected/revised
+// app.post("/api/send-email", async (req, res) => {
+//   console.log("✅ Email API Hit!"); // Debugging
+//   console.log("Received Data:", req.body); // Debugging
+  
+//   const { email, subject, message, projectName, action } = req.body; 
+//   console.log("Email:", email);
+//   console.log("Subject:", subject);
+//   console.log("Message:", message);
+//   console.log("Project Name:", projectName);
+//   console.log("Action:", action);
+// // Validate if projectName exists
+// if (!projectName || !email) {
+//   return res.status(400).json({ error: 'Missing required fields' });
+// }
+
+//   if (!email || !subject || !message) {
+//     return res.status(400).json({ error: "Missing email, subject, or message" });
+//   }
+//   if (!request || !request.members || request.members.length === 0) {
+//     return res.status(404).json({ error: "Request or members not found from app.js" });
+//   }
+  
+//   try {
+//     // 1️⃣ Fetch the mentor request from MentorRequest collection
+//     const request = await MentorRequest.findOne({ projectName });
+
+//     if (!request || !request.members || request.members.length === 0) {
+//       return res.status(404).json({ error: "Request or members not found" });
+//     }
+
+//     // 2️⃣ Get the first member's rollNo
+//     const firstMemberRollNo = request.members[0].rollno;
+
+//     // 3️⃣ Fetch the student record from the Students collection
+//     const student = await Student.findOne({ enrollmentNumber: firstMemberRollNo });
+
+//     if (!student || !student.email) {
+//       return res.status(404).json({ error: "Student email not found" });
+//     }
+
+//     // 4️⃣ Prepare email details
+//     const recipientEmail = student.email;
+//     let subject = "";
+//     let message = "";
+
+//     switch (action) {
+//       case "Accepted":
+//         subject = `Project "${projectName}" Accepted! 🎉`;
+//         message = `Your project "${projectName}" has been accepted by the mentor.`;
+//         break;
+//       case "Rejected":
+//         subject = `Project "${projectName}" Rejected 😞`;
+//         message = `Unfortunately, your project "${projectName}" has been rejected. Please contact your mentor for further details.`;
+//         break;
+//       case "Revised":
+//         subject = `Project "${projectName}" Needs Revision ✍️`;
+//         message = `Your project "${projectName}" has been marked for revision. Please check your dashboard for required changes.`;
+//         break;
+//       default:
+//         return res.status(400).json({ error: "Invalid action" });
+//     }
+
+//     // 5️⃣ Send the email
+//     await sendEmail(recipientEmail, subject, message);
+
+//     res.status(200).json({ message: `Email sent successfully to ${recipientEmail}` });
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//     res.status(500).json({ error: "Failed to send email" });
+//   }
+// });
+app.post("/api/send-email", async (req, res) => {
+  console.log("✅ Email API Hit!"); // Debugging
+  console.log("Received Data:", req.body); // Debugging
+  
+  const { email, subject, message, projectName, action } = req.body; 
+  console.log("Email:", email);
+  console.log("Subject:", subject);
+  console.log("Message:", message);
+  console.log("Project Name:", projectName);
+  console.log("Action:", action);
+
+  // Validate if projectName exists
+  if (!projectName || !email) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  if (!email || !subject || !message) {
+    return res.status(400).json({ error: "Missing email, subject, or message" });
+  }
+
+  try {
+
+    // 4️⃣ Prepare email details
+    let emailSubject = "";
+    let emailMessage = "";
+
+    switch (action) {
+      case "Accepted":
+        emailSubject = `Project "${projectName}" Accepted! 🎉`;
+        emailMessage = `Your project "${projectName}" has been accepted by the mentor.`;
+        break;
+      case "Rejected":
+        emailSubject = `Project "${projectName}" Rejected 😞`;
+        emailMessage = `Unfortunately, your project "${projectName}" has been rejected. Please contact your mentor for further details.`;
+        break;
+      case "Revised":
+        emailSubject = `Project "${projectName}" Needs Revision ✍️`;
+        emailMessage = `Your project "${projectName}" has been marked for revision. Please check your dashboard for required changes.`;
+        break;
+      default:
+        return res.status(400).json({ error: "Invalid action" });
+    }
+
+    // 5️⃣ Send the email
+    await sendEmail(email, emailSubject, emailMessage);
+
+    res.status(200).json({ message: `Email sent successfully to ${email}` });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ error: "Failed to send email" });
   }
 });
 

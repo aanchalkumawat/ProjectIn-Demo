@@ -54,14 +54,16 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="container">  {/* ✅ Matches student login styling */}
-      <div className="form-container"> {/* ✅ Matches student login styling */}
+    <div className="teacher-login-container">  {/* ✅ Matches student login styling */} 
+      <div className="form-teacher-container"> {/* ✅ Matches student login styling */}
+      <div className="log-logo-teacher-login"></div>{/* ✅ Updated class name */}
         <form onSubmit={handleSubmit}>
-          <h2>Login Form</h2>  {/* ✅ Matches student login styling */}
+          <h2 class="h2teacher">Login Form</h2>  {/* ✅ Matches student login styling */}
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
+            class="teacher-login-input-email"
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
             required
@@ -71,6 +73,7 @@ export default function LoginForm() {
             type="password"
             placeholder="Enter password"
             value={password}
+            class="teacher-login-input-password"
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             required

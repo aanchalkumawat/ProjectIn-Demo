@@ -1,5 +1,6 @@
 body {
-  padding-top: 70px; /* Adjust this value if needed */
+  padding-top: 7vh; /* Adjusted to vh for responsiveness */
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .header {
@@ -7,24 +8,36 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 8vh; /* Adjusted to vh for responsiveness */
   z-index: 1000;
+}
+
+.dashboard-logo {
+  width: 5vw; /* Adjusted to vw for responsiveness */
+  height: auto;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 15px;  /* Adds spacing between icons */
+  gap: 2vw;  /* Adjusted for responsiveness */
   position: absolute;
-  right: 20px; /* Aligns items to the right */
+  right: 2vw; /* Adjusted to vw */
   top: 50%;
-  transform: translateY(-50%); /* Centers vertically */
+  transform: translateY(-50%);
+}
+
+.bvlogo {
+  width: 3.5vw; /* Adjusted to vw */
+  height: auto;
+  margin-left: 3vw;
+  margin-right: 30vw; /* Adjusted to vw */
 }
 
 .header-icons {
   display: flex;
-  align-items: center;  /* Ensures both icons are vertically aligned */
-  gap: 15px;  /* Adds space between icons */
+  align-items: center;
+  gap: 2vw;  /* Adjusted for responsiveness */
 }
 
 .dashboard-header {
@@ -33,53 +46,56 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 1em;
+  padding: 2vw;
   position: fixed;
   top: 0;
   z-index: 1000;
   width: 100%;
-  height: 85px; /* Ensure header height is fixed */
+  height: 15vh; /* Adjusted to vh for responsive height */
+  margin-bottom: 2em;
 }
 
 .dashboard-header-text {
-  font-size: 2em;
+  font-size: 2.5vw; /* Adjusted to vw */
   font-weight: bold;
   text-align: left;
-  white-space: nowrap; /* Prevents text from wrapping */
-  margin: 0 auto; /* Centers the text */
+  white-space: nowrap;
+  margin-right: 14vw; /* Adjusted to vw for responsiveness */
 }
 
 .logout-button {
-  padding: 0.6em 1.2em;
+  padding: 3vh 3vw;
   background: #ff4d4d;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5em;
   cursor: pointer;
-  font-size: 0.9em;
+  font-size: 1.2vw; /* Adjusted to vw */
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .logout-button:hover {
-  background: #d43f3f;
+  color: #000000;
+  border-color: #8d8d8d;
 }
 
-.calendar-icon{
+.calendar-icon {
   cursor: pointer;
-  font-size: 24px;
+  font-size: 2vw; /* Adjusted to vw */
 }
 
 .calendar-container {
   position: fixed;
-  margin-right: 11em;
-  margin-top:-1.8em;
-  margin-left: 2em;
+  margin-right: 15vw; /* Adjusted to vw */
+  margin-top: -5vh; /* Adjusted to vh */
+  margin-left: 2vw; /* Adjusted to vw */
   background-color: #003366;
   border-color: #003366; 
 }
 
 .custom-calendar .react-calendar__tile {
-  padding: 8px;
-  border-radius: 3px;
+  padding: 1vw;
+  border-radius: 0.5vw;
   transition: background 0.3s ease;
   color: #000;
 }
@@ -91,7 +107,7 @@ body {
 .custom-calendar .react-calendar__tile--active {
   background: #003366;
   color: rgb(239, 216, 11);
-  border-radius: 5px;
+  border-radius: 0.5vw;
 }
 
 .custom-calendar .react-calendar__month-view__days__day {
@@ -103,8 +119,8 @@ body {
 }
 
 .event-dot {
-  width: 6px;
-  height: 6px;
+  width: 0.6vw;
+  height: 0.6vw;
   background-color: red;
   border-radius: 50%;
   margin: auto;
@@ -113,37 +129,39 @@ body {
 .event-input {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  margin-top: 10px;
+  gap: 1vw;
+  margin-top: 2vh;
 }
 
 .event-input input {
-  padding: 5px;
+  padding: 1vh;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0.5vw;
 }
 
 .event-input button {
-  padding: 5px;
+  padding: 1vh;
   background: #003366;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5vw;
   cursor: pointer;
 }
+
 .event-dot:hover::after {
   content: attr(title);
   position: absolute;
   background: #333;
   color: white;
-  padding: 5px;
-  border-radius: 5px;
-  top: -25px;
+  padding: 1vw;
+  border-radius: 0.5vw;
+  top: -2.5vh;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
-  font-size: 0.8em;
+  font-size: 1em; /* Adjusted to vw */
 }
+
 /* Profile Styles */
 .profile-container {
   position: relative;
@@ -152,73 +170,74 @@ body {
 }
 
 .profile-icon {
-  width: 40px; /* Keep similar size */
-  height: 40px;
-  font-size: 1.8em;
+  width: 3vw; /* Adjusted to vw */
+  height: 3vw; /* Adjusted to vw */
+  font-size: 2vw; /* Adjusted to vw */
   cursor: pointer;
   color: rgb(40, 44, 52);
 }
 
 .profile-dropdown {
   position: absolute;
-  top: 40px;
-  right: 10px;
+  top: 5vh;
+  right: 2vw;
   background-color: rgb(176, 174, 174);
   color: rgb(255, 255, 255);
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  padding: 2vw;
+  border-radius: 0.5vw;
+  box-shadow: 0px 0.4vw 0.6vw rgba(0, 0, 0, 0.2);
+  width: 30vw;
   text-align: left;
-  font-size: 14px;
+  font-size: 1.2vw; /* Adjusted to vw */
   z-index: 1500;
   text-align: center;
 }
 
 .profile-dropdown p {
-  margin: 15px 0;
-  font-size: 14px;
+  margin: 1vw 0;
+  font-size: 1.2vw; /* Adjusted to vw */
 }
 
 /* Logout Button */
 .logout-button {
-  margin-left: 20px;
-  padding: 0.4em 1.2em;
+  margin-left: 2vw;
+  padding: 0.6vh 2vw;
   background: #ff4d4d;
   color: rgb(255, 255, 255);
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5vw;
   cursor: pointer;
-  font-size: 0.9em;
+  font-size: 1vw; /* Adjusted to vw */
   width: fit-content;
 }
 
 .logout-button:hover {
   background: #d43f3f;
 }
+
 .sidebar {
-  margin-top: 60px;  /* Push it down so it doesn't overlap */
+  margin-top: 8vh;  /* Adjusted to vh */
 }
 
 /* Notification Icon */
 .notice-container {
   position: relative;
-  margin-right: 20px;
+  margin-right: 1.4vw; /* Adjusted to vw */
 }
 
 .notice-icon {
-  font-size: 24px;
+  font-size: 2vw; /* Adjusted to vw */
   cursor: pointer;
 }
 
 .badge {
   position: absolute;
-  top: -5px;
-  right: -10px;
+  top: -1.5vh;
+  right: -2vw;
   background: red;
   color: white;
-  font-size: 12px;
-  padding: 3px 7px;
+  font-size: 1.2vw; /* Adjusted to vw */
+  padding: 0.6vh 1vw;
   border-radius: 50%;
 }
 
@@ -238,23 +257,24 @@ body {
 
 .notification-popup {
   transform: translate(-50%, -50%);
-  width: 700px;
-  height: 500px;
+  width: 70vw; /* Adjusted to vw */
+  height: 50vh; /* Adjusted to vh */
   background: white;
-  color:#333;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  color: #333;
+  border-radius: 1vw;
+  box-shadow: 0 0.4vw 1vw rgba(0, 0, 0, 0.2);
+  padding: 2vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
+
 .notification-popup ul li {
   background: #ecf5fe;
-  padding: 10px;
-  margin: 2px 0;
-  border-radius: 5px;
+  padding: 2vw;
+  margin: 1vw 0;
+  border-radius: 0.5vw;
   width: 100%;
   text-align:left;
 }
@@ -262,7 +282,7 @@ body {
 .notification-popup ul {
   list-style: none;
   padding: 0;
-  max-height:80%;
+  max-height: 80%;
   overflow-y: auto;
   width: 100%;
   text-align:left;
@@ -271,11 +291,11 @@ body {
 
 .notification-popup button {
   width: 100%;
-  padding: 12px;
+  padding: 2vh;
   background-color: #4caf50;
   color: white;
   border: none;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 1vw 1vw;
   cursor: pointer;
   text-align: center;
 }
@@ -283,15 +303,39 @@ body {
 .notification-popup button:hover {
   background-color: #45a049;
 }
+
 /* Clipboard Icon Styling */
 .notice-container {
   position: relative;
-  margin-top: 9px;
-  margin-right: 90px; /* Moves it slightly left */
+  margin-top: 1vh;
+  margin-right: 9vw; /* Adjusted to vw */
 }
 
 .clipboard-icon {
-  font-size: 24px;
+  font-size: 2vw; /* Adjusted to vw */
   cursor: pointer;
   color: white;
+}
+
+.dashboard-logo {
+  width: 5vw; /* Adjusted to vw */
+  height: auto;
+}
+/* Notification Icon */
+.notice-container {
+  position: relative;
+  margin-right: 3vw; /* Adjust this value to bring the icon closer to the profile icon */
+}
+
+.notice-icon {
+  font-size: 2vw; /* Adjusted to vw */
+  cursor: pointer;
+}
+
+/* Profile Styles */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 1vw; /* You can tweak this margin to further adjust the spacing */
 }

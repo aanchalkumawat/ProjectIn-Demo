@@ -76,7 +76,7 @@ const AcceptedTeamsSection = ({ mentor }) => {
   
   return (
     <section className="accepted-section">
-      <h2>Accepted Teams</h2>
+       <h2 className="accpt">Accepted Teams</h2>
       <div className="accepted-teams-list">
       {acceptedTeamsState.length === 0 ? (
   <p>No accepted teams yet.</p>

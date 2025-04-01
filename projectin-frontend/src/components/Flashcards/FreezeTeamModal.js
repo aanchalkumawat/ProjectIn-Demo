@@ -74,7 +74,7 @@ const FreezeTeamModal = ({ onClose }) => {
         </p>
 
         <div className="modal-actions">
-          <button className="close-btn" onClick={onClose}>Close</button>
+          <button className="fclose-btn" onClick={onClose}>Close</button>
           <button className="freeze-btn" onClick={handleFreezeClick}>Freeze Team</button>
         </div>
       </div>
@@ -84,10 +84,10 @@ const FreezeTeamModal = ({ onClose }) => {
           <div className="confirm-content">
             <p>{message}</p>
             <div className="confirm-actions">
-              <button className="cancel-btn" onClick={() => setIsConfirmDialogOpen(false)}>
+              <button className="fcancel-btn" onClick={() => setIsConfirmDialogOpen(false)}>
                 Cancel
               </button>
-              <button className="confirm-btn" onClick={confirmFreeze}>Confirm</button>
+              <button className="fconfirm-btn" onClick={confirmFreeze}>Confirm</button>
             </div>
           </div>
         </div>

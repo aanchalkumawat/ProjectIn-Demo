@@ -12,7 +12,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,17 +23,17 @@
 /* Popup Form */
 .popup-form {
   background-color: white;
-  padding: 20px;
+  padding: 2vw;
   width: 90%;
-  max-width: 600px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 50vw;
+  box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.2);
   position: relative;
   overflow-y: auto;
-  max-height: 80vh; /* Prevents overflow on smaller screens */
+  max-height: 80vh;
 }
 
 .popup-form h3 {
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
   color: #004d99;
   text-align: center;
 }
@@ -41,9 +41,9 @@
 /* Close Button */
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
+  top: 1vh;
+  right: 1.5vw;
+  font-size: 2vw;
   cursor: pointer;
   border: none;
   background: none;
@@ -53,7 +53,7 @@
 /* Form Inputs */
 .popup-form label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5vh;
   font-weight: bold;
   color: #333;
 }
@@ -62,26 +62,26 @@
 .popup-form textarea,
 .popup-form select {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 1vh;
+  margin-bottom: 1vh;
+  border: 0.1vw solid #ccc;
+  border-radius: 0.6vw;
+  font-size: 1.4vw;
 }
 
 .popup-form textarea {
   resize: vertical;
-  height: 100px;
+  height: 10vh;
 }
 
 /* Buttons */
 .popup-form button {
   background-color: #004d99;
   color: white;
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 0.8vw 1.6vw;
+  font-size: 1.4vw;
   border: none;
-  border-radius: 6px;
+  border-radius: 0.6vw;
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
@@ -94,113 +94,104 @@
 .popup-form-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  padding-bottom: 10px;
-}
-
-.popup-form button:first-child {
-  margin-right: 10px;
-}
-
-.popup-form button:last-child {
-  margin-left: 10px;
+  margin-top: 1vh;
+  padding-bottom: 1vh;
 }
 
 /* Accepted Section */
 .accepted-section {
   flex: 1;
-  background:#73a8dd;
-  padding: 1.5em;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #73a8dd;
+  padding: 1.5vw;
+  border-radius: 1vw;
+  box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.1);
   overflow-y: visible;
   width: 100%;
-  margin: 1em auto 1em 1em;
-  margin-left: auto;
-  max-width: calc(100% - 20px);
+  margin: 1vw auto;
+  max-width: 95%;
   position: relative;
 }
+
 /* Responsive Team List */
 .accepted-teams-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 1vw;
   color: black;
   justify-content: center;
-}
-.teamName{
-  text-align: left;
-  text-overflow: inherit;
-  
 }
 
 .team-card {
   background: white;
-  padding: 1em;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 1vw;
+  border: 0.1vw solid #ccc;
+  border-radius: 0.6vw;
   text-align: left;
-  width: 100%;
-  max-width: 300px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease-in-out;
 }
 
 .team-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.8vw 1.6vw rgba(0, 0, 0, 0.2);
 }
 
 /* Meet Form */
 .meet-form {
   background: white;
-  padding: 20px;
-  border-radius: 0 12px 12px 0; /* Sharp on left top & bottom, rounded on right */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+  padding: 2vw;
+  border-radius: 0 1.2vw 1.2vw 0;
+  box-shadow: 0px 0.4vw 1vw rgba(0, 0, 0, 0.2);
+  max-width: 50vw;
   width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
 }
 
-.meet-form input,
-.meet-form textarea,
-.meet-form select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+.accpt{
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #333;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 0.5em;
 }
 
-/* Meet Form Buttons */
-.meet-form-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  padding-bottom: 10px;
-}
-
-.meet-form-buttons button {
-  font-size: 14px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Meet Button */
 .meet-button {
   background: #673ab7;
-  color: white;
-  padding: 0.5em 1em;
+  color: white; /* Adjust padding with rem to scale better */
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
-  margin-top: auto; /* Pushes the button to the bottom */
+  font-size: 1rem; /* Base font size */
+  width: fit-content;
+  position: sticky;
+  transition: 0.3s ease-in-out;
+  font-weight: normal;
+  font-family: 'Times New Roman', Times, serif;
 }
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .meet-button {
+    padding: 0.8rem 1.6rem; /* Slightly smaller padding */
+    font-size: 0.9rem; /* Slightly smaller font size */
+  }
+}
+
+@media (max-width: 768px) {
+  .meet-button {
+    padding: 0.7rem 1.4rem; /* Even smaller padding for smaller screens */
+    font-size: 0.85rem; /* Adjust font size */
+  }
+}
+
+@media (max-width: 600px) {
+  .meet-button {
+    padding: 0.6rem 1.2rem; /* Smallest padding */
+    font-size: 0.8rem; /* Smaller font size */
+  }
+}
+
 
 .meet-button:hover {
   background: #5e35b1;
@@ -208,62 +199,40 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .team-card {
-    width: calc(50% - 1em);
-  }
-
   .popup-form {
-    max-width: 80%;
+    max-width: 70vw;
   }
 }
 
 @media (max-width: 768px) {
   .accepted-section {
-    padding: 1em;
+    padding: 2vw;
   }
 
   .popup-form {
-    padding: 15px;
-    max-width: 90%;
+    padding: 2vw;
+    max-width: 85vw;
     max-height: 85vh;
   }
 
-  .team-card {
-    width: calc(50% - 1em);
-  }
-
   .meet-form {
-    max-width: 400px;
+    max-width: 60vw;
   }
 }
 
 @media (max-width: 600px) {
   .popup-form {
     width: 95%;
-    padding: 10px;
+    padding: 1vw;
     max-height: 90vh;
-  }
-
-  .team-card {
-    width: 100%;
   }
 
   .popup-form button {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 1vw;
   }
 
   .meet-form {
     max-width: 90%;
-  }
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

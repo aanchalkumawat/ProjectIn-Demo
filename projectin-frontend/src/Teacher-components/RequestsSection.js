@@ -27,6 +27,80 @@ const RequestsSection = ({ mentor ,onTeamAccepted}) => {
           console.error("Error fetching mentor requests:", error);
         }
       };
+       // Function to fetch student email
+  const fetchStudentEmail = async (rollno) => {
+    try {
+      console.log(`Fetching email for rollno: ${rollno}`);
+      const response = await axios.get(`http://localhost:5000/api/students/${rollno}`);
+      return response.data.email || null;
+    } catch (error) {
+      console.error(`Error fetching email for rollno: ${rollno}`, error);
+      return null;
+    }
+  };
+
+  // Function to send email notification
+  // const sendEmailNotification = async (email, subject, message) => {
+  //   try {
+  //     await axios.post("http://localhost:5000/api/send-email", {
+  //       projectName: request.projectName,
+  //       action: subject.includes("Accepted") ? "Accepted" :
+  //               subject.includes("Rejected") ? "Rejected" :
+  //               "Revised",
+  //     });
+      
+  //     console.log(`📧 Email sent successfully to ${email}`);
+  //   } catch (error) {
+  //     console.error("❌ Error sending email:", error);
+  //   }
+  // };
+  const sendEmailNotification = async (email, subject, message, request) => {
+    console.log("request in fcn:",request);
+    console.log("projectname in fcn:",request.projectName);
+    console.log("email in fcn:",email);
+    console.log("subject in fcn:",subject);
+    console.log("message in fcn:",message);
+// Determine the action based on subject content
+const action = (() => {
+  if (subject.toLowerCase().includes("accepted")) {
+    return "Accepted";
+  }
+  if (subject.toLowerCase().includes("rejected")) {
+    return "Rejected";
+  }
+  if (subject.toLowerCase().includes("revised")) {
+    return "Revised";
+  }
+  return "na"; // default case if none match
+})();
+console.log("action in fcn:",action);
+    try {
+      const emailData = {
+        email,  // Recipient email
+        subject, // Email subject
+        message, // Email body content 
+     
+        projectName: request.projectName, // Project name
+        action
+      };
+      console.log("request is:",request);
+      console.log("📤 Sending email data:", emailData);
+  
+      await axios.post("http://localhost:5000/api/send-email", emailData);
+      
+    } catch (error) {
+       if (error.request) {
+          console.error("❌ No response received from server:", error.request);
+      }else if (error.response) {
+        console.error("❌ Server responded with error:", error.response.status, error.response.data);
+    }else {
+          console.error("❌ Error in setting up request:", error.message);
+      }
+  }
+  
+  };
+  
+
       // Function to generate unique team name
   const generateTeamName = (projectName="Project") => {
     return `Team_${projectName.replace(/\s+/g, "_")}_${Math.floor(
@@ -46,14 +120,30 @@ const handleAccept = async (request) => {
 
 console.log("🔹 Generated Team Name:", teamName);
   try {
+     // 1️⃣ Fetch global maxTeams limit from backend (for all mentors)
+    console.log("🚀 Fetching team limit for all mentors");
 
+     const teamLimitResponse = await axios.get(`http://localhost:5000/api/team-limits/`);
+     const maxTeams = teamLimitResponse.data.maxTeams;
+ 
+     // 2️⃣ Fetch current count of accepted teams for this mentor
+     const acceptedCountResponse = await axios.get(`http://localhost:5000/api/accepted-requests/count?mentorId=${mentor.id}`);
+     const acceptedTeamsCount = acceptedCountResponse.data.count;
+ 
+     console.log(`📌 Max Teams Allowed: ${maxTeams}, Already Accepted: ${acceptedTeamsCount}`);
+ 
+     // 3️⃣ Check if the mentor has reached the limit
+     if (acceptedTeamsCount >= maxTeams) {
+       toast.error("Max limit reached. No more teams can be accepted.");
+       return;
+     }
       const response = await axios.post("http://localhost:5000/api/accepted-requests", {
           id: request._id,
           teamName, // ✅ Using generated team name
           projectName: request.projectName,
           teamMembers: request.teamMembers.map((member) => ({
               name: member.name || "Unknown",
-              rollNo: member.rollNo || "N/A",
+              rollno: member.rollno || "N/A",
           })),
           description: request.description,
           mentorId: mentor.id,
@@ -69,7 +159,20 @@ console.log("🔹 Generated Team Name:", teamName);
     {
       onTeamAccepted(response.data.acceptedRequest);
     }
-
+    // Fetch student email
+    const firstMember = request.teamMembers[0];
+    console.log("teammember:",firstMember);
+    if (firstMember) {
+      const studentEmail = await fetchStudentEmail(firstMember.rollno);
+      if (studentEmail) {
+        await sendEmailNotification(
+          studentEmail,
+          "Accepted",
+          `Your project  has been accepted by ${mentor.name}.`,
+          request
+        );
+      }
+    }
 await axios.delete(`http://localhost:5000/api/mentor-requests/${encodeURIComponent(request.projectName)}`);
 
 setRequests((prevRequests) => 
@@ -107,7 +210,19 @@ const handleReject = async (request) => {
     setRequests((prevRequests) => 
       prevRequests.filter((req) => req.projectName !== request.projectName)
     );
-
+     // Fetch student email
+     const firstMember = request.teamMembers[0];
+    if (firstMember) {
+      const studentEmail = await fetchStudentEmail(firstMember.rollno);
+      if (studentEmail) {
+        await sendEmailNotification(
+          studentEmail,
+          "Rejected",
+          `Your project has been rejected by ${mentor.name}.`,
+          request
+        );
+      }
+    }
   } catch (error) {
     console.error("Error rejecting request:", error);
   }
@@ -121,7 +236,7 @@ const handleRevise = async (request) => {
       projectName: request.projectName,
       teamMembers: request.teamMembers.map((member) => ({
         name: member.name || "Unknown",
-        rollNo: member.rollNo || "N/A",
+        rollNo: member.rollno || "N/A",
       })),
       description:request.description,
     }, {
@@ -135,7 +250,24 @@ const handleRevise = async (request) => {
     // setRequests(prevRequests => prevRequests.filter((req) => req._id !== request._id));
     // 🔍 Refetch updated requests from the database
     await fetchRequests();
-
+    // Fetch student email
+    const firstMember = request.teamMembers[0];
+    console.log("teammember:",firstMember);
+    console.log("request:",request);
+    console.log("firstMember.rollno",firstMember.rollno);
+    
+    if (firstMember) {
+      const studentEmail = await fetchStudentEmail(firstMember.rollno);
+      console.log("studentemail:",studentEmail);
+      if (studentEmail) {
+        await sendEmailNotification(
+          studentEmail,
+          "Revised",
+          `Your projectrequires revision. Please check the mentor's comments and update accordingly.`,
+          request
+        );
+      }
+    }
   } catch (error) {
     console.error("❌ Error revising request:", error.response ? error.response.data : error.message);
   }
@@ -143,7 +275,7 @@ const handleRevise = async (request) => {
 
   return (
     <section className="requests-section">
-      <h2>Requests</h2>
+      <h2 className="req">Requests</h2>
       <div className="requests-list">
         {requests.length === 0 ? (
         <p>No requests available.</p>
@@ -188,8 +320,8 @@ const handleRevise = async (request) => {
                 <ul className="dropdown-list">
                     {Array.isArray(request.teamMembers) && request.teamMembers.length > 0 ? (
                       request.teamMembers.map((member) => (
-                        <li key={member.rollNo || member.name}>
-                          {member.name || "Unknown"} ({member.rollNo || "N/A"})
+                        <li key={member.rollno || member.name}>
+                          {member.name || "Unknown"} ({member.rollno || "N/A"})
                         </li>
                       ))
                     ) : (

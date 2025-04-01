@@ -44,6 +44,21 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+// ✅ Route to get the count of accepted teams for a specific mentor
+router.get("/count", async (req, res) => {
+  const { mentorId } = req.query;
+  if (!mentorId) {
+    return res.status(400).json({ error: "Mentor ID is required" });
+  }
+
+  try {
+    const acceptedTeamsCount = await AcceptedTeam.countDocuments({ mentorId });
+    res.json({ count: acceptedTeamsCount });
+  } catch (error) {
+    console.error("❌ Error counting accepted teams:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // ✅ Define the route to fetch accepted teams
 router.get("/", async (req, res) => {

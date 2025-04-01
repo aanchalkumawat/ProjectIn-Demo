@@ -1,11 +1,4 @@
-/* Main Content */
-.content {
-  transition: margin-left 0.3s ease;
-}
 
-.content.shifted {
-  margin-left: 260px; /* Moves content when sidebar is open */
-}
 
 /* Sidebar */
 .sidebar {
@@ -40,7 +33,7 @@
   font-size: 16px;
   text-align: left;
   border: none;
-  background: linear-gradient(90deg,#004d99, #dddee4); /* Blue gradient */
+  background: linear-gradient(90deg,#004d99, #dddee4); /* Blue gradient */ 
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -110,16 +103,6 @@
   background: #e0e0e0;
 }
 
-/* Main Content */
-.main-content {
-  margin-left: 0;
-  padding: 20px;
-  transition: margin-left 0.3s ease;
-}
-
-.main-content.shifted {
-  margin-left: 250px; /* Matches the width of the sidebar */
-}
 
 .center-heading {
   text-align: center;

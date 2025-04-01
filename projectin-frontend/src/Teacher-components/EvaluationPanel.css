@@ -1,136 +1,135 @@
-/* Main panel */
 .evaluation-panel {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 100%; /* Increased width */
-  margin: 0 auto;
-  margin-top: 80px;
-  width: 90%;
+  padding: 2vw;
+  font-family: 'Times New Roman', Times, serif;
 }
 
-/* Heading */
 .heading {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #02234f;
+  text-align: center;
+  font-size: 2vw;
+  margin-bottom: 2vh;
+  margin-top: 15vh;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.8rem;
+  color: #333;
 }
 
-/* Team list container */
 .team-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 2vw;
+  width: 100%;
 }
 
-/* Individual team bar */
 .team-bar {
-  background-color: #ffffff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%; /* Ensures it takes up available width */
+  background-color: #f8f9fa;
+  padding: 2%;
+  border-radius: 0.5vw;
+  box-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
-/* Team information */
 .team-info {
-  font-size: 16px;
-  font-weight: 500;
-  color: #444;
+  font-size: 1.5vw;
+  font-weight: bold;
+  margin-bottom: 1vh;
 }
 
-/* Button styles */
 .evaluate-btn {
-  padding: 8px 15px;
-  font-size: 14px;
-  background-color: #218838;
+  background-color:#218838;
   color: white;
+  padding: 1% 1%;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  align-self: flex-start;
+  border-radius: 0.4vw;
+  font-size: 1.2vw;
+  width: fit-content;
+  font-weight: normal;
+  margin: 0.1%;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .evaluate-btn:hover {
-  background-color: #008600;
+  background-color:#28a745;
 }
 
-.evaluate-btn:focus {
-  outline: none;
-}
-
-/* Evaluation section (only visible when expanded) */
 .evaluation-section {
-  margin-top: 15px;
-  padding: 15px;
-  background-color: #d7dfe4;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-/* Evaluation items */
-.evaluation-item {
-  margin-bottom: 15px;
-}
-
-.evaluation-item label {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 5px;
-  display: block;
-}
-
-.evaluation-item input {
-  padding: 8px;
-  font-size: 14px;
+  margin-top: 2vh;
   width: 100%;
-  max-width: 300px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
-.evaluation-item input:disabled {
-  background-color: #e0e0e0;
-  cursor: not-allowed;
+.evaluation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2vh;
 }
 
-.evaluation-item button {
-  padding: 8px 15px;
-  margin-top: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.evaluation-item button:hover {
-  background-color: #218838;
-}
-
-.evaluation-item button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-/* No teams available message */
-.no-teams {
-  font-size: 18px;
-  color: #777;
+.evaluation-table th, .evaluation-table td {
+  border: 0.1vw solid #ddd;
+  padding: 0.5%;
   text-align: center;
 }
-.submit-btn {
-  background: #218838;
+
+.evaluation-table th {
+  background-color: #16304c;
   color: white;
-  padding: 10px;
+  font-size: 1.5vw;
+}
+
+.evaluation-table input {
+  width: 70%;
+  padding: 0.2%;
+  text-align: center;
+  font-size: 1vw;
+}
+
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 1.5% 2%;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
+  border-radius: 0.4vw;
+  font-size: 1.4vw;
+}
+
+.submit-btn:hover {
+  background-color: #88978b;
+}
+
+.no-teams {
+  text-align: center;
+  font-size: 1.6vw;
+  color: #dc3545;
+  margin-top: 3vh;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .heading {
+    font-size: 4vw;
+  }
+  
+  .team-info {
+    font-size: 3vw;
+  }
+
+  .evaluate-btn {
+    font-size: 3vw;
+    padding: 2.5% 4%;
+    color: #218838;
+  }
+
+  .evaluation-table th, .evaluation-table td {
+    font-size: 2.5vw;
+    padding: 2.5%;
+  }
+
+  .evaluation-table input {
+    width: 40%;
+  }
+
+  .submit-btn {
+    font-size: 3vw;
+    padding: 2.5% 4%;
+  }
 }

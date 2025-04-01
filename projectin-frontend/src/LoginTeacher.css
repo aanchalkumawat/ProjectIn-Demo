@@ -83,3 +83,228 @@ button:disabled {
   font-size: 0.9rem;
   margin-top: 5px;
 }
+.logteacher-container{
+  background-image:url(./assests/images/banner1.jpeg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* Heading */
+h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #333; 
+  margin-bottom: 15px;
+}
+
+/* White box with shadow */
+.logteacher-form-container {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+.logteacher-password-input
+{
+  padding: 12px;
+  margin-bottom: 10px;
+  width:100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+  font-size: 14px;
+}
+.logteacher-email-input
+{
+  padding: 12px;
+  margin-bottom: 10px;
+  width:100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+  font-size: 14px;
+}
+/* changed one */
+.teacher-login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: white;
+  background-image:url(./assests/images/banner1.jpeg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+.form-teacher-container{
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+.teacher-login-input-email
+{
+  padding: 12px;
+  margin-bottom: 10px;
+  width:100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+  font-size: 14px;
+}
+.teacher-login-input-password{
+  padding: 12px;
+  margin-bottom: 10px;
+  width:100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+  font-size: 14px;
+}
+.h2teacher{
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+.logteacher-form-container-teacher{
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+} 
+.log-logo-teacher-login{
+  background-image: url(./images/logo1.jpeg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 20px auto;
+  display: block;
+}
+.teacher-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(./assests/images/banner1.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Add an overlay effect */
+.teacher-login-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 139, 0.3); /* Slight blue overlay */
+}
+
+/* Ensure the form is above the overlay */
+.form-teacher-container {
+  position: relative;
+  z-index: 1;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+} 
+.form-teacher-container {
+  position: relative;
+  z-index: 1;
+  background: white;
+  padding: 50px; /* Increased padding */
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  width: 500px; /* Increased width */
+  height: 450px; /* Increased height */
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+/* Adjust the form elements to fit the increased size */
+.teacher-login-input-email,
+.teacher-login-input-password {
+  padding: 14px;
+  font-size: 16px;
+}
+
+button {
+  padding: 18px;
+  font-size: 1.3rem;
+}
+.form-teacher-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+  padding: 50px; /* Increased padding */
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  width: 500px; /* Increased width */
+  height: 450px; /* Increased height */
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+/* Adjust input fields */
+.teacher-login-input-email,
+.teacher-login-input-password {
+  padding: 14px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent fields */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  outline: none;
+  text-align: center;
+  border-radius: 8px;
+}
+
+/* Adjust button */
+button {
+  padding: 18px;
+  font-size: 1.3rem;
+  background-color: rgba(3, 52, 82, 0.8); /* Semi-transparent blue */
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: rgba(0, 123, 255, 0.9);
+}

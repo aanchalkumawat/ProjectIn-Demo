@@ -77,17 +77,19 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="container">
-      <div className="form-container">
-        <div className="form-toggle">
+    <div className="container-stud-login">
+      <div className="second-container-stud-login">
+      <div className="form-container-stud-login">
+      <div className="log-logo-teacher-login"></div>
+        <div className="form-toggle-stud">
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form">
             <h1>{isLogin ? "Login Form" : "Signup Form"}</h1>
 
             {/* Role Selection */}
-            <select onChange={(e) => setRole(e.target.value)} value={role} required>
-              <option value="">Select Your Role</option>
+            <select class="dropdown-stud" onChange={(e) => setRole(e.target.value)} value={role} required>
+              <option value="selecting-option">Select Your Role</option>
               <option value="student">Student</option>
               <option value="coordinator">Coordinator</option>
             </select>
@@ -96,6 +98,7 @@ export default function LoginForm() {
               type="email"
               placeholder="Enter Banasthali mail ID"
               value={email}
+              class="stud-login-input-email"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -103,6 +106,7 @@ export default function LoginForm() {
               type="password"
               placeholder="Password"
               value={password}
+              class="stud-login-input-password"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -132,6 +136,7 @@ export default function LoginForm() {
             )}
           </div>
         </form>
+      </div>
       </div>
     </div>
   );

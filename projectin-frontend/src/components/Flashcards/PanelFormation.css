@@ -3,6 +3,7 @@ body, html {
     padding: 0;
     overflow-x: hidden; /* Prevents horizontal scroll */
     width: 100vw;
+    font-family: 'Times New Roman', Times, serif;
     
 }
 .panel-formation-container {
@@ -27,14 +28,15 @@ body, html {
 
 /* Search Bar, Back Button, and Form Panel Button */
 .search-container.fixed {
-    width: 100%;
+    width: 70%;
     gap: 10px;
-    padding: 10px 0;
+    padding: 8px 0;
     position: sticky; 
     top: 70px;  
     background: white;  
-    z-index: 1000;  
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; 
+    font-family: 'Times New Roman', Times, serif;
+
 }
 
 .search-bar {
@@ -43,6 +45,7 @@ body, html {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .back-button, .form-panel-button, .show-panel-button {
@@ -55,14 +58,21 @@ body, html {
     height: 36px;
     min-width: 100px;
     text-align: center;
+    width: 10%;
+    font-family: 'Times New Roman', Times, serif;
 }
 
-.back-button {
-    background-color: #007bff;
+.back-button:hover {
+    background-color: #254669;
 }
 
 .form-panel-button {
     background-color: green;
+    font-weight: bold;
+}
+
+.form-panel-button:hover{
+    background-color: rgb(5, 45, 5);
     font-weight: bold;
 }
 
@@ -71,8 +81,12 @@ body, html {
     cursor: not-allowed;
 }
 
-.show-panel-button {
-    background-color: #007bff;
+.show-panel-button{
+    background: #ff9800;
+}
+
+.show-panel-button:hover {
+    background: #96651d;
 }
 
 /* Panel Count */
@@ -137,6 +151,9 @@ body, html {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 5px;
+    width: 30%;
+    font-size: 1vw;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .select-button:hover {
@@ -171,10 +188,14 @@ body, html {
     max-height: 500px;
 }
 
+.details-button{
+    background-color: #4978aa;
+}
+.allot-teams-button {background-color: #1f4773;}
 /* Detail & Allot Teams Buttons - Same Style */
 .details-button, .allot-teams-button {
-    padding: 8px 14px;
-    background-color: #007bff;
+    padding: 8px 8px;
+    
     color: white;
     border: none;
     cursor: pointer;
@@ -184,6 +205,8 @@ body, html {
     height: 36px;
     min-width: 120px;
     text-align: center;
+    width: 30%;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .details-button:hover, .allot-teams-button:hover {
