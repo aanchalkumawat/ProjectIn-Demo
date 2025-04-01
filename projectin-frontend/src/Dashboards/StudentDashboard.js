@@ -65,6 +65,8 @@ const Dashboard = ({ userName }) => {
           <FaBars className="icon" onClick={toggleSidebar} />
           <div className="logo-container">
             <div className="logo" />
+            <div className="our-logo">
+            </div>
           </div>
           <h3>{userName}</h3>
           <div className="icon-container">

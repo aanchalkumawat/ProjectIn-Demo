@@ -103,7 +103,7 @@ const EvaluationPanel = () => {
           teams.map((team) => (
             <div key={team._id} className="team-bar">
               <div className="team-info">
-                <strong>Team ID: {team._id}</strong>
+                <strong>Team ID: {team.teamID}</strong>
               </div>
               <button
                 className="evaluate-btn"

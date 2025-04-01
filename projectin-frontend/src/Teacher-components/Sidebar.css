@@ -42,23 +42,29 @@
 
 /* Navbar Icon */
 .navbar-icon {
+  margin-bottom: 03vh;
   position: fixed;
-  top: 4vh; /* Space from the top */
+  top: 5vh; /* Space from the top */
   left: 1vw; /* Space from the left */
+  width: 4vh; /* Ensuring square shape */
+  height: 4vh; /* Ensuring square shape */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  z-index: 1000;
 }
 
 .navbar-icon .line {
-  width: 3vw;
+  width: 2vw;
   height: 0.3vh;
   background-color: rgb(255, 255, 255);
-  margin: 1vh 0;
+  margin: 0.3vh 0;
   transition: background-color 0.3s;
 }
-
 .navbar-icon:hover .line {
-  background-color: #555;
+  background-color: #ffffff;
+  transform: scale(1.2);
 }
 
 .sidebar-btn-link {

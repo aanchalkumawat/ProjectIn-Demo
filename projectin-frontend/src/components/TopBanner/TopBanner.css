@@ -35,7 +35,14 @@
   font-size: 18px;
   font-weight: bold;
 }
-
+.coordinator-logo{
+  width: 8vh;
+  height: 8vh;
+}
+.coordinator-our-logo{
+  width: 8vh;
+  height: 8vh;
+}
 /* Right Side */
 .top-right {
   display: flex;

@@ -146,6 +146,7 @@ import "react-calendar/dist/Calendar.css";
 import { FaCalendarAlt, FaUserCircle, FaRegClipboard } from "react-icons/fa";
 import axios from "axios";
 import logo from "../assests/images/Banasthali_Vidyapeeth_Logo.png"; // Importing the logo
+import logo2 from "../images/logo2.png"
 
 const Header = ({ onLogout }) => {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -207,7 +208,9 @@ const Header = ({ onLogout }) => {
       <Sidebar />
 
       {/* Logo */}
+      <div className="mentor-header">
       <img src={logo} alt="Banasthali Vidyapeeth Logo" className="bvlogo" />
+      <img src={logo2} alt="Banasthali Vidyapeeth Logo" className="our-logo" />
 
       {/* Heading */}
       <div className="dashboard-header-text">Mentor Dashboard</div>
@@ -217,7 +220,7 @@ const Header = ({ onLogout }) => {
       {/* Notice (Clipboard) Icon */}
       <div className="notice-container">
         <FaRegClipboard className="icon notice-icon" onClick={toggleNotices} />
-        {notifications.length > 0 && <span className="badge">{notifications.length}</span>}
+        {notifications.length > 0 && <span className="teacher-badge">{notifications.length}</span>}
       </div>
 
       {/* Profile Icon */}
@@ -226,7 +229,7 @@ const Header = ({ onLogout }) => {
 
         {/* Profile Dropdown */}
         {showProfile && mentorData && (
-          <div className="profile-dropdown">
+          <div className="mentor-profile-dropdown">
             <p><strong>ID:</strong> {mentorData.id}</p>
             <p><strong>Name:</strong> {mentorData.name}</p>
             <p><strong>Email:</strong> {mentorData.email}</p>
@@ -235,6 +238,7 @@ const Header = ({ onLogout }) => {
       </div>
 
       <button className="logout-button" onClick={onLogout}>Logout</button>
+      </div>
 
       {/* Notification Popup */}
       {showNotices && (

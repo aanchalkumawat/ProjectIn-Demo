@@ -53,6 +53,17 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.our-logo {
+  background-image: url(../images/logo2.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .logo:hover {
   transform: scale(1.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);

@@ -4,6 +4,7 @@ import "./LandingPage.css";
 import background from "../assests/images/banner1.jpeg";
 import Footer from "./Footer1";
 import logo from "../assests/images/Banasthali_Vidyapeeth_Logo.png";
+import logo2 from "../images/logo2.png";
 import img1 from "../images/img1.png";
 import img2 from "../images/img2.png";
 import img3 from "../images/img3.png";
@@ -141,7 +142,10 @@ const LandingPage = () => {
     <div className="landing-page" style={{ backgroundImage: `url(${background})` }}>
       {/* Top Banner */}
       <header className="top-banner">
+        <div1>
         <img src={logo} alt="Banasthali Logo" className="banner-logo" />
+        <img src = {logo2} alt="ProjectIn logo" className="banner-logo"></img>
+        </div1>
         <span className="banner-text">BANASTHALI VIDYAPITH</span>
       </header>
 
