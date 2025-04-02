@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./submission1.css";
 
-function Submission1({ isOpen, onClose }) {
+function Submission1({ isOpen, onClose ,onSubmit }) {
   const [isResearchBased, setIsResearchBased] = React.useState("");
   const [srsFile, setSrsFile] = React.useState(null);
   const [sdsFile, setSdsFile] = React.useState(null);
@@ -56,6 +56,7 @@ function Submission1({ isOpen, onClose }) {
       );
 
       alert(response.data.message);
+      onSubmit();
       onClose(); // ✅ Close modal after submission
     } catch (error) {
       console.error("Error submitting project:", error);

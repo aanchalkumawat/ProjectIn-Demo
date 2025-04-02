@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./MentorForm.css";
 
-const MentorForm = ({ isOpen, onClose }) => {
+const MentorForm = ({ isOpen, onClose, onSubmit}) => {
   const [formData, setFormData] = useState({
     projectName: "",
     isResearchBased: false,
@@ -71,6 +71,7 @@ const MentorForm = ({ isOpen, onClose }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert(res.data.message);
+      onSubmit();
       onClose();
     } catch (error) {
       console.error("Error submitting mentor request:", error.response?.data || error.message);

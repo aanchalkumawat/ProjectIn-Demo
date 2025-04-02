@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./submission2.css";
 
-function Submission2({ isOpen, onClose }) {
+function Submission2({ isOpen, onClose, onSubmit }) {
   const [reportFile, setReportFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -36,6 +36,7 @@ function Submission2({ isOpen, onClose }) {
       );
 
       alert(response.data.message);
+      onSubmit();
       onClose(); // ✅ Close modal after successful submission
     } catch (error) {
       console.error("Error submitting report:", error);

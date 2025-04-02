@@ -1,4 +1,5 @@
 const Student = require("../models/Student");
+const Team = require("../models/Team");
 const bcrypt = require("bcrypt");
 const XLSX = require("xlsx");
 const multer = require("multer");
@@ -112,8 +113,33 @@ const importStudents = async (req, res) => {
   }
 };
 
+const getStudentById = async (req, res) => {
+  try {
+    const studentId = req.params.id;
+    
+    // Fetch student details
+    const student = await Student.findById(studentId);
+    if (!student) {
+      return res.status(404).json({ message: "Student not found in DB" });
+    }
+
+    // Fetch the team using teamID (if exists)
+    let teamData = null;
+    if (student.team?.teamID) {
+      teamData = await Team.findOne({ teamID: student.team.teamID });
+    }
+
+    res.status(200).json({ student, team: teamData });
+  } catch (error) {
+    console.error("Error fetching student:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
 // ✅ Export upload middleware and function
 module.exports = {
   upload,
   importStudents,
+  getStudentById,
 };

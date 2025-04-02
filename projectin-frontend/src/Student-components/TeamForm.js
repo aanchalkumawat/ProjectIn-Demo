@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./TeamForm.css"; // ✅ Regular CSS for styling
 
-const TeamForm = ({ onClose }) => {
+const TeamForm = ({ onClose,onSubmit }) => {
   const [teamLeader, setTeamLeader] = useState({
     fullName: "",
     enrollmentNumber: "",
@@ -64,6 +64,7 @@ const TeamForm = ({ onClose }) => {
     try {
       const response = await axios.post("http://localhost:5000/api/team/create", teamData);
       alert(`Team Created Successfully! Your Team ID: ${response.data.teamID}`);
+      onSubmit();
       onClose(); // ✅ Close the form after successful creation
     } catch (error) {
       console.error("Error creating team:", error);

@@ -9,22 +9,34 @@ import MentorForm from "../Student-components/MentorForm.js";
 import Submission1 from "../Student-components/submission1.js";
 import Submission2 from "../Student-components/submission2.js";
 import ProjectDetailForm from "../Student-components/ProjectDetailForm";
+import Profile from "../Student-components/Profile.js";
 
-const Dashboard = ({ userName }) => {
+const Dashboard = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [openForm, setOpenForm] = useState(null);
   const [notifications, setNotifications] = useState([]);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
 
-  const [progressData, setProgressData] = useState([
-    { step: "Team", status: false },
-    { step: "Mentor", status: false },
-    { step: "Project", status: false },
-    { step: "Submission1", status: false },
-    { step: "Submission2", status: false },
-  ]);
+  const progressSteps = ["Team", "Mentor", "Project", "Submission1", "Submission2"];
+  const [progressData, setProgressData] = useState(
+    progressSteps.map((step) => ({ step, status: false }))
+  );
+
+  // Fetch user details from localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      console.log("✅ User Data Loaded from localStorage:", storedUser);
+      setUserData(storedUser);
+    } else {
+      console.error("🚨 No user data found in localStorage!");
+      navigate("/login"); // Redirect to login if user data is missing
+    }
+  }, [navigate]);
 
   // Fetch notifications
   useEffect(() => {
@@ -34,28 +46,28 @@ const Dashboard = ({ userName }) => {
       .catch((err) => console.error("Error fetching notifications:", err));
   }, []);
 
-  // Toggle Sidebar
+  // Toggle functions
   const toggleSidebar = useCallback(() => setIsSidebarOpen((prev) => !prev), []);
-
-  // Toggle Calendar
   const toggleCalendar = useCallback(() => setShowCalendar((prev) => !prev), []);
-
-  // Toggle Notification Popup
   const toggleNotifications = useCallback(() => setIsNotificationOpen((prev) => !prev), []);
+  const toggleProfile = useCallback(() => setIsProfileOpen((prev) => !prev), []);
 
-  // Open specific form
+  // Handle form actions
   const openSpecificForm = useCallback((formName) => setOpenForm(formName), []);
-
-  // Close form
   const closeForm = useCallback(() => setOpenForm(null), []);
 
-  // Handle form submission & update progress
   const handleFormSubmit = useCallback((formIndex) => {
     setProgressData((prev) =>
       prev.map((item, idx) => (idx === formIndex ? { ...item, status: true } : item))
     );
     closeForm();
   }, [closeForm]);
+
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
 
   return (
     <div className="dashboard-container">
@@ -65,15 +77,13 @@ const Dashboard = ({ userName }) => {
           <FaBars className="icon" onClick={toggleSidebar} />
           <div className="logo-container">
             <div className="logo" />
-            <div className="our-logo">
-            </div>
+            <div className="our-logo"></div>
           </div>
-          <h3>{userName}</h3>
           <div className="icon-container">
             <FaClipboard className="icon" title="Notifications" onClick={toggleNotifications} />
             {notifications.length > 0 && <span className="badge">{notifications.length}</span>}
             <FaCalendarAlt className="icon" title="Calendar" onClick={toggleCalendar} />
-            <FaUser className="icon" title="Profile" />
+            <FaUser className="icon" title="Profile" onClick={toggleProfile} />
           </div>
         </div>
       </div>
@@ -87,14 +97,14 @@ const Dashboard = ({ userName }) => {
             </button>
           ))}
         </div>
-        <button className="logout-button" onClick={() => navigate("/login")}>
+        <button className="logout-button" onClick={handleLogout}>
           Logout
         </button>
       </div>
 
       {/* Content */}
       <div className="content">
-        <h2>Welcome to the Dashboard!</h2>
+      <h2>Welcome to the Dashboard {userData?.team?.teamID ? `- Team ${userData.team.teamID}` : ""}!</h2>
 
         {/* Progress Bar */}
         <div className="progress-bar-container">
@@ -107,12 +117,14 @@ const Dashboard = ({ userName }) => {
             </div>
           ))}
         </div>
+
         {/* Calendar Component */}
         {showCalendar && <Calander />}
       </div>
 
-          {/* Background Overlay */}
-        {isNotificationOpen && <div className="overlay" onClick={toggleNotifications}></div>} 
+      {/* Background Overlay for Notifications */}
+      {isNotificationOpen && <div className="overlay" onClick={toggleNotifications}></div>}
+
       {/* Notification Popup */}
       {isNotificationOpen && (
         <div className="notification-popup">
@@ -126,16 +138,31 @@ const Dashboard = ({ userName }) => {
               notifications.map((note, index) => <li key={index}>{note.message}</li>)
             )}
           </ul>
-          <button onClick={toggleNotifications}>close</button>
+          <button onClick={toggleNotifications}>Close</button>
         </div>
       )}
 
+      {/* Profile Popup */}
+      {isProfileOpen && userData && userData.team && (
+        <Profile
+          teamName={userData.team.teamID}
+          projectId={userData.team.projectID || "N/A"}
+          teamMembers={userData.team.members || []}
+          leader={userData.team.leader}
+          onClose={toggleProfile}
+        />
+      )}
+
       {/* Popup Forms */}
-      {openForm === "Team" && <TeamFormationForm isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(0)} />}
-      {openForm === "Mentor" && <MentorForm isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(1)} />}
-      {openForm === "Project" && <ProjectDetailForm isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(2)} />}
-      {openForm === "Submission1" && <Submission1 isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(3)} />}
-      {openForm === "Submission2" && <Submission2 isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(4)} />}
+      {openForm && (
+        <>
+          {openForm === "Team" && <TeamFormationForm isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(0)} />}
+          {openForm === "Mentor" && <MentorForm isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(1)} />}
+          {openForm === "Project" && <ProjectDetailForm isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(2)} />}
+          {openForm === "Submission1" && <Submission1 isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(3)} />}
+          {openForm === "Submission2" && <Submission2 isOpen onClose={closeForm} onSubmit={() => handleFormSubmit(4)} />}
+        </>
+      )}
     </div>
   );
 };
