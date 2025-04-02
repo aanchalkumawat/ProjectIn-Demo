@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./submission2.css";
 
-function Submission2({ isOpen, onClose, onSubmit }) {
+function Submission2({ isOpen, onClose }) {
   const [reportFile, setReportFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -36,7 +36,6 @@ function Submission2({ isOpen, onClose, onSubmit }) {
       );
 
       alert(response.data.message);
-      onSubmit();
       onClose(); // ✅ Close modal after successful submission
     } catch (error) {
       console.error("Error submitting report:", error);
@@ -52,6 +51,10 @@ function Submission2({ isOpen, onClose, onSubmit }) {
         </button>
         <h1>Project Report Submission</h1>
         <br></br>
+        <div class="format" >
+        📥<a href="formats\Project Report_Guidelines.pdf" download>
+         Download Project Report Guidlines For Reference
+        </a> <br></br> </div><br></br>
         <label>Upload Project Report:</label>
         <input type="file" accept="application/pdf" onChange={handleFileChange} />
         <br /><br />

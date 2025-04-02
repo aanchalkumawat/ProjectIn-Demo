@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./submission1.css";
 
-function Submission1({ isOpen, onClose ,onSubmit }) {
+function Submission1({ isOpen, onClose }) {
   const [isResearchBased, setIsResearchBased] = React.useState("");
   const [srsFile, setSrsFile] = React.useState(null);
   const [sdsFile, setSdsFile] = React.useState(null);
@@ -56,7 +56,6 @@ function Submission1({ isOpen, onClose ,onSubmit }) {
       );
 
       alert(response.data.message);
-      onSubmit();
       onClose(); // ✅ Close modal after submission
     } catch (error) {
       console.error("Error submitting project:", error);
@@ -73,8 +72,20 @@ function Submission1({ isOpen, onClose ,onSubmit }) {
           &times;
         </button>
         <h1>SRS & SDS / Synopsis Submission</h1>
-        <br></br>
+        <br></br> 
+        <div class="format" >
+        📥<a href="/formats/SRS Format.pdf" download>
+         Download SRS Format For Reference
+        </a> <br></br>
 
+        📥<a href="/formats/SDS Format.pdf" download>
+         Download SDS Format For Reference
+       </a><br></br>
+
+       📥<a href="/formats/Synopsis format.pdf" download>
+         Download Synopsis Format For Reference
+       </a>
+       </div> <br></br>
         <label>Is your project Research based?</label>
         <br />
         <br />

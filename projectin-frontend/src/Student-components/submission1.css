@@ -75,3 +75,10 @@
 .submission1-submit-button:hover{
   background-color: #3e8e41;
 }
+.format{
+  background-color: lightblue;
+  padding: 2%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+  border-radius: 20px;
+}

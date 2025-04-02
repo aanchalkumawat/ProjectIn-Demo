@@ -8,6 +8,7 @@ const path = require("path"); // ✅ Import path module for serving files
 const MentorRequest = require("./models/MentorRequest");
 const Student = require("./models/Student");
 const sendEmail = require("./utils/emailService");
+const FreezeStatus = require("./models/FreezeStatus");
 
 const app = express();
 
@@ -208,6 +209,20 @@ app.post("/api/team/update-progress", async (req, res) => {
   }
 });
 
+app.post("/api/team-freeze/remove-freeze", async (req, res) => {
+  try {
+    let freezeStatus = await FreezeStatus.findOne();
+
+    if (freezeStatus) {
+      freezeStatus.isFrozen = false;
+      await freezeStatus.save();
+    }
+    
+    res.json({ message: "Freeze has been removed successfully!", isFrozen: false });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to remove freeze status" });
+  }
+});
 
 // ✅ Logging Registered Routes
 console.log("\n📌 Registered API Routes:");

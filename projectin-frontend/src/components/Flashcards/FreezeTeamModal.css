@@ -186,3 +186,19 @@
     margin-bottom: 10px;
   }
 }
+
+.remove-freeze-btn{
+  background:orange;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 50%;
+  transition: background 0.3s ease-in-out;
+  font-weight: normal;
+  font-family: 'Times New Roman', Times, serif;
+}
+.remove-freeze-btn:hover{
+  background: #FFA07A;
+}
