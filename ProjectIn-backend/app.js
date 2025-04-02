@@ -112,78 +112,7 @@ app.post("/api/accepted-requests", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-// Endpoint to send email when a request is accepted/rejected/revised
-// app.post("/api/send-email", async (req, res) => {
-//   console.log("✅ Email API Hit!"); // Debugging
-//   console.log("Received Data:", req.body); // Debugging
-  
-//   const { email, subject, message, projectName, action } = req.body; 
-//   console.log("Email:", email);
-//   console.log("Subject:", subject);
-//   console.log("Message:", message);
-//   console.log("Project Name:", projectName);
-//   console.log("Action:", action);
-// // Validate if projectName exists
-// if (!projectName || !email) {
-//   return res.status(400).json({ error: 'Missing required fields' });
-// }
 
-//   if (!email || !subject || !message) {
-//     return res.status(400).json({ error: "Missing email, subject, or message" });
-//   }
-//   if (!request || !request.members || request.members.length === 0) {
-//     return res.status(404).json({ error: "Request or members not found from app.js" });
-//   }
-  
-//   try {
-//     // 1️⃣ Fetch the mentor request from MentorRequest collection
-//     const request = await MentorRequest.findOne({ projectName });
-
-//     if (!request || !request.members || request.members.length === 0) {
-//       return res.status(404).json({ error: "Request or members not found" });
-//     }
-
-//     // 2️⃣ Get the first member's rollNo
-//     const firstMemberRollNo = request.members[0].rollno;
-
-//     // 3️⃣ Fetch the student record from the Students collection
-//     const student = await Student.findOne({ enrollmentNumber: firstMemberRollNo });
-
-//     if (!student || !student.email) {
-//       return res.status(404).json({ error: "Student email not found" });
-//     }
-
-//     // 4️⃣ Prepare email details
-//     const recipientEmail = student.email;
-//     let subject = "";
-//     let message = "";
-
-//     switch (action) {
-//       case "Accepted":
-//         subject = `Project "${projectName}" Accepted! 🎉`;
-//         message = `Your project "${projectName}" has been accepted by the mentor.`;
-//         break;
-//       case "Rejected":
-//         subject = `Project "${projectName}" Rejected 😞`;
-//         message = `Unfortunately, your project "${projectName}" has been rejected. Please contact your mentor for further details.`;
-//         break;
-//       case "Revised":
-//         subject = `Project "${projectName}" Needs Revision ✍️`;
-//         message = `Your project "${projectName}" has been marked for revision. Please check your dashboard for required changes.`;
-//         break;
-//       default:
-//         return res.status(400).json({ error: "Invalid action" });
-//     }
-
-//     // 5️⃣ Send the email
-//     await sendEmail(recipientEmail, subject, message);
-
-//     res.status(200).json({ message: `Email sent successfully to ${recipientEmail}` });
-//   } catch (error) {
-//     console.error("Error sending email:", error);
-//     res.status(500).json({ error: "Failed to send email" });
-//   }
-// });
 app.post("/api/send-email", async (req, res) => {
   console.log("✅ Email API Hit!"); // Debugging
   console.log("Received Data:", req.body); // Debugging
@@ -260,6 +189,25 @@ app.post("/api/notifications/add", async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
+
+// update-progress api
+app.post("/api/team/update-progress", async (req, res) => {
+  const { teamID, step } = req.body;
+
+  try {
+    const team = await Team.findOne({ teamID });
+    if (!team) return res.status(404).json({ success: false, message: "Team not found" });
+
+    team.progressStatus[step] = true;
+    await team.save();
+
+    res.json({ success: true, message: `${step} form submitted successfully` });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server error", error });
+  }
+});
+
 
 // ✅ Logging Registered Routes
 console.log("\n📌 Registered API Routes:");

@@ -127,7 +127,7 @@ const Dashboard = () => {
 
       {/* Notification Popup */}
       {isNotificationOpen && (
-        <div className="notification-popup">
+        <div className="student-notification-popup">
           <div className="notification-header">
             <h2>📢 Notices</h2>
           </div>
@@ -138,7 +138,7 @@ const Dashboard = () => {
               notifications.map((note, index) => <li key={index}>{note.message}</li>)
             )}
           </ul>
-          <button onClick={toggleNotifications}>Close</button>
+          <button className="notice-button"onClick={toggleNotifications}>Close</button>
         </div>
       )}
 
@@ -146,7 +146,7 @@ const Dashboard = () => {
       {isProfileOpen && userData && userData.team && (
         <Profile
           teamName={userData.team.teamID}
-          projectId={userData.team.projectID || "N/A"}
+          projectId={userData.team.domain}
           teamMembers={userData.team.members || []}
           leader={userData.team.leader}
           onClose={toggleProfile}
