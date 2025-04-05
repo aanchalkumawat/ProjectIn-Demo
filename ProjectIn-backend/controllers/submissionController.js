@@ -93,7 +93,30 @@ const deleteSubmissionRequest = async (req, res) => {
   }
 };
 
+const getActiveDeadlines = async (req, res) => {
+  try {
+    const { type } = req.query;
+
+    if (!type) {
+      return res.status(400).json({ message: "Missing submission type" });
+    }
+
+    const deadline = await SubmissionRequest.findOne({ submissionType: type });
+
+    if (!deadline) {
+      return res.status(404).json({ message: "No deadline found for the given type" });
+    }
+
+    res.status(200).json({ deadlineDate: deadline.deadlineDate });
+  } catch (error) {
+    console.error("Error fetching deadline:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
 
 module.exports = { upload, submitProject,createSubmissionRequest,
   getAllSubmissionRequests,
-  deleteSubmissionRequest, };
+  deleteSubmissionRequest,
+  getActiveDeadlines };

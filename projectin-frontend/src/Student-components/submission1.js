@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./submission1.css";
 
-function Submission1({ isOpen, onClose }) {
-  const [isResearchBased, setIsResearchBased] = React.useState("");
-  const [srsFile, setSrsFile] = React.useState(null);
-  const [sdsFile, setSdsFile] = React.useState(null);
-  const [synopsisFile, setSynopsisFile] = React.useState(null);
+function Submission1({ isOpen, onClose, onSubmit }) {
+  const [isResearchBased, setIsResearchBased] = useState("");
+  const [srsFile, setSrsFile] = useState(null);
+  const [sdsFile, setSdsFile] = useState(null);
+  const [synopsisFile, setSynopsisFile] = useState(null);
+  const [deadline, setDeadline] = useState(null);
+  const [isDeadlineOver, setIsDeadlineOver] = useState(false); // 🆕
+
+  useEffect(() => {
+    const fetchDeadline = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get(
+          "http://localhost:5000/api/submission/active?type=Submission%201",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const deadlineDate = new Date(res.data.deadlineDate);
+        setDeadline(deadlineDate);
+
+        // Check if deadline has passed
+        if (new Date() > deadlineDate) {
+          setIsDeadlineOver(true);
+        }
+      } catch (error) {
+        console.error("Failed to fetch deadline:", error);
+      }
+    };
+
+    if (isOpen) fetchDeadline();
+  }, [isOpen]);
 
   const handleRadioChange = (event) => {
     setIsResearchBased(event.target.value);
@@ -25,6 +54,11 @@ function Submission1({ isOpen, onClose }) {
 
   const handleSubmit = async () => {
     try {
+      if (isDeadlineOver) {
+        alert("Deadline is over. Submission not allowed.");
+        return;
+      }
+
       if (!isResearchBased) {
         alert("Please select whether your project is research-based.");
         return;
@@ -56,6 +90,7 @@ function Submission1({ isOpen, onClose }) {
       );
 
       alert(response.data.message);
+      onSubmit();
       onClose(); // ✅ Close modal after submission
     } catch (error) {
       console.error("Error submitting project:", error);
@@ -72,20 +107,37 @@ function Submission1({ isOpen, onClose }) {
           &times;
         </button>
         <h1>SRS & SDS / Synopsis Submission</h1>
-        <br></br> 
-        <div class="format" >
-        📥<a href="/formats/SRS Format.pdf" download>
-         Download SRS Format For Reference
-        </a> <br></br>
+        <br />
 
-        📥<a href="/formats/SDS Format.pdf" download>
-         Download SDS Format For Reference
-       </a><br></br>
+        {/* 📅 Deadline Display */}
+        {deadline && (
+          <p className="submission1-deadline">
+            🕒 Deadline:{" "}
+            <strong>
+              {deadline.toLocaleString("en-IN", {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+              })}
+            </strong>
+          </p>
+        )}
 
-       📥<a href="/formats/Synopsis format.pdf" download>
-         Download Synopsis Format For Reference
-       </a>
-       </div> <br></br>
+        {isDeadlineOver && (
+          <p className="submission1-deadline" style={{ color: "red" }}>
+            ⛔ Deadline is over. Submission is disabled.
+          </p>
+        )}
+
+        <div className="format">
+          📥 <a href="/formats/SRS Format.pdf" download>Download SRS Format For Reference</a>
+          <br />
+          📥 <a href="/formats/SDS Format.pdf" download>Download SDS Format For Reference</a>
+          <br />
+          📥 <a href="/formats/Synopsis format.pdf" download>Download Synopsis Format For Reference</a>
+        </div>
+        <br />
+
         <label>Is your project Research based?</label>
         <br />
         <br />
@@ -95,6 +147,7 @@ function Submission1({ isOpen, onClose }) {
           value="yes"
           checked={isResearchBased === "yes"}
           onChange={handleRadioChange}
+          disabled={isDeadlineOver}
         />{" "}
         Yes
         <input
@@ -103,6 +156,7 @@ function Submission1({ isOpen, onClose }) {
           value="no"
           checked={isResearchBased === "no"}
           onChange={handleRadioChange}
+          disabled={isDeadlineOver}
         />{" "}
         No
         <br />
@@ -115,6 +169,7 @@ function Submission1({ isOpen, onClose }) {
               type="file"
               accept="application/pdf"
               onChange={(e) => handleFileChange(e, setSynopsisFile)}
+              disabled={isDeadlineOver}
             />
             <br />
             <br />
@@ -128,6 +183,7 @@ function Submission1({ isOpen, onClose }) {
               type="file"
               accept="application/pdf"
               onChange={(e) => handleFileChange(e, setSrsFile)}
+              disabled={isDeadlineOver}
             />
             <br />
             <br />
@@ -137,6 +193,7 @@ function Submission1({ isOpen, onClose }) {
               type="file"
               accept="application/pdf"
               onChange={(e) => handleFileChange(e, setSdsFile)}
+              disabled={isDeadlineOver}
             />
             <br />
             <br />
@@ -154,7 +211,12 @@ function Submission1({ isOpen, onClose }) {
             </>
           )}
           <center>
-            <button className="submission1-submit-button" type="submit" onClick={handleSubmit}>
+            <button
+              className="submission1-submit-button"
+              type="submit"
+              onClick={handleSubmit}
+              disabled={isDeadlineOver}
+            >
               SUBMIT
             </button>
           </center>

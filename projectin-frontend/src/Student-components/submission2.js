@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./submission2.css";
 
-function Submission2({ isOpen, onClose }) {
+function Submission2({ isOpen, onClose, onSubmit }) {
   const [reportFile, setReportFile] = useState(null);
+  const [deadline, setDeadline] = useState(null);
+  const [isDeadlinePassed, setIsDeadlinePassed] = useState(false);
+
+  // ✅ Fetch deadline on component mount
+  useEffect(() => {
+    const fetchDeadline = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/submission/active?type=Submission 2"
+        );
+        const deadlineDate = new Date(response.data.deadlineDate);
+        setDeadline(deadlineDate);
+        setIsDeadlinePassed(new Date() > deadlineDate);
+      } catch (error) {
+        console.error("Failed to fetch deadline:", error);
+      }
+    };
+
+    if (isOpen) fetchDeadline(); // Fetch only when modal is open
+  }, [isOpen]);
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 1) {
@@ -17,6 +37,11 @@ function Submission2({ isOpen, onClose }) {
     try {
       if (!reportFile) {
         alert("Please upload a project report.");
+        return;
+      }
+
+      if (isDeadlinePassed) {
+        alert("Submission deadline has passed. You cannot submit now.");
         return;
       }
 
@@ -36,6 +61,7 @@ function Submission2({ isOpen, onClose }) {
       );
 
       alert(response.data.message);
+      onSubmit();
       onClose(); // ✅ Close modal after successful submission
     } catch (error) {
       console.error("Error submitting report:", error);
@@ -50,11 +76,23 @@ function Submission2({ isOpen, onClose }) {
           &times;
         </button>
         <h1>Project Report Submission</h1>
-        <br></br>
-        <div class="format" >
-        📥<a href="formats\Project Report_Guidelines.pdf" download>
-         Download Project Report Guidlines For Reference
-        </a> <br></br> </div><br></br>
+
+        {deadline && (
+          <p>
+            <strong>Deadline:</strong>{" "}
+            {new Date(deadline).toLocaleDateString()}{" "}
+            ({isDeadlinePassed ? "⛔ Deadline Passed" : "✅ Open for submission"})
+          </p>
+        )}
+
+        <div className="format">
+          📥{" "}
+          <a href="formats/Project Report_Guidelines.pdf" download>
+            Download Project Report Guidelines For Reference
+          </a>
+        </div>
+        <br />
+
         <label>Upload Project Report:</label>
         <input type="file" accept="application/pdf" onChange={handleFileChange} />
         <br /><br />
@@ -65,7 +103,12 @@ function Submission2({ isOpen, onClose }) {
         </div>
 
         <center>
-          <button className="submission2-submit-button" type="submit" onClick={handleSubmit}>
+          <button
+            className="submission2-submit-button"
+            type="submit"
+            onClick={handleSubmit}
+            disabled={isDeadlinePassed}
+          >
             SUBMIT
           </button>
         </center>

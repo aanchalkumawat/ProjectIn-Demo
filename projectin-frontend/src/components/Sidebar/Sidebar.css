@@ -174,7 +174,7 @@
 /* For screens smaller than 1024px */
 @media (max-width: 1024px) {
   .sidebar {
-    width: 25vw;
+    width: 20vw;
     left: -20vw;
   }
 
@@ -200,7 +200,6 @@
 
   .sidebar.open {
     left: 0;
-    width:23vw;
   }
 
   .sidebar-button {
@@ -228,7 +227,6 @@
 
   .sidebar.open {
     left: 0;
-    width:80vw;
   }
 
   .sidebar-button {

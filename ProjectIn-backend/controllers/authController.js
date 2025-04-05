@@ -47,7 +47,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     console.log("📌 Login Request Body:", req.body);
-
+    
     const { email, password, role } = req.body;
     if (!email || !password || !role) {
       return res.status(400).json({ message: "Email, password, and role are required" });

@@ -11,11 +11,16 @@ const RequestSubmissionModal = ({ isOpen, onClose, onSubmit }) => {
     console.log("Submitting:", { submissionType: selectedOption, deadlineDate: deadline }); // ✅ Fixed variable names
 
     try {
-      const response = await fetch("http://localhost:5000/api/submission/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ submissionType: selectedOption, deadlineDate: deadline }), // ✅ Corrected names
-      });
+      const token = localStorage.getItem("token");
+
+const response = await fetch("http://localhost:5000/api/submission/create", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`
+  },
+  body: JSON.stringify({ submissionType: selectedOption, deadlineDate: deadline }),
+});
 
       const data = await response.json();
       console.log("Server Response:", data);

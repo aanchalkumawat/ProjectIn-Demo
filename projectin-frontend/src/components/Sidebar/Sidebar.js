@@ -5,6 +5,7 @@ import TeamExportPopup from "./TeamExportPopup";
 import ImportStudentDataPopup from "./ImportStudentDataPopup";
 import ImportMentorDataPopup from "./ImportMentorDataPopup";
 import ImportCoordinatorDataPopup from "./ImportCoordinatorDataPopup";
+import FlushDataPopup from "./FlushDataPopup";
 
 const Sidebar = ({
   isSidebarOpen,
@@ -16,6 +17,8 @@ const Sidebar = ({
 }) => {
   const [isTeamExportPopupOpen, setIsTeamExportPopupOpen] = useState(false);
   const [isImportDropdownOpen, setIsImportDropdownOpen] = useState(false);
+  const [isFlushDropdownOpen, setIsFlushDropdownOpen] = useState(false);
+  const [isFlushDataPopupOpen, setIsFlushDataPopupOpen] = useState(false);
   const [isStudentImportPopupOpen, setIsStudentImportPopupOpen] = useState(false);
   const [isMentorImportPopupOpen, setIsMentorImportPopupOpen] = useState(false);
   const [isCoordinatorImportPopupOpen, setIsCoordinatorImportPopupOpen] = useState(false);
@@ -27,6 +30,11 @@ const Sidebar = ({
     }
     console.log(`Uploading ${role} file:`, file);
     alert(`File "${file.name}" uploaded successfully for ${role}!`);
+  };
+
+  const handleFlushData = () => {
+    alert("All session data has been deleted!");
+    setIsFlushDataPopupOpen(false);
   };
 
   return (
@@ -91,12 +99,28 @@ const Sidebar = ({
             </ul>
           )}
         </li>
+
+        <li>
+          <button className="sidebar-button primary" onClick={() => setIsFlushDropdownOpen(!isFlushDropdownOpen)}>
+            Flush Data
+          </button>
+          {isFlushDropdownOpen && (
+            <ul className="dropdown">
+              <li>
+                <button className="secondary-button" onClick={() => setIsFlushDataPopupOpen(true)}>
+                  Delete All Data
+                </button>
+              </li>
+            </ul>
+          )}
+        </li>
       </ul>
 
       {isTeamExportPopupOpen && <TeamExportPopup onClose={() => setIsTeamExportPopupOpen(false)} />}
       {isStudentImportPopupOpen && <ImportStudentDataPopup onClose={() => setIsStudentImportPopupOpen(false)} onFileUpload={handleFileUpload} />}
       {isMentorImportPopupOpen && <ImportMentorDataPopup onClose={() => setIsMentorImportPopupOpen(false)} onFileUpload={handleFileUpload} />}
       {isCoordinatorImportPopupOpen && <ImportCoordinatorDataPopup onClose={() => setIsCoordinatorImportPopupOpen(false)} onFileUpload={handleFileUpload} />}
+      {isFlushDataPopupOpen && <FlushDataPopup onClose={() => setIsFlushDataPopupOpen(false)} onDelete={handleFlushData} />}
     </div>
   );
 };

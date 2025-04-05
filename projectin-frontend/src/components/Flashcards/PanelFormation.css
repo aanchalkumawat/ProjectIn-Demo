@@ -265,6 +265,8 @@ body, html {
     width: 40%;
     font-family: 'Times New Roman', Times, serif;
     font-weight: normal;
+    height: 30px;
+    border-radius: 0;
 }
 
 /* Close Button Hover */

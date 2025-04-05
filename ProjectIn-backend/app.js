@@ -56,6 +56,7 @@ const mentormeetRoutes = require("./routes/mentormeet");
 const evaluationRoutes = require("./routes/evaluationRoutes");
 const AcceptedTeam = require("./models/AcceptedRequest");
 const mentorToken = require("./middlewares/mentorMiddleware");
+const flushRoutes = require("./routes/flushRoutes");
 // const emailRoutes = require("./routes/emailRoutes"); // Import email routes
 
 //const projectRoutes = require("./routes/projectRoutes");
@@ -86,6 +87,7 @@ app.use("/api/revised-requests", reviseRequestRoutes);
 app.use("/api/mentormeets", mentormeetRoutes);
 app.use("/api/evaluation", evaluationRoutes);
 app.use("/app", projectRoutes);
+app.use("/api", flushRoutes);
 // app.use("/api/send-email", emailRoutes); // Use email routes
 console.log("✅ Email routes loaded successfully!"); // Debug log
 
