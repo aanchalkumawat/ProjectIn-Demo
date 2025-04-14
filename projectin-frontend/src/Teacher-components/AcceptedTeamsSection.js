@@ -83,8 +83,7 @@ const AcceptedTeamsSection = ({ mentor }) => {
 ) : (
   acceptedTeamsState.map((team) => (
     <div key={team._id} className="team-card">
-      <h4 className= "teamName" >{team.teamName}</h4>
-      <p>{team.projectName}</p>
+      <h4 className= "teamName" >{team.projectName}</h4>
       <p>{team.description}</p>
       <button
         className="meet-button"
@@ -104,14 +103,15 @@ const AcceptedTeamsSection = ({ mentor }) => {
           <div className="popup-form">
   
   
-            <h3>Scheduled Meeting for {selectedTeam.teamName}</h3>
+            <h3>Scheduled Meeting for {selectedTeam.projectName}</h3>
             <form onSubmit={handleFormSubmit}>
               {/* Team id */}
-              <input type="text" name="teamId" value={selectedTeam._id} disabled/>
+              <label>Team ID:</label>
+              <input type="text" name="teamId" />
               
             {/* Team Name Field */}
             <label>Team Name:</label>
-            <input type="text" value={selectedTeam.teamName} disabled />
+            <input type="text" value={selectedTeam.projectName} disabled />
                {/* Date Field */}
         <label htmlFor="date">Date:</label>
         <input type="date" id="date" name="date" required />
