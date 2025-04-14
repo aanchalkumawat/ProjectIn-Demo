@@ -1,24 +1,29 @@
 const express = require("express");
+const router = express.Router();
 const mongoose = require("mongoose");
 
-const router = express.Router();
-
-// Route to delete all documents in all collections
+// Route to delete all documents from all collections except 'coordinators'
 router.delete("/flush-all", async (req, res) => {
   try {
-    // Get all collection names from MongoDB
-    const collections = Object.keys(mongoose.connection.collections);
+    const db = mongoose.connection.db;
 
-    // Loop through each collection and delete all documents
-    for (let collectionName of collections) {
-      const collection = mongoose.connection.collections[collectionName];
-      await collection.deleteMany({}); // Deletes all documents while keeping the structure
+    // Fetch all collection names in the database
+    const collections = await db.listCollections().toArray();
+
+    // Iterate through collections and delete documents (except 'coordinators')
+    for (let collection of collections) {
+      const collectionName = collection.name;
+
+      if (collectionName !== "coordinators") {
+        await db.collection(collectionName).deleteMany({});
+        console.log(`Cleared collection: ${collectionName}`);
+      }
     }
 
-    res.json({ message: "All collections truncated successfully!" });
+    res.json({ message: "All collections (except coordinators) have been flushed successfully!" });
   } catch (error) {
-    console.error("Error truncating collections:", error);
-    res.status(500).json({ message: "Failed to truncate collections.", error });
+    console.error("Error flushing data:", error);
+    res.status(500).json({ message: "Failed to flush data." });
   }
 });
 

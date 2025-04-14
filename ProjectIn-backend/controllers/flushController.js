@@ -1,24 +1,27 @@
 const mongoose = require("mongoose");
 
-/**
- * Truncate all collections in the database while preserving their structure.
- */
-const flushAllCollections = async (req, res) => {
+const flushAllData = async (req, res) => {
   try {
-    // Get all collection names from MongoDB
-    const collections = Object.keys(mongoose.connection.collections);
+    const db = mongoose.connection.db;
 
-    // Loop through collections and delete all documents
-    for (let collectionName of collections) {
-      const collection = mongoose.connection.collections[collectionName];
-      await collection.deleteMany({}); // Deletes all documents
+    // Fetch all collection names in the database
+    const collections = await db.listCollections().toArray();
+
+    // Iterate through collections and delete documents (except 'coordinators')
+    for (let collection of collections) {
+      const collectionName = collection.name;
+
+      if (collectionName !== "coordinators") {
+        await db.collection(collectionName).deleteMany({});
+        console.log(`Cleared collection: ${collectionName}`);
+      }
     }
 
-    res.status(200).json({ message: "All collections have been flushed successfully!" });
+    res.json({ message: "All collections (except coordinators) have been flushed successfully!" });
   } catch (error) {
-    console.error("Error in flushing collections:", error);
-    res.status(500).json({ message: "Error while flushing collections", error });
+    console.error("Error flushing data:", error);
+    res.status(500).json({ message: "Failed to flush data." });
   }
 };
 
-module.exports = { flushAllCollections };
+module.exports = { flushAllData };
